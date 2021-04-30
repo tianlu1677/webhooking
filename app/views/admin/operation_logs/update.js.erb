@@ -1,0 +1,6 @@
+<% if @operation_log.errors.empty? %>
+  $("#operation_log_<%= @operation_log.id %>").html('<%= j( render :partial => 'admin/operation_logs/operation_log', locals: { operation_log: @operation_log} ) %>');
+  toastr.success("执行成功", "温馨提示") 
+<% else %>
+  toastr.error("执行失败", "温馨提示") 
+<% end %>

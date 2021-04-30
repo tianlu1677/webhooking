@@ -1,0 +1,6 @@
+#config/sidekiq_schedule.yml
+
+HardWorker:
+  cron: "*/5 * * * *"
+  class: "HardWorker"
+  queue: default

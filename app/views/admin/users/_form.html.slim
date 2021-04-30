@@ -1,0 +1,24 @@
+.row
+  .col-md-6
+    .card
+      .card-header
+        h3
+          = t("action_labels.#{action_name}")
+          = resource_class.model_name.human
+      = simple_form_for [:admin, user], wrapper: :horizontal_form do |f|
+        .card-block.card-body
+          - if user.errors.any?
+            #error_explanation
+              .alert.alert-info[role="alert"]
+                strong
+                  = pluralize(user.errors.count, "错误")
+                  |  导致不能保存: 
+                ul
+                  - user.errors.full_messages.each do |message|
+                    li
+                      = message
+          = f.input :id          
+
+        .card-footer          
+          = index_link(admin_users_path)
+          = save_link

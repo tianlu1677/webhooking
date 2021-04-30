@@ -1,0 +1,89 @@
+zh-CN:
+  action_labels: &action_labels
+    manage: 管理
+    new: 新建
+    update: 更新
+    edit: 编辑
+    destroy: 删除
+    show: 查看
+    success: 成功
+    kid_list: 查看内容
+    index: 全部列表
+    history: 历史
+    submit: 保存
+    commit: 发布版本
+    export: 导出数据
+    search: 搜索
+    list: 全部列表
+    back_list: 返回
+    cancel: 取消
+    preview: 预览
+    are_you_sure: 您确定删除这条数据吗？
+    generate: 生成
+    regenerate: 重新生成
+    publish:  发布
+    are_you_sure_operation: 您确定要进行此操作吗？
+    play: 播放
+    transcoding: 转码
+    import: 导入
+    modify: 编辑
+    action: 操作
+    domain: 领域
+  common: &common
+    id:           序号
+    position:     位置
+    status:       状态
+    deleted_at:   删除时间
+    created_at:   创建时间
+    updated_at:   更新时间
+    
+  activerecord:
+    models:
+      user: 用户      
+      operation_log: 操作日志        
+      account: 用户
+      action: 动作记录
+    attributes: 
+      user:
+        id: ID
+        username: 用户名
+        phone: 手机号
+        email: 邮箱
+        role_id: 角色
+        position: 位置
+        status: 状态
+        deleted_at: 删除时间
+        created_at: 创建时间
+        updated_at: 更新时间
+        encrypted_password: 加密密码
+        confirmation_token:
+        remember_token:
+        password: 密码
+        avatar: 头像
+      operation_log:
+        <<: *common
+        user_id: 操作人
+        controller: 控制器Controller
+        action: 动作Action
+        params: 参数Params
+        ip_address: IP地址
+        log_type: 类型
+      action:
+        <<: *common
+        id: 序号
+        action_option:
+        action_type: 类型
+        target_id: 关联ID
+        target_type: 关联的类型
+        user_type: 用户
+        user_id: 用户
+      asset:
+        id: 序号
+        data: 文件
+        data_file_name:  文件名
+        data_content_type: 文件类型
+        data_file_size:  文件大小  
+        type: 类型
+        cover: 截图
+        video: 转化后视频
+

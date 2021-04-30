@@ -1,0 +1,57 @@
+<div class="app flex-row align-items-center" style="margin-top: 150px;">
+  <div class="container flex-row align-items-center">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card mx-4">
+          <div class="card-block p-4">
+              <h4 class="text-center">后台管理</h4>
+              <p class="text-muted"></p>
+
+              <%= simple_form_for :session, url: session_path do |form| %>
+                <% if flash[:notice] %>
+                  <div class="alert alert-success">
+                    <%= flash[:notice] %>
+                  </div>
+                <% elsif flash[:error] %>
+                  <div class="alert alert-danger">
+                    <%= flash[:error]  %>
+                  </div>  
+                <% end %>
+                <%= form.input :email, label: "邮箱" %>
+                <%= form.input :password, label: "密码" %>
+
+                <%= form.submit '登陆', class: 'btn btn-primary form-control', disabled_with: "登录中..." %>
+                <!--<div class="row">-->
+                  <!--<div class="col-md-6">-->
+                    <!--<%#= form.submit '登陆', class: 'btn btn-primary px-2', disable_with: "登录中..." %>-->
+                  <!--</div>-->
+
+                  <!--<div class="col-md-6 text-right">-->
+                    <!--<div class="other-links">-->
+
+                      <!--<%#= link_to "忘记密码?", new_password_path %>-->
+                    <!--</div>-->
+                  <!--</div>-->
+                <!--</div>-->
+              <% end %>
+            </div>
+
+          <!--<div class="card card-inverse card-primary py-3 hidden-md-down hide" style="width:44%">-->
+            <!--<div class="card-block text-center">-->
+              <!--<div>-->
+                <!--<h2>Sign up</h2>-->
+                <!--<p>You know you show know what you doing.</p>-->
+                <!--<% if Clearance.configuration.allow_sign_up? %>-->
+                  <!--<button type="button" class="btn btn-secondary btn-lg">-->
+                    <!--<%= link_to t(".sign_in"), sign_up_path %>-->
+                  <!--</button>-->
+                <!--<% end %>-->
+
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

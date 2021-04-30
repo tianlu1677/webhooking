@@ -1,0 +1,32 @@
+version: '3'
+services:
+  rails6_rails:
+    ports: 
+      - 3000:3000
+    build: .    
+    container_name: rails6_rails
+    command: bash -c "bundle exec rake db:create && bundle exec rake db:migrate && bundle exec rails s -b 0.0.0.0 -p 3000"
+    environment:
+      - ENV=production
+      - RAILS_ENV=production
+    env_file:
+      - .env
+    depends_on:
+      - redis
+      - db
+    volumes:
+      - ./log:/rails6/log
+      - ./public:/rails6/public # nginx 可以处理内容
+      # - ./tmp:/rails6/tmp
+      - ./tmp/pids:/rails6/tmp/pids
+  db:
+    image: postgres:10
+    volumes:
+      - "./datadir/postgresql:/var/lib/postgresql/data"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=rails6
+  redis:
+    image: redis:4
+    volumes:
+      - './datadir/redis:/data'

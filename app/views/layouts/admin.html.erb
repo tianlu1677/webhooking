@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>管理</title>
+    <%= csrf_meta_tags %>
+    <meta charset="utf8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="后台管理">
+    <meta name="author" content="tianlu">
+    <link rel="icon" href="/maolv.png">
+
+    <%= javascript_pack_tag 'admin', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'admin', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'admin/style', 'data-turbolinks-track': 'reload' %>
+
+    <meta name="turbolinks-cache-control" content="no-cache">
+  </head>
+
+  <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show  page-<%= controller_name %>">
+     <%= render "admin/common/header" %>
+     <div class="app-body">
+      <%= render "admin/common/sidebar"  %>
+       <main class="main">
+          <%= render "admin/common/breadcrumb" %>
+         <div class="container-fluid">
+            <%= yield %>
+         </div>
+       </main>
+
+      <%#= render "admin/common/aside_menu" %>
+       
+       <div id="challenge-node"></div>
+     </div>
+     <%= render "admin/common/flash_notice" %>
+
+  </body>
+
+</html>

@@ -1,0 +1,21 @@
+  
+  - resource ||= nil
+  - attr ||=  nil
+  - if respond_to?("#{attr}_text".to_sym)
+    = self.send("#{attr}_text".to_sym).presence || "-"
+  - elsif resource.respond_to?("#{attr}_text".to_sym)
+    = raw resource.send("#{attr}_text".to_sym).presence || "-"
+  - elsif resource.respond_to?("#{attr}_title".to_sym)
+    = resource.send("#{attr}_title".to_sym).presence || "-"
+  - elsif resource.respond_to?("#{attr}_name".to_sym)
+    = resource.send("#{attr}_name".to_sym).presence || "-"
+  - elsif resource.send(attr).is_a?(Time)
+    = resource.send(attr).try(:strftime, '%Y-%m-%d %H:%M:%S').presence || "-"
+  - elsif resource.send(attr).is_a?(TrueClass)
+    = '是'
+  - elsif resource.send(attr).is_a?(FalseClass)
+    = '否'
+  /- elsif resource.send(attr).is_a?(CarrierWave::Uploader::Base)
+    = image_tag(resource.send(attr + "_identify"))
+  - else
+    = resource.send(attr)

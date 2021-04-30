@@ -1,0 +1,11 @@
+ol.breadcrumb
+  li.breadcrumb-item
+    a[href="/admin"]
+      | 首页
+  
+  - if resource_class.present?
+    li.breadcrumb-item.active
+      a href="/admin/#{resource_class.model_name.to_s.underscore.pluralize}"      
+        = resource_class.model_name.human
+  li.breadcrumb-item.active
+    = t("action_labels.#{action_name}")

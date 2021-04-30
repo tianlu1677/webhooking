@@ -1,0 +1,16 @@
+<% if flash[:notice].present? %>
+  <script>
+    $(function(){
+      var info = "<%= flash[:notice] %>"
+      toastr.success(info, '温馨提示')
+      console.log(info)
+    }) 
+  </script>
+<% elsif flash[:error].present? %>
+  <script>
+    $(function(){
+      var error = "<%= flash[:error] %>"
+      toastr.success(error, '错误提示')
+    })
+  </script>
+<% end %>

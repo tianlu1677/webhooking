@@ -1,0 +1,19 @@
+# Sample configuration file for Sidekiq.
+# Options here can still be overridden by cmd line args.
+# Place this file at config/sidekiq.yml and Sidekiq will
+# pick it up automatically.
+---
+:verbose: true
+:concurrency: 5
+:timeout: 25
+
+# http://www.mikeperham.com/2013/11/13/advanced-sidekiq-host-specific-queues/
+:queues:
+  - [low, 1]
+  - [default, 5]  
+  
+# you can override concurrency based on environment
+production:
+  :concurrency: 10
+staging:
+  :concurrency: 5

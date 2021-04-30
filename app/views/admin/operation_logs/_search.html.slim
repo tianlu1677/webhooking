@@ -1,0 +1,15 @@
+.col-lg-12.search_form
+  = search_form_for [:admin, @q], class: 'form-inline' do |f|
+    .input-group.mb-2.mr-sm-2
+      = f.label 'ID'
+      = f.search_field :id_eq, class: 'form-control'
+
+    / .input-group.mb-2.mr-sm-2
+      = f.label 'xx'
+      = f.select :target_type_eq, options_for_select(Action.target_type.options, params.dig(:q, :target_type_eq)), include_blank: '---全部---', class: 'form-control mb-2 mr-sm-2'
+    .input-group.mb-2.mr-sm-2
+      = f.label '创建时间'
+      = f.search_field :created_at_gteq, placeholder: '开始时间', class: 'datepicker form-control'
+      = f.search_field :created_at_lteq, placeholder: '结束时间', class: 'datepicker form-control'
+    .input-group.mb-2.mr-sm-2
+      = f.submit '搜索', class: 'btn btn-success'

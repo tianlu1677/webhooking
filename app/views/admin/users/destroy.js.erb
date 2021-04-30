@@ -1,0 +1,5 @@
+<% if @user.errors.empty? %>
+  $("#user_<%= @user.id %>").remove(); toastr.success("删除成功", "温馨提示")
+<% else %>
+  toastr.error("删除失败", "温馨提示") 
+<% end %>  

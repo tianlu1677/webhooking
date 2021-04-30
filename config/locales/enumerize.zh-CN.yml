@@ -1,0 +1,11 @@
+zh-CN:
+  enumerize:    
+    user:
+      role_id:
+        user: 用户
+        admin: 管理员
+        super_admin: 超级管理员
+      status:
+        new: 新建
+        online: 上线
+        offline: 下线

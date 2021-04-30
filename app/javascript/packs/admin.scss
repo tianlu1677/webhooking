@@ -1,0 +1,21 @@
+
+// @import '~bootstrap/scss/bootstrap';
+@import "~@coreui/coreui/scss/coreui";
+
+@import "toastr/toastr.scss";
+
+.margin-right-5 {
+  margin-right: 5px;
+}
+
+.rails-bootstrap-forms-date-select select,
+.rails-bootstrap-forms-time-select select,
+.rails-bootstrap-forms-datetime-select select {
+  display: inline-block;
+  width: auto;
+}
+
+.rails-bootstrap-forms-error-summary {
+  margin-top: 10px;
+}
+

@@ -1,0 +1,90 @@
+.sidebar
+  nav.sidebar-nav
+    ul.nav
+      li.nav-item
+        a.nav-link[href="/admin"]
+          i.icon-speedometer
+          |  Dashboard
+          span.badge.badge-info
+
+      li.nav-item.nav-dropdown
+        a.nav-link.nav-dropdown-toggle[href="#"]
+          i.icon-list
+          |  管理列表
+        ul.nav-dropdown-items
+          li.nav-item
+            a.nav-link[href="/admin/users"]
+              i.icon-people
+              | 用户管理                            
+
+      li.nav-item.nav-dropdown
+        a.nav-link.nav-dropdown-toggle[href="#"]
+          i.icon-list
+          |  管理员记录
+        ul.nav-dropdown-items          
+          li.nav-item
+            a.nav-link[href="/admin/sidekiq" target="_blank"]
+              i.icon-book-open
+              | 后台任务队列
+
+          li.nav-item
+            a.nav-link[href="/admin/operation_logs"]
+              i.icon-book-open
+              | 管理员操作
+          li.nav-item
+            a.nav-link[href="/admin/pghero"]
+              i.icon-book-open
+              | 数据库索引    
+
+javascript:
+  $(function(){
+      $('.nav-dropdown').addClass('open');
+      $.navigation = $('nav > ul.nav');
+      // Add class .active to current link
+      $.navigation.find('a').each(function(){
+        var cUrl = String(window.location).split('?')[0];
+
+        if (cUrl.substr(cUrl.length - 1) == '#') {
+          cUrl = cUrl.slice(0,-1);
+        }
+
+        if ($($(this))[0].href==cUrl) {
+          $(this).addClass('active hight');
+
+          $(this).parents('ul').add(this).each(function(){
+            $(this).parent().addClass('open');
+          });
+        }
+      });
+
+       
+      $('.navbar-toggler').click(function(){
+
+        if ($(this).hasClass('sidebar-toggler')) {
+          $('body').toggleClass('sidebar-hidden');
+        }
+
+        if ($(this).hasClass('sidebar-minimizer')) {
+          $('body').toggleClass('sidebar-minimized');
+        }
+
+        if ($(this).hasClass('aside-menu-toggler')) {
+          $('body').toggleClass('aside-menu-hidden');
+        }
+
+        if ($(this).hasClass('mobile-sidebar-toggler')) {
+          $('body').toggleClass('sidebar-mobile-show');
+        }
+
+      });
+
+      $('.sidebar-close').click(function(){
+        $('body').toggleClass('sidebar-opened').parent().toggleClass('sidebar-opened');
+      });
+
+      /* ---------- Disable moving to top ---------- */
+      $('a[href="#"][data-top!=true]').click(function(e){
+        e.preventDefault();
+      });
+
+    });

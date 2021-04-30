@@ -1,0 +1,14 @@
+
+<% type = respond_to?("type") ? type : 'warning' %>
+
+<div class="alert alert-<%= type %> alert-dismissible fade show" role="alert">
+  <% if respond_to?("title") %>
+    <h6 class="alert-heading"><%= title %></h4>
+  <% else %>  
+    <h6 class="alert-heading">温馨提示：</h4>
+  <% end %>  
+  <p style="margin-bottom: 0"><%= message %></p>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
