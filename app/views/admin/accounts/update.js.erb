@@ -1,0 +1,6 @@
+<% if @account.errors.empty? %>
+  $("#account_<%= @account.id %>").html('<%= j( render :partial => 'admin/accounts/account', locals: { account: @account} ) %>');
+  toastr.success("执行成功", "温馨提示")
+<% else %>
+  toastr.error("执行失败", "温馨提示")
+<% end %>

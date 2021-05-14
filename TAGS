@@ -1,0 +1,222 @@
+
+app/mailers/application_mailer.rb,67
+class ApplicationMailer < ActionMailer::BaseApplicationMailer1,0
+
+app/models/account_token.rb,56
+class AccountToken < ApplicationRecordAccountToken1,0
+
+app/models/account.rb,84
+class Account < ApplicationRecordAccount1,0
+  def set_init_dataset_init_data4,0
+
+app/models/request.rb,46
+class Request < ApplicationRecordRequest1,0
+
+app/models/operation_log.rb,56
+class OperationLog < ApplicationRecordOperationLog1,0
+
+app/models/application_record.rb,67
+class ApplicationRecord < ActiveRecord::BaseApplicationRecord1,0
+
+app/models/user.rb,254
+class User < ApplicationRecordUser15,0
+  has_one :accountaccount21,0
+  has_one :accountaccount=21,0
+  has_one :accountbuild_account21,0
+  has_one :accountcreate_account21,0
+  has_one :accountcreate_account!21,0
+  def init_datainit_data23,0
+
+app/policies/application_policy.rb,571
+class ApplicationPolicyApplicationPolicy1,0
+  attr_reader :user, :recorduser2,0
+  attr_reader :user, :recordrecord2,0
+  def initialize(user, record)initialize4,0
+  def index?index?9,0
+  def show?show?13,0
+  def create?create?17,0
+  def new?new?21,0
+  def update?update?25,0
+  def edit?edit?29,0
+  def destroy?destroy?33,0
+  class ScopeScope37,0
+  class ScopeApplicationPolicy::Scope37,0
+    attr_reader :user, :scopeuser38,0
+    attr_reader :user, :scopescope38,0
+    def initialize(user, scope)initialize40,0
+    def resolveresolve45,0
+
+app/policies/dashboard_policy.rb,100
+class DashboardPolicy < ApplicationPolicyDashboardPolicy3,0
+  def show_sidebar?show_sidebar?4,0
+
+app/workers/hard_worker.rb,66
+class HardWorkerHardWorker3,0
+  def perform(*_args)perform7,0
+
+app/jobs/application_job.rb,58
+class ApplicationJob < ActiveJob::BaseApplicationJob1,0
+
+app/controllers/clearance/base_controller.rb,161
+class Clearance::BaseController < ApplicationControllerBaseController3,0
+class Clearance::BaseController < ApplicationControllerClearance::BaseController3,0
+
+app/controllers/clearance/passwords_controller.rb,905
+class Clearance::PasswordsController < Clearance::BaseControllerPasswordsController5,0
+class Clearance::PasswordsController < Clearance::BaseControllerClearance::PasswordsController5,0
+  def createcreate24,0
+  def editedit32,0
+  def newnew43,0
+  def updateupdate47,0
+  def deliver_email(user)deliver_email62,0
+  def password_reset_paramspassword_reset_params72,0
+  def find_user_by_id_and_confirmation_tokenfind_user_by_id_and_confirmation_token81,0
+  def find_user_for_createfind_user_for_create89,0
+  def find_user_for_editfind_user_for_edit94,0
+  def find_user_for_updatefind_user_for_update98,0
+  def ensure_existing_userensure_existing_user102,0
+  def flash_failure_when_forbiddenflash_failure_when_forbidden109,0
+  def flash_failure_after_updateflash_failure_after_update115,0
+  def url_after_createurl_after_create121,0
+  def url_after_updateurl_after_update125,0
+
+app/controllers/clearance/users_controller.rb,442
+class Clearance::UsersController < Clearance::BaseControllerUsersController3,0
+class Clearance::UsersController < Clearance::BaseControllerClearance::UsersController3,0
+  def newnew14,0
+  def createcreate19,0
+  def avoid_sign_inavoid_sign_in32,0
+  def redirect_signed_in_usersredirect_signed_in_users40,0
+  def url_after_createurl_after_create44,0
+  def user_from_paramsuser_from_params48,0
+  def user_paramsuser_params60,0
+
+app/controllers/clearance/sessions_controller.rb,468
+class Clearance::SessionsController < Clearance::BaseControllerSessionsController3,0
+class Clearance::SessionsController < Clearance::BaseControllerClearance::SessionsController3,0
+  def createcreate22,0
+  def destroydestroy35,0
+  def newnew40,0
+  def redirect_signed_in_usersredirect_signed_in_users46,0
+  def url_after_createurl_after_create50,0
+  def url_after_destroyurl_after_destroy54,0
+  def url_for_signed_in_usersurl_for_signed_in_users58,0
+
+app/controllers/application_controller.rb,79
+class ApplicationController < ActionController::BaseApplicationController1,0
+
+app/controllers/admin/operation_logs_controller.rb,512
+class Admin::OperationLogsController < Admin::ApplicationControllerOperationLogsController3,0
+class Admin::OperationLogsController < Admin::ApplicationControllerAdmin::OperationLogsController3,0
+  def indexindex6,0
+  def show; endshow12,0
+  def newnew14,0
+  def edit; endedit18,0
+  def createcreate20,0
+  def updateupdate30,0
+  def destroydestroy41,0
+  def set_operation_logset_operation_log51,0
+  def operation_log_paramsoperation_log_params55,0
+  def show_attributesshow_attributes59,0
+
+app/controllers/admin/application_controller.rb,177
+class Admin::ApplicationController < ApplicationControllerApplicationController1,0
+class Admin::ApplicationController < ApplicationControllerAdmin::ApplicationController1,0
+
+app/controllers/admin/users_controller.rb,405
+class Admin::UsersController < Admin::ApplicationControllerUsersController3,0
+class Admin::UsersController < Admin::ApplicationControllerAdmin::UsersController3,0
+  def indexindex6,0
+  def show; endshow13,0
+  def newnew15,0
+  def edit; endedit19,0
+  def createcreate21,0
+  def update    update31,0
+  def destroydestroy42,0
+  def set_userset_user49,0
+  def user_paramsuser_params53,0
+
+app/controllers/admin/home_controller.rb,185
+class Admin::HomeController < Admin::ApplicationControllerHomeController1,0
+class Admin::HomeController < Admin::ApplicationControllerAdmin::HomeController1,0
+  def indexindex3,0
+
+app/controllers/users_controller.rb,294
+class UsersController < ApplicationControllerUsersController1,0
+  def indexindex5,0
+  def showshow10,0
+  def newnew14,0
+  def editedit19,0
+  def createcreate23,0
+  def updateupdate34,0
+  def destroydestroy43,0
+    def set_userset_user50,0
+    def user_paramsuser_params55,0
+
+app/controllers/home_controller.rb,86
+class HomeController < ApplicationControllerHomeController1,0
+  def indexindex3,0
+
+app/controllers/concerns/admin/resource_content.rb,260
+module AdminAdmin1,0
+module ResourceContentResourceContent2,0
+module ResourceContentAdmin::ResourceContent2,0
+  def attributesattributes5,0
+  def show_attributesshow_attributes9,0
+  def resourceresource13,0
+  def resource_classresource_class17,0
+
+app/helpers/admin_helper.rb,572
+module AdminHelperAdminHelper3,0
+  def new_link(url, remote: false)new_link4,0
+  def show_link(url)show_link8,0
+  def edit_link(url, text: nil, opts: { css: nil })edit_link12,0
+  def icon_edit_link(text = nil, url)icon_edit_link18,0
+  def save_link(text: nil)save_link24,0
+  def destroy_link(url, remote: false, opts: { css: nil })destroy_link30,0
+  def index_link(url)index_link36,0
+  def custom_link(text = '', url, remote: false)custom_link42,0
+  def image_link(url, size: '80x80')image_link48,0
+  def video_link(url, size: '80x80')video_link58,0
+
+app/helpers/application_helper.rb,47
+module ApplicationHelperApplicationHelper1,0
+
+app/channels/application_cable/connection.rb,195
+module ApplicationCableApplicationCable1,0
+  class Connection < ActionCable::Connection::BaseConnection2,0
+  class Connection < ActionCable::Connection::BaseApplicationCable::Connection2,0
+
+app/channels/application_cable/channel.rb,177
+module ApplicationCableApplicationCable1,0
+  class Channel < ActionCable::Channel::BaseChannel2,0
+  class Channel < ActionCable::Channel::BaseApplicationCable::Channel2,0
+
+config/application.rb,182
+module Rails6TemplateWebRails6TemplateWeb9,0
+  class Application < Rails::ApplicationApplication10,0
+  class Application < Rails::ApplicationRails6TemplateWeb::Application10,0
+
+db/migrate/20200528064829_create_users.rb,89
+class CreateUsers < ActiveRecord::Migration[6.0]CreateUsers1,0
+  def changechange2,0
+
+db/migrate/20210430082706_create_active_storage_tables.active_storage.rb,117
+class CreateActiveStorageTables < ActiveRecord::Migration[5.2]CreateActiveStorageTables2,0
+  def changechange3,0
+
+db/migrate/20210514071829_create_account_tokens.rb,105
+class CreateAccountTokens < ActiveRecord::Migration[6.1]CreateAccountTokens1,0
+  def changechange2,0
+
+db/migrate/20200528072905_create_operation_logs.rb,105
+class CreateOperationLogs < ActiveRecord::Migration[6.0]CreateOperationLogs1,0
+  def changechange2,0
+
+db/migrate/20210514064639_create_accounts.rb,95
+class CreateAccounts < ActiveRecord::Migration[6.1]CreateAccounts1,0
+  def changechange2,0
+
+db/migrate/20210514070926_create_requests.rb,95
+class CreateRequests < ActiveRecord::Migration[6.1]CreateRequests1,0
+  def changechange2,0

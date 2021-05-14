@@ -1,13 +1,12 @@
 require 'sidekiq/web'
 require 'sidekiq/cron/web'
 
-
 Rails.application.routes.draw do
   mount Sidekiq::Web => '/admin/sidekiq'
   mount PgHero::Engine, at: '/admin/pghero'
 
   resources :passwords, controller: 'clearance/passwords', only: %i[create new]
-  resource :session, controller: 'clearance/sessions'#, only: [:create]
+  resource :session, controller: 'clearance/sessions' # , only: [:create]
 
   resources :users, controller: 'clearance/users', only: [:create] do
     resource :password,
@@ -20,10 +19,15 @@ Rails.application.routes.draw do
 
   root 'home#index'
 
+  match 'r/:backpack_token', via: %i[get post], to: 'receives#create'
+
   # 管理后台
   namespace :admin do
     root 'home#index'
     resources :operation_logs
     resources :users
+    resources :backpacks
+    resources :account_tokens
+    resources :accounts
   end
 end

@@ -1,0 +1,33 @@
+.row
+  = render "search"
+  .col-lg-12
+    .card
+      .card-header
+        = '☰ '
+        = resource_class.model_name.human
+        = new_link new_admin_backpack_path
+        / = page_entries_info @backpacks
+      .card-block.card-body[style="overflow: scroll"]
+        table.table.table-bordered.table-striped.table-condensed
+          thead
+            tr
+              - attributes = %w[id method url req_params created_at ]
+              - attributes.each do |attr|
+                th
+                  = resource_class.human_attribute_name(attr)
+              th
+                = t('action_labels.action')
+          tbody
+            - @backpacks.each do |backpack|
+              tr id="backpack_#{backpack.id}"
+                td = backpack.id
+                td = backpack.req_method
+                td = backpack.url
+                td = backpack.req_params
+                td = backpack.created_at.try(:strftime, '%Y-%m-%d %H:%M:%S').presence || "-"
+                td
+                  = edit_link edit_admin_backpack_path(backpack)
+                  = show_link admin_backpack_path(backpack)
+                  = destroy_link admin_backpack_path(backpack), remote: true
+
+        == pagy_nav @pagy

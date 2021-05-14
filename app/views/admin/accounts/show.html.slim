@@ -1,0 +1,22 @@
+.col-lg-12
+  .card
+    .card-header
+      i.fa.fa-align-justify
+      = resource_class.model_name.human
+    .card-block.card-body
+      table.table.table-bordered.table-striped.table-sm
+        thead
+          tr
+            th
+              | 属性
+            th
+              | 内容
+        tbody
+          - show_attributes.each do |attr|
+            tr
+              th
+                = resource_class.human_attribute_name(attr)
+              th
+                = @account.send(attr)
+      = index_link admin_accounts_path
+

@@ -10,10 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_30_082706) do
+ActiveRecord::Schema.define(version: 2021_05_14_072203) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "account_tokens", force: :cascade do |t|
+    t.string "uuid"
+    t.string "receive_email"
+    t.datetime "expired_at"
+    t.integer "account_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "accounts", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "uuid", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_accounts_on_user_id"
+    t.index ["uuid"], name: "index_accounts_on_uuid"
+  end
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -43,11 +61,46 @@ ActiveRecord::Schema.define(version: 2021_04_30_082706) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "backpacks", force: :cascade do |t|
+    t.string "uuid"
+    t.string "url"
+    t.string "req_method"
+    t.string "ip"
+    t.string "hostname"
+    t.string "user_agent"
+    t.string "referer"
+    t.text "content"
+    t.jsonb "headers"
+    t.integer "status_code"
+    t.jsonb "req_params"
+    t.integer "account_id"
+    t.integer "token_uuid"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "operation_logs", force: :cascade do |t|
     t.string "user_id"
     t.string "params"
     t.string "action"
     t.string "controller"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "requests", force: :cascade do |t|
+    t.string "uuid"
+    t.string "url"
+    t.string "action_method"
+    t.string "ip"
+    t.string "hostname"
+    t.string "user_agent"
+    t.string "referer"
+    t.text "content"
+    t.jsonb "headers"
+    t.integer "status_code"
+    t.jsonb "req_params"
+    t.integer "account_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -1,0 +1,6 @@
+<% if @backpack.errors.empty? %>
+  $("#backpack_<%= @backpack.id %>").html('<%= j( render :partial => 'admin/backpacks/backpack', locals: { backpack: @backpack} ) %>');
+  toastr.success("执行成功", "温馨提示")
+<% else %>
+  toastr.error("执行失败", "温馨提示")
+<% end %>

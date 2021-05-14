@@ -6,14 +6,14 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module Rails6TemplateWeb
+module WebHookKing
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
 
     config.active_record.default_timezone = :local
     config.time_zone = 'Beijing'
-    config.i18n.available_locales = [:"zh-CN", :en]
+    config.i18n.available_locales = %i[zh-CN en]
     config.i18n.default_locale = :"zh-CN"
 
     config.generators do |g|
@@ -21,14 +21,14 @@ module Rails6TemplateWeb
       g.helper false
       g.serializer false
       g.jbuilder false
-      g.template_engine :slim      
+      g.template_engine :slim
       g.test_framework :rspec,
-        fixtures: true,
-        view_specs: false,
-        helper_specs: false,
-        routing_specs: false,
-        request_specs: false,
-        integrate_specs: false
+                       fixtures: true,
+                       view_specs: false,
+                       helper_specs: false,
+                       routing_specs: false,
+                       request_specs: false,
+                       integrate_specs: false
       g.fixture_replacement :factory_bot, dir: 'spec/factories'
     end
 
