@@ -19,6 +19,13 @@ Rails.application.routes.draw do
 
   root 'home#index'
 
+  resources :accounts do
+    member do
+      get :account_token
+    end
+  end
+  resources :backpacks
+
   match 'r/:backpack_token', via: %i[get post], to: 'receives#create'
 
   # 管理后台

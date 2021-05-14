@@ -1,0 +1,150 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6">
+      <table class="table table-borderless table-striped">
+        <thead>
+        <tr>
+          <th colspan="2">
+            Request Details
+            <span class="pull-right">
+            </span>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- ngIf: currentRequest.type === 'web' --><tr >
+          <td>
+            <span class="label label-info"><%= @backpack.req_method %></span>
+          </td>
+          <td id="req-url" class="break">
+            <a href="https://webhook.site/151a4b47-2103-441b-bdb7-1923e5be1aff?a=2&amp;c=2%0A" class="ng-binding">https://webhook.site/151a4b47-2103-441b-bdb7-1923e5be1aff?a=2&amp;c=2%0A</a>
+          </td>
+        </tr>
+        <tr >
+          <td>Host</td>
+          <td id="req-ip" class="ng-binding">
+            <%= @backpack.ip %>
+            <a class="small" target="_blank" href="https://who.is/whois-ip/ip-address/<%= @backpack.ip %>">whois</a>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Date</td>
+          <td id="req-date" title="<%= @backpack.created_at %>">
+            <span ng-show="hasRequests" class="ng-binding"><%= @backpack.created_at %></span>
+          </td>
+        </tr>
+        <tr>
+          <td>Size</td>
+          <td id="req-date" title="0 bytes" class="ng-binding">0 bytes</td>
+        </tr>
+        <tr>
+          <td width="15%" d="">ID</td>
+          <td id="req-date" class="ng-binding"><%= @backpack.uuid %></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-6">
+      <table class="table table-borderless table-striped">
+        <thead>
+        <tr>
+          <th colspan="2">Headers</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- ngRepeat: (headerName, values) in currentRequest.headers track by headerName --><tr >
+          <td width="25%" class="ng-binding">connection</td>
+          <td class="long">
+            <code class="ng-binding">
+              <%= @backpack.headers['CONNECTION'] %>
+            </code>
+          </td>
+        </tr><tr >
+          <td width="25%" class="ng-binding">content-length</td>
+          <td class="long">
+            <code class="ng-binding">
+              0
+            </code>
+          </td>
+        </tr><tr >
+          <td width="25%" class="ng-binding">accept-encoding</td>
+          <td class="long">
+            <code class="ng-binding">
+              <%= @backpack.headers['ACCEPT-ENCODING'] %>
+            </code>
+          </td>
+        </tr><tr >
+          <td width="25%" class="ng-binding">host</td>
+          <td class="long">
+            <code class="ng-binding">
+              <%= @backpack.headers['HOST'] %>
+            </code>
+          </td>
+        </tr><tr >
+          <td width="25%" class="ng-binding">postman-token</td>
+          <td class="long">
+            <code class="ng-binding">
+              dae78a2b-8402-457f-843a-ba3196ebceba
+            </code>
+          </td>
+        </tr><tr >
+          <td width="25%" class="ng-binding">accept</td>
+          <td class="long">
+            <code class="ng-binding">
+              */*
+            </code>
+          </td>
+        </tr><tr >
+          <td width="25%" class="ng-binding">user-agent</td>
+          <td class="long">
+            <code class="ng-binding">
+              PostmanRuntime/7.26.10
+            </code>
+          </td>
+        </tr><tr >
+          <td width="25%" class="ng-binding">authorization</td>
+          <td class="long">
+            <code class="ng-binding">
+              Bearer nCVgHR8PSAabTB_yKCtinybw94_fBFW8Gus4B4hxYiA
+            </code>
+          </td>
+        </tr><tr >
+          <td width="25%" class="ng-binding">content-type</td>
+          <td class="long">
+            <code class="ng-binding">
+
+            </code>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <table class="table table-borderless table-striped">
+        <thead>
+        <tr>
+          <th colspan="2">Query strings</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-show="!currentRequest.query" class="ng-hide">
+          <td><span class="small">(empty)</span></td>
+        </tr>
+        <!-- ngRepeat: (name, value) in currentRequest.query --><tr ng-repeat="(name, value) in currentRequest.query" class="ng-scope">
+          <td width="25%" class="break ng-binding">a</td>
+          <td class="break"><code class="ng-binding">2</code></td>
+        </tr><!-- end ngRepeat: (name, value) in currentRequest.query --><tr ng-repeat="(name, value) in currentRequest.query" class="ng-scope">
+          <td width="25%" class="break ng-binding">c</td>
+          <td class="break"><code class="ng-binding">2
+          </code></td>
+        </tr><!-- end ngRepeat: (name, value) in currentRequest.query -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Admin::BackpacksController < Admin::ApplicationController
-  before_action :set_backpacks, only: %i[show edit update destroy]
+  before_action :set_backpack, only: %i[show edit update destroy]
 
   def index
     @q = Backpack.all.ransack(params[:q])
@@ -12,15 +12,15 @@ class Admin::BackpacksController < Admin::ApplicationController
   def show; end
 
   def new
-    @backpacks = Backpack.new
+    @backpack = Backpack.new
   end
 
   def edit; end
 
   def create
-    @backpacks = Backpack.new(backpacks_params)
+    @backpack = Backpack.new(backpacks_params)
 
-    if @backpacks.save
+    if @backpack.save
       redirect_to(admin_backpacks_path, notice: '创建成功。')
     else
       render :new
@@ -28,7 +28,7 @@ class Admin::BackpacksController < Admin::ApplicationController
   end
 
   def update
-    if @backpacks.update(backpacks_params)
+    if @backpack.update(backpack_params)
       respond_to do |format|
         format.html { redirect_to(admin_backpacks_path, notice: '更新成功。') }
         format.js
@@ -39,7 +39,7 @@ class Admin::BackpacksController < Admin::ApplicationController
   end
 
   def destroy
-    @backpacks.destroy
+    @backpack.destroy
     respond_to do |format|
       format.html { redirect_to admin_backpacks_path, notice: '删除成功.' }
       format.js
@@ -48,15 +48,11 @@ class Admin::BackpacksController < Admin::ApplicationController
 
   private
 
-  def set_backpacks
-    @backpacks = Backpack.find(params[:id])
+  def set_backpack
+    @backpack = Backpack.find(params[:id])
   end
 
-  def backpacks_params
-    params.require(:backpacks).permit!
-  end
-
-  def show_attributes
-    %w[id created_at updated_at]
+  def backpack_params
+    params.require(:backpack).permit!
   end
 end
