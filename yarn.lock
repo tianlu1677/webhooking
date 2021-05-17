@@ -931,20 +931,10 @@
     "@babel/helper-validator-identifier" "^7.14.0"
     to-fast-properties "^2.0.0"
 
-"@coreui/coreui-plugin-npm-postinstall@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.npm.taobao.org/@coreui/coreui-plugin-npm-postinstall/download/@coreui/coreui-plugin-npm-postinstall-1.0.2.tgz#6daeb2ec786580d9c0849b05bc3e8d0222d5c463"
-  integrity sha1-ba6y7HhlgNnAhJsFvD6NAiLVxGM=
-
-"@coreui/coreui@2.1.12":
-  version "2.1.12"
-  resolved "https://registry.nlark.com/@coreui/coreui/download/@coreui/coreui-2.1.12.tgz#778b03a59984becb5441410a7595f6a064d388cd"
-  integrity sha1-d4sDpZmEvstUQUEKdZX2oGTTiM0=
-  dependencies:
-    "@coreui/coreui-plugin-npm-postinstall" "^1.0.2"
-    bootstrap "^4.3.1"
-    core-js "^3.1.3"
-    regenerator-runtime "^0.13.2"
+"@coreui/coreui@3.4.0":
+  version "3.4.0"
+  resolved "https://registry.npmjs.org/@coreui/coreui/-/coreui-3.4.0.tgz#3e3627a1f48a00f6289204a23f71eaa6ea94e370"
+  integrity sha512-WqzockdWVkXUNmNwlqdu+AxM+9JoiWGe4rKaySu/dZme1NvVOn2ukjJlpTkssal8UKcSHyitzNixtkMCmUxE1A==
 
 "@csstools/convert-colors@^1.4.0":
   version "1.4.0"
@@ -971,6 +961,11 @@
   dependencies:
     mkdirp "^1.0.4"
     rimraf "^3.0.2"
+
+"@popperjs/core@^2.9.2":
+  version "2.9.2"
+  resolved "https://registry.npmjs.org/@popperjs/core/-/core-2.9.2.tgz#adea7b6953cbb34651766b0548468e743c6a2353"
+  integrity sha512-VZMYa7+fXHdwIq1TDhSXoVmSPEGM/aa+6Aiq3nVVJ9bXr24zScr+NlKFKC3iPljA7ho/GAZr+d2jOf5GIRC30Q==
 
 "@rails/actioncable@^6.0.0", "@rails/actioncable@^6.1.0":
   version "6.1.3"
@@ -1599,7 +1594,7 @@ boolbase@^1.0.0, boolbase@~1.0.0:
   resolved "https://registry.npm.taobao.org/boolbase/download/boolbase-1.0.0.tgz#68dff5fbe60c51eb37725ea9e3ed310dcc1e776e"
   integrity sha1-aN/1++YMUes3cl6p4+0xDcwed24=
 
-bootstrap@^4.3.1, bootstrap@^4.5.0:
+bootstrap@^4.5.0:
   version "4.6.0"
   resolved "https://registry.npm.taobao.org/bootstrap/download/bootstrap-4.6.0.tgz#97b9f29ac98f98dfa43bf7468262d84392552fd7"
   integrity sha1-l7nymsmPmN+kO/dGgmLYQ5JVL9c=
@@ -2179,7 +2174,7 @@ core-js-compat@^3.9.0, core-js-compat@^3.9.1:
     browserslist "^4.16.5"
     semver "7.0.0"
 
-core-js@^3.1.3, core-js@^3.11.0:
+core-js@^3.11.0:
   version "3.11.1"
   resolved "https://registry.nlark.com/core-js/download/core-js-3.11.1.tgz#f920392bf8ed63a0ec8e4e729857bfa3d121c525"
   integrity sha1-+SA5K/jtY6Dsjk5ymFe/o9EhxSU=
@@ -5797,7 +5792,7 @@ regenerate@^1.4.0:
   resolved "https://registry.npm.taobao.org/regenerate/download/regenerate-1.4.2.tgz?cache=0&sync_timestamp=1604218378158&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fregenerate%2Fdownload%2Fregenerate-1.4.2.tgz#b9346d8827e8f5a32f7ba29637d398b69014848a"
   integrity sha1-uTRtiCfo9aMve6KWN9OYtpAUhIo=
 
-regenerator-runtime@^0.13.2, regenerator-runtime@^0.13.4, regenerator-runtime@^0.13.7:
+regenerator-runtime@^0.13.4, regenerator-runtime@^0.13.7:
   version "0.13.7"
   resolved "https://registry.nlark.com/regenerator-runtime/download/regenerator-runtime-0.13.7.tgz#cac2dacc8a1ea675feaabaeb8ae833898ae46f55"
   integrity sha1-ysLazIoepnX+qrrriugziYrkb1U=

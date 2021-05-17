@@ -7,7 +7,7 @@
               <h4 class="text-center">后台管理</h4>
               <p class="text-muted"></p>
 
-              <%= simple_form_for :session, url: session_path do |form| %>
+              <%= simple_form_for :session, url: session_path, "data-turbo": false do |form| %>
                 <% if flash[:notice] %>
                   <div class="alert alert-success">
                     <%= flash[:notice] %>

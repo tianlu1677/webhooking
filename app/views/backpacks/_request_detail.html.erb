@@ -1,0 +1,33 @@
+<div class="card">
+  <div class="card-header">
+    <i class="fa fa-align-justify"></i>
+    <h6>Request detail</h6>
+  </div>
+  <div class="">
+    <table class="table table-responsive-sm table-sm">
+      <tbody>
+
+      <tr>
+        <td>GET</td>
+        <td><%= backpack.url %></td>
+      </tr>
+      <tr>
+        <td>Host</td>
+        <td><%= backpack.hostname %></td>
+      </tr>
+      <tr>
+        <td>Date</td>
+        <td><%= backpack.created_at %></td>
+      </tr>
+      <tr>
+        <td>Size</td>
+        <td><%= backpack.content.size %></td>
+      </tr>
+      <tr>
+        <td>ID</td>
+        <td><%= backpack.uuid %></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

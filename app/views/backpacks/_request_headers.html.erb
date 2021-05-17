@@ -1,0 +1,17 @@
+<div class="card">
+  <div class="card-header"><i class="fa fa-align-justify"></i>
+    <h6>Headers</h6>
+  </div>
+  <div class="card-body">
+    <table class="table table-responsive-sm">
+      <tbody>
+      <% backpack.headers.each do |k, v| %>
+      <tr>
+        <td><%= k %></td>
+        <td><%= v %></td>
+      </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

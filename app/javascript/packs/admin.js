@@ -6,6 +6,7 @@ import toastr from 'toastr';
 import queryString from 'query-string'
 window.queryString = queryString
 import ReactDOM from 'react-dom'
+require("@hotwired/turbo-rails")
 
 // https://chartkick.com/
 require("chartkick")
@@ -13,8 +14,8 @@ require("chart.js")
 
 
 window.toastr = toastr;
-var Turbolinks = require("turbolinks")
-Turbolinks.start()
+// var Turbolinks = require("turbolinks")
+// Turbolinks.start()
 
 require('jquery');
 
