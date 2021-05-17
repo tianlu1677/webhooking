@@ -7,9 +7,8 @@ gem 'rails', '~> 6.1.3.2'
 gem 'puma', '~> 4.1'
 gem 'sass-rails', '>= 6'
 gem 'webpacker', '~> 5.3.0'
-gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.11.2'
-
+gem 'hotwire-rails'
 # add
 gem 'pg'
 gem 'pghero'
