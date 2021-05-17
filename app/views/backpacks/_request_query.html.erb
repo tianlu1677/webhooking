@@ -1,22 +1,14 @@
 <div class="card">
-  <div class="card-header"><i class="fa fa-align-justify"></i> Request detail</div>
+  <div class="card-header"><i class="fa fa-align-justify"></i> Request Params</div>
   <div class="card-body">
     <table class="table table-responsive-sm">
-      <thead>
-      <tr>
-        <th>Username</th>
-        <th>Date registered</th>
-      </tr>
-      </thead>
       <tbody>
-      <tr>
-        <td>Samppa Nori</td>
-        <td>2012/01/01</td>
-      </tr>
-      <tr>
-        <td>Estavan Lykos</td>
-        <td>2012/02/01</td>
-      </tr>
+      <% backpack.req_params.each do |k, v| %>
+        <tr>
+          <td><%= k %></td>
+          <td><%= v %></td>
+        </tr>
+      <% end %>
       </tbody>
     </table>
   </div>

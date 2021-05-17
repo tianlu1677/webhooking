@@ -8,7 +8,7 @@
       <tbody>
 
       <tr>
-        <td>GET</td>
+        <td><%= backpack.req_method || 'GET' %></td>
         <td><%= backpack.url %></td>
       </tr>
       <tr>
@@ -21,7 +21,7 @@
       </tr>
       <tr>
         <td>Size</td>
-        <td><%= backpack.content.size %></td>
+        <td><%= backpack.content_length %></td>
       </tr>
       <tr>
         <td>ID</td>

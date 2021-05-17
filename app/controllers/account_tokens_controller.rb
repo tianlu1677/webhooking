@@ -6,7 +6,7 @@ class AccountTokensController < ApplicationController
   def show
     @account_token = AccountToken.find_by_id(params[:id])
     @account = @account_token.account
-    @backpacks = @account_token.backpacks
+    @backpacks = @account_token.backpacks.order('id desc')
   end
 
   private

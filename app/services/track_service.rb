@@ -15,7 +15,7 @@ class TrackService
     hostname = request.hostname
     user_agent = request.user_agent
     referer = request.referer
-    content = request.content_length
+    content_length = request.content_length
     status_code = 200
     req_params = request.params.reject { |x| %w[controller action backpack_token].include?(x) }
 
@@ -28,7 +28,7 @@ class TrackService
       referer: referer,
       status_code: status_code,
       req_params: req_params,
-      content: content,
+      content_length: content_length,
       account_id: @account_token.account_id
     }
     Rails.logger.info("request #{request_data}")
@@ -41,8 +41,10 @@ class TrackService
   end
 
   def extract_http_request_headers(env)
+    # binding.pry
+    allow = %w[CONTENT_TYPE CONTENT_LENGTH]
     env.reject do |k, v|
-      !(/^HTTP_[A-Z_]+$/ === k) || k == 'HTTP_VERSION' || v.nil? || k == 'HTTP_COOKIE'
+      (!(/^HTTP_[A-Z_]+$/ === k) && !allow.include?(k)) || k == 'HTTP_VERSION'
     end.map do |k, v|
       [reconstruct_header_name(k), v]
     end.each_with_object(Rack::Utils::HeaderHash.new) do |k_v, hash|
@@ -52,7 +54,7 @@ class TrackService
   end
 
   def reconstruct_header_name(name)
-    name.sub(/^HTTP_/, '').gsub('_', '-')
+    name.sub(/^HTTP_/, '').gsub('_', '-').downcase
   end
 
   COOKIE_PARAM_PATTERN = %r{\A([^(),/<>@;:\\"\[\]?={}\s]+)(?:=([^;]*))?\Z}

@@ -1,28 +1,23 @@
 <div class="" style="">
 
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-3">
       <%= render "backpacks/left_list", backpacks: @backpacks %>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-9">
       <%= render "header" %>
       <div>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-5">
             <%= render "backpacks/request_detail", backpack: @backpacks.first %>
-          </div>
-          <div class="col-md-6">
-            <%= render "backpacks/request_headers", backpack: @backpacks.first %>
-          </div>
-          <div class="col-md-6">
             <%= render "backpacks/request_query", backpack: @backpacks.first %>
+            <%#= render "backpacks/request_form", backpack: @backpacks.first %>
           </div>
 
-          <div class="col-md-6">
-            <%= render "backpacks/request_form", backpack: @backpacks.first %>
+          <div class="col-md-7">
+            <%= render "backpacks/request_headers", backpack: @backpacks.first %>
           </div>
         </div>
-        底部信息
       </div>
     </div>
   </div>
