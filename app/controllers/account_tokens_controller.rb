@@ -4,9 +4,9 @@ class AccountTokensController < ApplicationController
   end
 
   def show
-    @account_token = AccountToken.find_by_id(params[:id])
-    @account = @account_token.account
+    @account_token = AccountToken.find_by_id_or_uuid(params[:id])
     @backpacks = @account_token.backpacks.order('id desc')
+    @current_backpack = Backpack.find_by(uuid: params[:backpack_id]) || @backpacks.last
   end
 
   private

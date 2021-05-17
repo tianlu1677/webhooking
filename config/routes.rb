@@ -19,14 +19,11 @@ Rails.application.routes.draw do
 
   root 'home#index'
 
-  resources :accounts do
-    member do
-      get :account_token
-    end
-  end
-
+  resources :accounts
   resources :account_tokens
   resources :backpacks
+
+  get 'account_tokens/:id/:backpack_id', to: 'account_tokens#show'
 
   match 'r/:backpack_token', via: %i[get post], to: 'receives#create'
 

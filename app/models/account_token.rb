@@ -11,9 +11,11 @@
 #  updated_at    :datetime         not null
 #
 class AccountToken < ApplicationRecord
-  belongs_to :account
+  belongs_to :account, optional: true
 
   has_many :backpacks, foreign_key: :token_uuid, primary_key: :uuid
+
+  scope :find_by_id_or_uuid, ->(id) { where("uuid = ? OR id = ?", id, id.to_i).first }
 
   before_create :set_init_data
   def set_init_data
