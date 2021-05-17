@@ -1,0 +1,10 @@
+<% @accounts.each do |account| %>
+  <div>
+    <%= account.id %>
+    <% account.account_tokens.each do |t| %>
+      <p>Detail <%= link_to t.uuid, account_token_path(t) %></p>
+      <p>token <%= link_to t.uuid, "/r/#{t.uuid}" %></p>
+    <% end %>
+  </div>
+
+<% end %>

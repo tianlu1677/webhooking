@@ -24,6 +24,8 @@ Rails.application.routes.draw do
       get :account_token
     end
   end
+
+  resources :account_tokens
   resources :backpacks
 
   match 'r/:backpack_token', via: %i[get post], to: 'receives#create'
