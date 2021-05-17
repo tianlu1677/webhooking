@@ -102,6 +102,9 @@ GEM
     database_cleaner-core (2.0.1)
     diff-lcs (1.4.4)
     dotenv (2.7.6)
+    dotenv-rails (2.7.6)
+      dotenv (= 2.7.6)
+      railties (>= 3.2)
     email_validator (2.2.3)
       activemodel
     enumerize (2.4.0)
@@ -343,7 +346,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   clearance
   database_cleaner
-  dotenv
+  dotenv-rails
   enumerize
   factory_bot_rails
   ffaker

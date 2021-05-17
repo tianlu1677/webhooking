@@ -9,6 +9,7 @@ gem 'sass-rails', '>= 6'
 gem 'webpacker', '~> 5.3.0'
 gem 'jbuilder', '~> 2.11.2'
 gem 'hotwire-rails'
+gem 'dotenv-rails'
 # add
 gem 'pg'
 gem 'pghero'
@@ -19,7 +20,7 @@ gem 'redis-objects'
 gem 'redis-rails'
 
 gem 'enumerize'
-gem 'dotenv'
+
 gem 'pundit'
 gem 'ransack'
 gem 'simple_form'
