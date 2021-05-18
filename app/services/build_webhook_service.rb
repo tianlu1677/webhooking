@@ -6,10 +6,10 @@ class BuildWebhookService
   end
 
   def find_or_create!
-    byebug
+    # byebug
     puts "cookie_token #{cookie_token}"
     if cookie_token.blank?
-      cookie_token = "xxxx"
+      cookies.encrypted['webhook_token'] = SecureRandom.hex
     end
 
     webhook = Webhook.find_or_create_by(user_id: @user&.id, webhook_token: cookie_token)
@@ -21,7 +21,7 @@ class BuildWebhookService
   end
 
   def cookie_token=(value)
-    byebug
+    # byebug
     cookies.encrypted['webhook_token'] = value
   end
 end
