@@ -3,7 +3,7 @@ class ReceivesController < ApplicationController
   before_action :extrack_token
 
   def create
-    byebug
+    # byebug
     backpack = TrackService.new(request).do!
     render json: { status: 'ok', backpack: backpack }
   end
@@ -12,6 +12,6 @@ class ReceivesController < ApplicationController
 
   def extrack_token
     @token_uuid = params[:backpack_token]
-    @account_token = AccountToken.find_by!(uuid: @token_uuid)
+    @webhook = Webhook.find_by!(uuid: @token_uuid)
   end
 end

@@ -15,17 +15,6 @@ ActiveRecord::Schema.define(version: 2021_05_18_062706) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "account_tokens", force: :cascade do |t|
-    t.string "uuid"
-    t.string "receive_email"
-    t.datetime "expired_at"
-    t.integer "account_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "webhook_token"
-    t.integer "user_id"
-  end
-
   create_table "accounts", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "uuid", null: false
@@ -77,9 +66,11 @@ ActiveRecord::Schema.define(version: 2021_05_18_062706) do
     t.jsonb "req_params"
     t.integer "account_id"
     t.string "token_uuid"
+    t.integer "webhook_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "content_length", default: 0
+    t.index ["webhook_id"], name: "index_backpacks_on_webhook_id"
   end
 
   create_table "operation_logs", force: :cascade do |t|
@@ -100,6 +91,17 @@ ActiveRecord::Schema.define(version: 2021_05_18_062706) do
     t.string "remember_token", limit: 128, null: false
     t.index ["email"], name: "index_users_on_email"
     t.index ["remember_token"], name: "index_users_on_remember_token"
+  end
+
+  create_table "webhooks", force: :cascade do |t|
+    t.string "uuid"
+    t.string "receive_email"
+    t.datetime "expired_at"
+    t.integer "account_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "webhook_token"
+    t.integer "user_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

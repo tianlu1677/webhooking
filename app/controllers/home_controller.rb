@@ -1,25 +1,19 @@
 class HomeController < ApplicationController
 
   def index
-    find_or_create_account_token
+    find_or_create_webhook
   end
 
   private
 
-  def find_or_create_account_token
+  def find_or_create_webhook
     if cookies.encrypted['webhook_token'].nil?
       cookies.encrypted['webhook_token'] = SecureRandom.hex
     end
 
-    model = AccountToken.find_or_create_by(user_id: fetch_user_id, webhook_token: cookies.encrypted['webhook_token'])
+    webhook = Webhook.find_or_create_by(user_id: fetch_user_id, webhook_token: cookies.encrypted['webhook_token'])
 
-    redirect_to account_token_path(account_token)
-  end
-
-  def set_anonymous_account_token
-    account_token = AccountToken.create!
-    response.set_cookie('anonymous_account_token', account_token.uuid)
-    account_token
+    redirect_to webhook_path(webhook.uuid)
   end
 
   private

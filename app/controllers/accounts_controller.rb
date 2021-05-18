@@ -10,7 +10,7 @@ class AccountsController < ApplicationController
 
   def show
     @account = Account.find(params[:id])
-    @current_token = @account.account_tokens.first
+    @current_token = @account.webhooks.first
     @backpacks = @current_token.backpacks
   end
 

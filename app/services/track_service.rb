@@ -8,7 +8,7 @@ class TrackService
 
   def do!
     headers = extract_http_request_headers(request.headers)
-    find_account_token(request.params[:backpack_token])
+    find_webhook(request.params[:backpack_token])
 
     req_method = request.method
     ip = request.remote_ip
@@ -29,15 +29,15 @@ class TrackService
       status_code: status_code,
       req_params: req_params,
       content_length: content_length,
-      account_id: @account_token.account_id
+      account_id: @webhook.account_id
     }
     Rails.logger.info("request #{request_data}")
 
-    backpack = @account_token.backpacks.create!(request_data)
+    backpack = @webhook.backpacks.create!(request_data)
   end
 
-  def find_account_token(uuid)
-    @account_token = AccountToken.find_by!(uuid: uuid)
+  def find_webhook(uuid)
+    @webhook = Webhook.find_by!(uuid: uuid)
   end
 
   def extract_http_request_headers(env)

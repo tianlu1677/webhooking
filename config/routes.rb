@@ -20,10 +20,10 @@ Rails.application.routes.draw do
   root 'home#index'
 
   resources :accounts
-  resources :account_tokens
+  resources :webhooks
   resources :backpacks
 
-  get 'account_tokens/:id/:backpack_id', to: 'account_tokens#show'
+  get 'webhooks/:id/:backpack_id', to: 'webhooks#show'
 
   match 'r/:backpack_token', via: %i[get post patch delete put head options], to: 'receives#create'
 
@@ -33,7 +33,7 @@ Rails.application.routes.draw do
     resources :operation_logs
     resources :users
     resources :backpacks
-    resources :account_tokens
+    resources :webhooks
     resources :accounts
   end
 end

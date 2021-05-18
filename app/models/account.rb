@@ -11,7 +11,7 @@
 class Account < ApplicationRecord
   before_create :set_init_data
 
-  has_many :account_tokens
+  has_many :webhooks
   belongs_to :user, optional: true
 
   def set_init_data

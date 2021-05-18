@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: account_tokens
+# Table name: webhooks
 #
 #  id            :bigint           not null, primary key
 #  uuid          :string
@@ -10,7 +10,7 @@
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #
-class AccountToken < ApplicationRecord
+class Webhook < ApplicationRecord
   belongs_to :account, optional: true
 
   has_many :backpacks, foreign_key: :token_uuid, primary_key: :uuid

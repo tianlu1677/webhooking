@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: account_tokens
+# Table name: webhooks
 #
 #  id            :bigint           not null, primary key
 #  uuid          :string
@@ -12,6 +12,6 @@
 #
 require 'rails_helper'
 
-RSpec.describe AccountToken, type: :model do
+RSpec.describe Webhook, type: :model do
   pending "add some examples to (or delete) #{__FILE__}"
 end

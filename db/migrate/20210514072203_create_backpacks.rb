@@ -15,8 +15,11 @@ class CreateBackpacks < ActiveRecord::Migration[6.1]
 
       t.integer :account_id
       t.string :token_uuid
+      t.integer :webhook_id
 
       t.timestamps
     end
+
+    add_index :backpacks, :webhook_id
   end
 end

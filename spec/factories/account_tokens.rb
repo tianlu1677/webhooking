@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: account_tokens
+# Table name: webhooks
 #
 #  id            :bigint           not null, primary key
 #  uuid          :string
@@ -11,7 +11,7 @@
 #  updated_at    :datetime         not null
 #
 FactoryBot.define do
-  factory :account_token do
+  factory :webhook do
     uuid { "MyString" }
     receive_email { "MyString" }
     expired_at { "2021-05-14 15:18:29" }

@@ -21,7 +21,7 @@
 #
 class Backpack < ApplicationRecord
   belongs_to :account, optional: true
-  belongs_to :account_token, foreign_key: :token_uuid, optional: true
+  belongs_to :webhook, foreign_key: :token_uuid, optional: true
 
   before_create :set_init_data
 
