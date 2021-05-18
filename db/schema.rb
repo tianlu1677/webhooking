@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_17_092716) do
+ActiveRecord::Schema.define(version: 2021_05_18_062706) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 2021_05_17_092716) do
     t.integer "account_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "webhook_token"
+    t.integer "user_id"
   end
 
   create_table "accounts", force: :cascade do |t|
@@ -74,9 +76,9 @@ ActiveRecord::Schema.define(version: 2021_05_17_092716) do
     t.integer "status_code"
     t.jsonb "req_params"
     t.integer "account_id"
+    t.string "token_uuid"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "token_uuid"
     t.integer "content_length", default: 0
   end
 
@@ -85,23 +87,6 @@ ActiveRecord::Schema.define(version: 2021_05_17_092716) do
     t.string "params"
     t.string "action"
     t.string "controller"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "requests", force: :cascade do |t|
-    t.string "uuid"
-    t.string "url"
-    t.string "action_method"
-    t.string "ip"
-    t.string "hostname"
-    t.string "user_agent"
-    t.string "referer"
-    t.text "content"
-    t.jsonb "headers"
-    t.integer "status_code"
-    t.jsonb "req_params"
-    t.integer "account_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

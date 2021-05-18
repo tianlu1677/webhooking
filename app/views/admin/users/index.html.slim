@@ -1,10 +1,11 @@
 .row
+
   = render "search"
   .col-lg-12
     .card
       .card-header
         = '☰ '
-        = resource_class.model_name.human        
+        = resource_class.model_name.human
         / = page_entries_info @users
         = new_link new_admin_user_path
       .card-block.card-body[style="overflow: scroll"]
@@ -23,12 +24,12 @@
               - attributes.each do |attr|
                 - case attr
                   - when 'id'
-                    td = user.id                     
-                  - else   
-                    td = render "admin/common/index_info", resource: user, attr: attr               
+                    td = user.id
+                  - else
+                    td = render "admin/common/index_info", resource: user, attr: attr
               td
                 = edit_link edit_admin_user_path(user)
                 = show_link admin_user_path(user)
                 = destroy_link admin_user_path(user), remote: true
-                  
+
         / = paginate @users

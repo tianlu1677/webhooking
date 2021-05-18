@@ -3,6 +3,7 @@ class ReceivesController < ApplicationController
   before_action :extrack_token
 
   def create
+    byebug
     backpack = TrackService.new(request).do!
     render json: { status: 'ok', backpack: backpack }
   end
