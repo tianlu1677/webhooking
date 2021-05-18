@@ -19,7 +19,7 @@ class WebhooksController < ApplicationController
   # 新建webhook
   def reset
     cookies.encrypted['webhook_token'] = ''
-    @webhook = BuildWebhookService.new(current_user, cookies)
+    @webhook = BuildWebhookService.new(current_user, cookies).find_or_create!
     redirect_to webhook_path(@webhook.uuid)
   end
 
