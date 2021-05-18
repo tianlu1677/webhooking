@@ -5,16 +5,9 @@
     </div>
   </div>
   <div class="card-body">
-    <div class="list-group">
+    <div class="list-group" id='card-list-group'>
       <% backpacks.each do |backpack| %>
-        <%= link_to "/webhooks/#{backpack.token_uuid}/#{backpack.uuid}" do %>
-        <div class="list-group-item list-group-item-action flex-column align-items-start <%= current_backpack&.uuid == backpack.uuid  ? 'active' : '' %>">
-            <div class="d-flex w-100 justify-content-between">
-              <h6 class="mb-1"><%= backpack.req_method %></h6><small><%= backpack.created_at.strftime('%Y/%m/%d %H:%M:%S') %></small>
-            </div>
-            <p class="mb-1"><%= backpack.hostname %></p><small>uuid: <%= backpack.uuid  %></small>
-        </div>
-          <% end %>
+        <%= render '/backpacks/left_list_item', backpack: backpack, current_backpack: current_backpack %>
       <% end %>
      </div>
   </div>

@@ -15,7 +15,7 @@
 class Webhook < ApplicationRecord
   belongs_to :account, optional: true
 
-  has_many :backpacks, foreign_key: :token_uuid, primary_key: :uuid
+  has_many :backpacks
 
   scope :find_by_id_or_uuid, ->(id) { where("uuid = ? OR id = ?", id, id.to_i).first }
 

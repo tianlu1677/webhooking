@@ -3,8 +3,8 @@ module ApplicationCable
     identified_by :current_webhook
 
     def connect
-      self.current_webhook = User.find_by_remember_token cookies[:remember_token]
-      if self.current_user.nil?
+      self.current_webhook = Webhook.find_by_webhook_token cookies.encrypted['webhook_token']
+      if self.current_webhook.nil?
         reject_unauthorized_connection
       end
     end

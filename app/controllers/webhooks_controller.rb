@@ -1,11 +1,8 @@
 class WebhooksController < ApplicationController
-  before_action :set_webhook, only: [:show, :clear_backpacks]
-  def index
-    @webhooks = Webhook.all
-  end
+  skip_before_action :verify_authenticity_token, only: [:left_list_item]
+  before_action :set_webhook, only: [:show, :clear_backpacks, :left_list_item]
 
   def show
-    # @webhook = BuildWebhookService.new(current_user, cookies).find_or_create!
     if @webhook.nil?
       return redirect_to root_path
     end
@@ -26,9 +23,15 @@ class WebhooksController < ApplicationController
     redirect_to webhook_path(@webhook.uuid)
   end
 
+  def left_list_item
+    @backpack = @webhook.backpacks.find params[:backpack_id]
+    @current_backpack
+  end
+
   private
 
   def set_webhook
     @webhook = BuildWebhookService.new(current_user, cookies).find_or_create!
   end
+
 end

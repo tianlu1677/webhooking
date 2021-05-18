@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   resources :webhooks do
     member do
       post :clear_backpacks
+      post :left_list_item
     end
     collection do
       post :reset

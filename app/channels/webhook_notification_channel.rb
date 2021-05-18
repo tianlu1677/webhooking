@@ -1,7 +1,7 @@
 class WebhookNotificationChannel < ApplicationCable::Channel
   def subscribed
     # stream_from "some_channel"
-    stream_from "webhook-notify-user-#{current_user.id}"
+    stream_from "webhook-notify-#{current_webhook.id}"
   end
 
   def unsubscribed
