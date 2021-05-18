@@ -24,8 +24,6 @@ Rails.application.routes.draw do
     member do
       post :clear_backpacks
       post :left_list_item
-    end
-    collection do
       post :reset
     end
   end
