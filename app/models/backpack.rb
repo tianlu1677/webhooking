@@ -23,11 +23,17 @@
 #
 class Backpack < ApplicationRecord
   belongs_to :account, optional: true
-  belongs_to :webhook, foreign_key: :token_uuid, optional: true
+  belongs_to :webhook
 
   before_create :set_init_data
+  after_create :send_websocket_notification
 
   def set_init_data
     self.uuid = SecureRandom.uuid.gsub('-', '')
+    self.token_uuid = webhook.uuid
+  end
+
+  def send_websocket_notification
+    ActionCable.server.broadcast("webhook-notify-#{webhook.id}", {webhook_id: webhook.id, backpack_id: id})
   end
 end
