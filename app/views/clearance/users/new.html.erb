@@ -1,22 +1,29 @@
-<div class="app flex-row align-items-center"  style="margin-top: 120px">
+<div class="bg-light min-vh-100 d-flex flex-row align-items-center">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-6">
-        <div class="card mx-4">
-          <div class="card-block p-4">
-            <h1>注册</h1>
-            <p class="text-muted">Create your account</p>
-            <%= simple_form_for @user do |form| %>
-              <%= form.input :username %>
-              <%= form.input :email %>
-              <%= form.input :password %>
-              <%= form.submit 'Submit', class: 'btn btn-block btn-success' %>
-              <div class="other-links">
-                <%= link_to t(".sign_in"), sign_in_path %>
-              </div>
-
-            <% end %>
-
+        <div class="card mb-4 mx-4">
+          <div class="card-body p-4">
+            <h1>Register</h1>
+            <p class="text-medium-emphasis">Create your account</p>
+              <%= simple_form_for @user, "data-turbo": false do |form| %>
+                <% if flash[:notice] %>
+                  <div class="alert alert-success">
+                    <%= flash[:notice] %>
+                  </div>
+                <% elsif flash[:error] %>
+                  <div class="alert alert-danger">
+                    <%= flash[:error]  %>
+                  </div>
+                <% end %>
+                <%= form.input :email, class: 'mb-4' %>
+                <%= form.input :password, wrap_html: {class: 'mb-4'} %>
+                <%= form.submit '创建', class: 'btn btn-success mb-4 mt-4 form-control' %>
+                <div class="other-links ">
+                  <%= link_to t(".sign_in"), sign_in_path %>
+                </div>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>

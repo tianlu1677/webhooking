@@ -20,7 +20,14 @@ Rails.application.routes.draw do
   root 'home#index'
 
   resources :accounts
-  resources :webhooks
+  resources :webhooks do
+    member do
+      post :clear_backpacks
+    end
+    collection do
+      post :reset
+    end
+  end
   resources :backpacks
 
   get 'webhooks/:id/:backpack_id', to: 'webhooks#show'

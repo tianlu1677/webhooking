@@ -18,6 +18,7 @@ class User < ApplicationRecord
 
   # has one account
   has_one :account
+  has_many :webhooks
 
   def init_data
     build_account

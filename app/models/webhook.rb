@@ -23,4 +23,8 @@ class Webhook < ApplicationRecord
   def set_init_data
     self.uuid = SecureRandom.uuid.gsub('-', '')
   end
+
+  def request_url
+    "#{ENV['WEBSITE_URL']}/r/#{uuid}"
+  end
 end
