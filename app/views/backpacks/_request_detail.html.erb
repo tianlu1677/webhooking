@@ -3,13 +3,12 @@
     <i class="fa fa-align-justify"></i>
     <h6>Request detail</h6>
   </div>
-  <div class="">
-    <table class="table table-responsive-sm table-sm">
+  <div class="card-body">
+    <table class="table table-responsive-sm table-sm table-borderless table-striped">
       <tbody>
-
       <tr>
         <td><%= backpack.req_method || 'GET' %></td>
-        <td><%= backpack.url %></td>
+        <td><%= "/r/#{backpack.token_uuid}" %></td>
       </tr>
       <tr>
         <td>Host</td>

@@ -25,7 +25,7 @@ Rails.application.routes.draw do
 
   get 'account_tokens/:id/:backpack_id', to: 'account_tokens#show'
 
-  match 'r/:backpack_token', via: %i[get post], to: 'receives#create'
+  match 'r/:backpack_token', via: %i[get post patch delete put head options], to: 'receives#create'
 
   # 管理后台
   namespace :admin do

@@ -3,11 +3,11 @@
     <h6>Headers</h6>
   </div>
   <div class="card-body">
-    <table class="table table-responsive-sm">
-      <tbody>
+    <table class="table table-responsive-sm table-striped">
+      <tbody style="word-break: break-all;">
       <% backpack.headers.each do |k, v| %>
       <tr>
-        <td><%= k %></td>
+        <td width="30%"><%= k %></td>
         <td><%= v %></td>
       </tr>
       <% end %>

@@ -1,4 +1,11 @@
 //@import '~bootstrap/scss/bootstrap';
+@import "./stylesheets/normalize";
 @import "~@coreui/coreui/scss/coreui";
 
-@import "./stylesheets/normalize";
+a, u {
+  text-decoration: none;
+}
+
+#request_detail table {
+  font-size: 85%;
+}
