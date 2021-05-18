@@ -9,6 +9,8 @@
 #  account_id    :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  webhook_token :string
+#  user_id       :integer
 #
 class Webhook < ApplicationRecord
   belongs_to :account, optional: true
