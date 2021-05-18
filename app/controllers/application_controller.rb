@@ -17,4 +17,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def cookie_webhook_token
+    cookies.encrypted['webhook_token'].presence
+  end
+
+  def set_cookie_webhook_token(value)
+    # byebug
+    cookies.encrypted['webhook_token'] = value
+  end
+
 end

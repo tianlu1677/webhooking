@@ -1,27 +1,24 @@
 class BuildWebhookService
-  attr_accessor :user, :cookies
-  def initialize(user = nil, cookies)
+  attr_accessor :user, :webhook_token, :opts
+  def initialize(user = nil, webhook_token_or_uuid = nil)
     @user = user
-    @cookies = cookies
+    @webhook_token = webhook_token_or_uuid
   end
 
   def find_or_create!
-    # byebug
-    puts "cookie_token #{cookie_token}"
-    if cookie_token.blank?
-      cookies.encrypted['webhook_token'] = SecureRandom.hex
+    if webhook_token.blank? || (webhook = find!).blank?
+      webhook = create!
     end
-
-    webhook = Webhook.find_or_create_by(user_id: @user&.id, webhook_token: cookie_token)
     webhook
   end
 
-  def cookie_token
-    cookies.encrypted['webhook_token']
+  def create!
+    webhook = Webhook.create(user_id: @user&.id, webhook_token: SecureRandom.hex)
   end
 
-  def cookie_token=(value)
-    # byebug
-    cookies.encrypted['webhook_token'] = value
+  def find!
+    webhook = Webhook.where(user_id: @user&.id).where("webhook_token = ? OR uuid = ?", webhook_token, webhook_token).first
+
+    webhook
   end
 end

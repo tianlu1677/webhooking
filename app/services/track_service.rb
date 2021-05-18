@@ -17,8 +17,8 @@ class TrackService
     referer = request.referer
     content_length = request.content_length
     status_code = 200
-    req_params = request.params.reject { |x| %w[controller action backpack_token].include?(x) }
 
+    query_params = request.query_parameters#.reject { |x| %w[controller action backpack_token].include?(x) }
     request_data = {
       headers: headers,
       req_method: req_method,
@@ -27,7 +27,7 @@ class TrackService
       user_agent: user_agent,
       referer: referer,
       status_code: status_code,
-      req_params: req_params,
+      query_params: query_params,
       content_length: content_length,
       account_id: @webhook.account_id
     }
@@ -41,7 +41,6 @@ class TrackService
   end
 
   def extract_http_request_headers(env)
-    # binding.pry
     allow = %w[CONTENT_TYPE CONTENT_LENGTH]
     env.reject do |k, v|
       (!(/^HTTP_[A-Z_]+$/ === k) && !allow.include?(k)) || k == 'HTTP_VERSION'
