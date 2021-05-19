@@ -24,7 +24,7 @@ class TrackService
     media_type = request.media_type
     file_params = extra_file_params(request)
     raw_content = request.raw_post
-    if file_params.present? || request.media_type.present?
+    if file_params.present?
       raw_content = ''
     end
     # 当有文件时，把文件都提取出来。
@@ -48,12 +48,12 @@ class TrackService
 
     backpack = @webhook.backpacks.create!(request_data)
     upload_file_params(file_params, backpack)
-    binary_upload(request, backpack)
+    # binary_upload(request, backpack)
     backpack
   end
 
   def extract_form_params(request)
-    return request.request_parameters unless request.content_type == 'multipart/form-data'
+    return {} unless %w[multipart/form-data application/x-www-form-urlencoded].include?(request.content_type)
 
     request.request_parameters.select {|k, v| !v.kind_of?(ActionDispatch::Http::UploadedFile)}
   end
@@ -82,7 +82,7 @@ class TrackService
   end
 
   def extra_file_params(request)
-    file_params = request.request_parameters.select {|k, v| v.kind_of?(ActionDispatch::Http::UploadedFile)}
+    request.request_parameters.select {|k, v| v.kind_of?(ActionDispatch::Http::UploadedFile)}
   end
 
   def find_webhook(uuid)
