@@ -74,8 +74,8 @@ class Backpack < ApplicationRecord
     dict = build_info
     keys = []
     search = dict
-    add_key_to_keys_from_search(search, keys)
-
+    add_key_to_keys(search, keys)
+    keys
   end
 
   def add_key_to_keys(search, answer, prefix = 'request')

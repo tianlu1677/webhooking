@@ -8,5 +8,7 @@
     <%= link_to "删除所有请求", clear_backpacks_webhook_path(@webhook.uuid), method: :post, class: 'btn btn-warning btn-sm' %>
 
     <%= link_to "重置", reset_webhook_path(@webhook.uuid), method: :post, class: 'btn btn-warning btn-sm' %>
+
+    <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#WebhookResponseSettingModal">返回内容设置</button>
   </div>
 </div>

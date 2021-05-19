@@ -36,4 +36,18 @@ class Webhook < ApplicationRecord
     template.render "request" => backpack.default_template_params
   end
 
+  def default_template_param_keys(backpack = nil)
+    backpack ||= backpacks.order("created_at desc").first
+    return backpack.default_template_param_keys unless backpack.nil?
+
+    [
+      "request.uuid",
+      "request.ip",
+      "request.hostname",
+      "request.user_agent",
+      "request.referer",
+      "request.headers",
+      "request.status_code"]
+  end
+
 end

@@ -3,6 +3,11 @@
     <%= render "backpacks/left_list", backpacks: @backpacks, current_backpack: @current_backpack %>
   </div>
   <div class="col-md-9">
+
+
+<!-- Modal -->
+<%= render 'webhook_response_settings' %>
+
     <%= render "header" %>
     <% if @current_backpack.present? %>
       <div class=""></div>

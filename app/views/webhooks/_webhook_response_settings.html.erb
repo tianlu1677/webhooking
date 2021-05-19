@@ -1,0 +1,48 @@
+<div class="modal fade" id="WebhookResponseSettingModal" tabindex="-1" aria-labelledby="WebhookResponseSettingModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="WebhookResponseSettingModalLabel">webhooks response settings</h5>
+        <button type="button" class="btn-close"  data-bs-dismiss="modal"></button>
+      </div>
+        <%= form_with model: @webhook, url: "/webhooks/#{@webhook.uuid}", method: :patch, local: true, html: {"data-turbo" => false} do |f| %>
+      <div class="modal-body">
+          <div class='mb-3 row'>
+            <%= f.label :resp_code, "响应头", class: 'col-form-label col-sm-4' %>
+            <div class="col-sm-8">
+              <%= f.text_field :resp_code, class: 'form-control'%>
+            </div>
+          </div>
+
+          <div class='mb-3 row'>
+            <%= f.label :resp_content_type, "Content Type", class: 'col-form-label col-sm-4' %>
+            <div class="col-sm-8">
+              <%= f.text_field :resp_content_type, class: 'form-control'%>
+            </div>
+          </div>
+
+          <div class='mb-3 row'>
+            <%= f.label :resp_body, "响应Body", class: 'col-form-label col-sm-4' %>
+            <div class="col-sm-8">
+              <%= f.text_area :resp_body, class: 'form-control'%>
+            </div>
+          </div>
+
+          <div>
+            <p>可选参数</p>
+            <ul style='height: 100px; overflow: auto'>
+              <% @webhook.default_template_param_keys(@current_backpack).each do |item|%>
+              <li>{<%= item%> }</li>
+            <%end %>
+            </ul>
+          </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <%= f.submit class: 'btn btn-primary' %>
+      </div>
+       <%end %>
+    </div>
+  </div>
+</div>
