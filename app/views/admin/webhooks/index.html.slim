@@ -1,0 +1,34 @@
+.row
+  = render "search"
+  .col-lg-12
+    .card
+      .card-header
+        = '☰ '
+        = resource_class.model_name.human
+        = new_link new_admin_webhook_path
+        / = page_entries_info @webhooks
+      .card-block.card-body[style="overflow: scroll"]
+        table.table.table-bordered.table-striped.table-condensed
+          thead
+            tr
+              - attributes = %w[id user_id uuid webhook_token request_count created_at ]
+              - attributes.each do |attr|
+                th
+                  = resource_class.human_attribute_name(attr)
+              th
+                = t('action_labels.action')
+          tbody
+            - @webhooks.each do |webhook|
+              tr id="webhook_#{webhook.id}"
+                td = webhook.id
+                td = webhook.user_id
+                td = webhook.uuid
+                td = webhook.webhook_token
+                td = link_to webhook.backpacks.count, admin_backpacks_path(q: {webhook_id_eq: webhook.id })
+                td = webhook.created_at.try(:strftime, '%Y-%m-%d %H:%M:%S').presence || "-"
+                td
+                  = edit_link edit_admin_webhook_path(webhook)
+                  = show_link admin_webhook_path(webhook)
+                  = destroy_link admin_webhook_path(webhook), remote: true
+
+        == pagy_nav @pagy

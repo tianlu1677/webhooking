@@ -19,3 +19,7 @@
   margin-top: 10px;
 }
 
+ #root-wrap {
+  padding-left: var(--cui-sidebar-occupy-start, 0);
+  padding-right: var(--cui-sidebar-occupy-end, 0);
+}

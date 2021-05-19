@@ -12,7 +12,7 @@
         table.table.table-bordered.table-striped.table-condensed
           thead
             tr
-              - attributes = %w[id email]
+              - attributes = %w[id email is_admin]
               - attributes.each do |attr|
                 th
                   = resource_class.human_attribute_name(attr)
