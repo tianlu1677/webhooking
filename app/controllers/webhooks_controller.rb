@@ -4,10 +4,10 @@ class WebhooksController < ApplicationController
 
   def show
     if current_user
-      @webhook = Webhook.find_by(user_id: current_user.id, uuid: params[:id])
-      set_cookie_webhook_token(@webhook.webhook_token)
+      @webhook = Webhook.where(user_id: current_user.id).find_by_id_or_uuid(params[:id])
+      set_cookie_webhook_token(@webhook.webhook_token) if @webhook.present?
     else
-      @webhook = Webhook.find_by(webhook_token: cookie_webhook_token)
+      @webhook = Webhook.where(webhook_token: cookie_webhook_token).find_by_id_or_uuid(params[:id])
     end
 
     if @webhook.nil?
