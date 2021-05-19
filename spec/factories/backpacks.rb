@@ -28,12 +28,6 @@ FactoryBot.define do
   factory :backpack do
     uuid { "MyString" }
     url { "MyString" }
-    method { "MyString" }
-    ip { "MyString" }
-    hostname { "MyString" }
-    user_agent { "MyString" }
-    referer { "MyString" }
-    content { "MyString" }
-    headers { "MyString" }
+   
   end
 end

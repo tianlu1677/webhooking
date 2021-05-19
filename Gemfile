@@ -53,6 +53,7 @@ group :development, :test do
   gem 'ffaker'
   gem 'pry'
   gem 'pry-rails'
+  gem 'factory_bot_rails'
 end
 
 group :development do
@@ -69,7 +70,7 @@ group :test do
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
   gem 'database_cleaner'
-  gem 'factory_bot_rails'
+  
   gem 'rspec-rails'
   gem 'webmock'
   # Easy installation and use of web drivers to run system tests with browsers

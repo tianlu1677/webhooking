@@ -1,6 +1,6 @@
 version: '3'
 services:
-  rails6_rails:
+  webhook-king:
     ports: 
       - 3000:3000
     build: .    
