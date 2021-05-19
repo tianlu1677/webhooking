@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_18_091516) do
+ActiveRecord::Schema.define(version: 2021_05_19_023130) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -105,6 +105,9 @@ ActiveRecord::Schema.define(version: 2021_05_18_091516) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "webhook_token"
     t.integer "user_id"
+    t.integer "resp_code", default: 200
+    t.string "resp_body", default: ""
+    t.string "resp_content_type", default: "text/plain"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

@@ -5,7 +5,7 @@ class ReceivesController < ApplicationController
   def create
     # binding.pry
     backpack = TrackService.new(request).do!
-    render json: { status: 'ok', backpack: backpack }
+    render body: @webhook.resp_body, content_type: @webhook.resp_content_type, status: @webhook.resp_code
   end
 
   private
