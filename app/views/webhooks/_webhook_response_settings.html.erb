@@ -22,6 +22,13 @@
           </div>
 
           <div class='mb-3 row'>
+            <div class="col-sm-8">
+              <%= f.check_box :cors_enabled, class: 'form-check-input'%>
+            <%= f.label :cors_enabled, "允许CORS", class: 'form-check-label col-sm-4' %>
+            </div>
+          </div>
+
+          <div class='mb-3 row'>
             <%= f.label :resp_body, "响应Body", class: 'col-form-label col-sm-4' %>
             <div class="col-sm-8">
               <%= f.text_area :resp_body, class: 'form-control'%>

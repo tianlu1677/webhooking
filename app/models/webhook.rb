@@ -44,6 +44,7 @@ class Webhook < ApplicationRecord
       "request.uuid",
       "request.ip",
       "request.hostname",
+      'request.method',
       "request.user_agent",
       "request.referer",
       "request.headers",
