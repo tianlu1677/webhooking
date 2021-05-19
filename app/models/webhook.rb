@@ -20,8 +20,6 @@ class Webhook < ApplicationRecord
 
   has_many :backpacks
 
-  scope :find_by_id_or_uuid, ->(id) { where("uuid = ? OR id = ?", id, id.to_i).first }
-
   before_create :set_init_data
   def set_init_data
     self.uuid = SecureRandom.uuid.gsub('-', '')
@@ -48,6 +46,12 @@ class Webhook < ApplicationRecord
       "request.referer",
       "request.headers",
       "request.status_code"]
+  end
+
+  class << self
+    def find_by_id_or_uuid(id)
+      where("uuid = ? OR id = ?", id.to_s, id.to_i).first
+    end
   end
 
 end
