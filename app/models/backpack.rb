@@ -31,6 +31,8 @@ class Backpack < ApplicationRecord
   before_create :set_init_data
   after_create :send_websocket_notification
 
+  has_many_attached :files
+
   def set_init_data
     self.uuid = SecureRandom.uuid.gsub('-', '')
     self.token_uuid = webhook.uuid
@@ -51,7 +53,7 @@ class Backpack < ApplicationRecord
   def json_params
     return JSON.parse(raw_content) if content_type == 'application/json'
   rescue
-    ''
+    {}
   end
 
   private
