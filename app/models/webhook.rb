@@ -32,6 +32,8 @@ class Webhook < ApplicationRecord
   def build_response_body(backpack)
     template = Liquid::Template.parse(resp_body)
     template.render "request" => backpack.default_template_params
+  rescue
+    "解析语法错误"
   end
 
   def default_template_param_keys(backpack = nil)
