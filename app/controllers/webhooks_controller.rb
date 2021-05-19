@@ -27,7 +27,7 @@ class WebhooksController < ApplicationController
   def reset
     @webhook = BuildWebhookService.new(current_user, '').create!
     set_cookie_webhook_token(@webhook.webhook_token) if @webhook.present?
-    redirect_to webhook_path(@webhook.uuid)
+    redirect_to webhook_path(@webhook)
   end
 
   def left_list_item
