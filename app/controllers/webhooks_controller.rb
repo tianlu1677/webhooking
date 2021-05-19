@@ -19,7 +19,7 @@ class WebhooksController < ApplicationController
   end
 
   def update
-    @webhook.update(params.require(:webhook).permit(:resp_code, :resp_content_type, :resp_body))
+    @webhook.update(params.require(:webhook).permit(:resp_code, :resp_content_type, :resp_body, :cors_enabled))
     redirect_to "/webhooks/#{@webhook.uuid}"
   end
 

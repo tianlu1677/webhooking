@@ -62,6 +62,7 @@ class Backpack < ApplicationRecord
       uuid: uuid,
       ip: ip,
       hostname: hostname,
+      method: req_method,
       user_agent: user_agent,
       referer: referer,
       headers: headers,
