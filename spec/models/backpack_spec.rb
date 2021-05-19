@@ -10,10 +10,8 @@
 #  hostname       :string
 #  user_agent     :string
 #  referer        :string
-#  content        :text
 #  headers        :jsonb
 #  status_code    :integer
-#  req_params     :jsonb
 #  account_id     :integer
 #  token_uuid     :string
 #  webhook_id     :integer
@@ -22,7 +20,9 @@
 #  content_length :integer          default(0)
 #  query_params   :jsonb
 #  form_params    :jsonb
-#  json_params    :jsonb
+#  content_type   :string
+#  media_type     :string
+#  raw_content    :text
 #
 require 'rails_helper'
 

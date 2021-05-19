@@ -10,10 +10,8 @@
 #  hostname       :string
 #  user_agent     :string
 #  referer        :string
-#  content        :text
 #  headers        :jsonb
 #  status_code    :integer
-#  req_params     :jsonb
 #  account_id     :integer
 #  token_uuid     :string
 #  webhook_id     :integer
@@ -22,7 +20,9 @@
 #  content_length :integer          default(0)
 #  query_params   :jsonb
 #  form_params    :jsonb
-#  json_params    :jsonb
+#  content_type   :string
+#  media_type     :string
+#  raw_content    :text
 #
 class Backpack < ApplicationRecord
   belongs_to :account, optional: true
@@ -38,5 +38,53 @@ class Backpack < ApplicationRecord
 
   def send_websocket_notification
     ActionCable.server.broadcast("webhook-notify-#{webhook.id}", {webhook_id: webhook.id, backpack_id: id})
+  end
+
+  def default_template_param_keys
+    build_template_keys
+  end
+
+  def default_template_params
+    build_info.with_indifferent_access
+  end
+
+  def json_params
+    return JSON.parse(raw_content) if content_type == 'application/json'
+  rescue
+    ''
+  end
+
+  private
+  def build_info
+    {
+      uuid: uuid,
+      ip: ip,
+      hostname: hostname,
+      user_agent: user_agent,
+      referer: referer,
+      headers: headers,
+      status_code: status_code,
+      query: query_params,
+      form: form_params,
+      json: json_params
+    }
+  end
+
+  def build_template_keys
+    dict = build_info
+    keys = []
+    search = dict
+    add_key_to_keys_from_search(search, keys)
+
+  end
+
+  def add_key_to_keys(search, answer, prefix = 'request')
+    if search.is_a? Hash
+      search.each do |key, value|
+        answer << "#{prefix}.#{key}"
+        add_key_to_keys(value, answer, "#{prefix}.#{key}")
+      end
+    else
+    end
   end
 end
