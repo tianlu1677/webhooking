@@ -18,13 +18,16 @@ class TrackService
     content_length = request.content_length
     status_code = 200
 
-    query_params = request.query_parameters#.reject { |x| %w[controller action backpack_token].include?(x) }
-    form_params = request.request_parameters
-    # binding.pry
+    query_params = request.query_parameters
+    form_params = extract_form_params(request)
     content_type = request.content_type
-    raw_content = request.raw_post
     media_type = request.media_type
-
+    file_params = extra_file_params(request)
+    raw_content = request.raw_post
+    if file_params.present? || request.media_type.present?
+      raw_content = ''
+    end
+    # 当有文件时，把文件都提取出来。
     request_data = {
       headers: headers,
       req_method: req_method,
@@ -44,6 +47,42 @@ class TrackService
     Rails.logger.info("request #{request_data}")
 
     backpack = @webhook.backpacks.create!(request_data)
+    upload_file_params(file_params, backpack)
+    binary_upload(request, backpack)
+    backpack
+  end
+
+  def extract_form_params(request)
+    return request.request_parameters unless request.content_type == 'multipart/form-data'
+
+    request.request_parameters.select {|k, v| !v.kind_of?(ActionDispatch::Http::UploadedFile)}
+  end
+
+  def upload_file_params(file_params, backpack)
+    return if file_params.blank?
+    file_params.each do |key, fileupload|
+      backpack.files.attach(io: File.open(fileupload.tempfile),
+                            filename: fileupload.original_filename,
+                            content_type: fileupload.content_type,
+                            metadata: { params_key: key}
+      )
+    end
+  end
+
+  def binary_upload(request, backpack)
+    if request.media_type.present? && request.media_type != "multipart/form-data" && request.content_type.present? && request.content_length > 0
+    backpack.files.attach(io: StringIO.new(request.raw_post),
+                          filename: 'xxxx',
+                          content_type: request.content_type,
+                          metadata: {
+                              binary_upload: '1'
+                          }
+    )
+    end
+  end
+
+  def extra_file_params(request)
+    file_params = request.request_parameters.select {|k, v| v.kind_of?(ActionDispatch::Http::UploadedFile)}
   end
 
   def find_webhook(uuid)

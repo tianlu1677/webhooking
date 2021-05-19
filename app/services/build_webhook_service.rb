@@ -17,7 +17,7 @@ class BuildWebhookService
   end
 
   def find!
-    webhook = Webhook.where(user_id: @user&.id).where("webhook_token = ? OR uuid = ?", webhook_token, webhook_token).first
+    webhook = Webhook.where(user_id: @user&.id).where("id = ? OR webhook_token = ? OR uuid = ?", webhook_token.to_i, webhook_token, webhook_token).first
 
     webhook
   end

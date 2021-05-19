@@ -3,6 +3,13 @@ class WebhooksController < ApplicationController
   before_action :set_webhook_by_params, only: [:show, :clear_backpacks, :left_list_item, :update]
 
   def show
+    if current_user
+      @webhook = Webhook.where(user_id: current_user.id).find_by_id_or_uuid(params[:id])
+      set_cookie_webhook_token(@webhook.webhook_token) if @webhook.present?
+    else
+      @webhook = Webhook.where(webhook_token: cookie_webhook_token).find_by_id_or_uuid(params[:id])
+    end
+
     if @webhook.nil?
       return redirect_to root_path
     end
@@ -23,9 +30,9 @@ class WebhooksController < ApplicationController
   end
   # 新建webhook
   def reset
-    cookies.encrypted['webhook_token'] = ''
-    @webhook = BuildWebhookService.new(current_user, cookies).find_or_create!
-    redirect_to webhook_path(@webhook.uuid)
+    @webhook = BuildWebhookService.new(current_user, '').create!
+    set_cookie_webhook_token(@webhook.webhook_token) if @webhook.present?
+    redirect_to webhook_path(@webhook)
   end
 
   def left_list_item
