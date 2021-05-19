@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_18_091516) do
+ActiveRecord::Schema.define(version: 2021_05_19_032148) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,10 +60,8 @@ ActiveRecord::Schema.define(version: 2021_05_18_091516) do
     t.string "hostname"
     t.string "user_agent"
     t.string "referer"
-    t.text "content"
     t.jsonb "headers"
     t.integer "status_code"
-    t.jsonb "req_params"
     t.integer "account_id"
     t.string "token_uuid"
     t.integer "webhook_id"
@@ -72,7 +70,9 @@ ActiveRecord::Schema.define(version: 2021_05_18_091516) do
     t.integer "content_length", default: 0
     t.jsonb "query_params"
     t.jsonb "form_params"
-    t.jsonb "json_params"
+    t.string "content_type"
+    t.string "media_type"
+    t.text "raw_content"
     t.index ["webhook_id"], name: "index_backpacks_on_webhook_id"
   end
 

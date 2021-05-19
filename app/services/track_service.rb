@@ -19,6 +19,12 @@ class TrackService
     status_code = 200
 
     query_params = request.query_parameters#.reject { |x| %w[controller action backpack_token].include?(x) }
+    form_params = request.request_parameters
+    # binding.pry
+    content_type = request.content_type
+    raw_content = request.raw_post
+    media_type = request.media_type
+
     request_data = {
       headers: headers,
       req_method: req_method,
@@ -28,7 +34,11 @@ class TrackService
       referer: referer,
       status_code: status_code,
       query_params: query_params,
+      form_params: form_params,
+      raw_content: raw_content,
+      content_type: content_type,
       content_length: content_length,
+      media_type: media_type,
       account_id: @webhook.account_id
     }
     Rails.logger.info("request #{request_data}")

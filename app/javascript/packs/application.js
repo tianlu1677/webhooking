@@ -8,6 +8,9 @@ import "@coreui/coreui"
 import './application.scss'
 import "controllers"
 const ClipboardJS = require('clipboard')
+
+require('jquery');
+import toastr from 'toastr';
 require("@rails/ujs").start()
 require("@rails/activestorage").start()
 require("channels")
@@ -27,7 +30,13 @@ window.Rails = Rails
 
 $(document).on("turbo:load", () => {
   console.log("turbo!")
-  new ClipboardJS('.copy')
+  const clipboard = new ClipboardJS('.copy')
+  clipboard.on('success', function(e) {
+    console.info('Action:', e.action);
+    console.info('Text:', e.text);
+    console.info('Trigger:', e.trigger);
+    // toastr.success('xxx')
+  });
   // $('[data-toggle="tooltip"]').tooltip()
   // $('[data-toggle="popover"]').popover()
 })

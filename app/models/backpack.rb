@@ -20,6 +20,9 @@
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  content_length :integer          default(0)
+#  query_params   :jsonb
+#  form_params    :jsonb
+#  json_params    :jsonb
 #
 class Backpack < ApplicationRecord
   belongs_to :account, optional: true

@@ -19,6 +19,8 @@ class Clearance::SessionsController < Clearance::BaseController
                        raise: false
   end
 
+  after_action :relation_current_webhook, only: [:create]
+
   def create
     @user = authenticate(params)
 
@@ -42,6 +44,15 @@ class Clearance::SessionsController < Clearance::BaseController
   end
 
   private
+
+  def relation_current_webhook
+    if signed_in? && (webhook_token = cookies.encrypted['webhook_token'].presence).present?
+      webhook = Webhook.find_by(webhook_token: webhook_token)
+      if webhook && webhook.user_id.blank?
+        webhook.update(user_id: @user.id)
+      end
+    end
+  end
 
   def redirect_signed_in_users
     redirect_to url_for_signed_in_users if signed_in?

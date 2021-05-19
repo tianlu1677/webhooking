@@ -2,12 +2,9 @@
 
   <div class="card-body">
     <p class="alert alert-success copy" data-clipboard-text="<%= "#{ENV['WEBSITE_URL']}/r/#{@webhook.uuid}" %>">
-      你当前的链接是 <span class="btn"><%= @webhook.request_url %> 复制</span>
-
+      你当前的链接是 <%= @webhook.request_url %> <button class="btn btn-sm btn-success">复制</button>
       <%= link_to "Try", @webhook.request_url, method: :post, class: 'btn btn-warning btn-sm' %>
     </p>
-
-
     <%= link_to "删除所有请求", clear_backpacks_webhook_path(@webhook.uuid), method: :post, class: 'btn btn-warning btn-sm' %>
 
     <%= link_to "重置", reset_webhook_path(@webhook.uuid), method: :post, class: 'btn btn-warning btn-sm' %>

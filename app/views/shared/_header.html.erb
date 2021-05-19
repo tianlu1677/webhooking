@@ -1,28 +1,17 @@
 <header class="header header-sticky mb-4">
   <div class="container-fluid">
-    <button class="header-toggler px-md-0 me-md-3 d-xxl-none" type="button" onclick="coreui.Sidebar.getInstance(document.querySelector('#sidebar')).toggle()">
-      <svg class="icon icon-lg">
-        <use xlink:href="/coreui/icons/brand/coreui.svg#full"></use>
-      </svg>
-    </button>
-    <a class="header-brand d-xl-none" href="#">
-      <svg width="118" height="46" alt="CoreUI Logo">
-        <use xlink:href="/coreui/icons/brand/coreui.svg#full"></use>
-      </svg>
-    </a>
     <ul class="header-nav d-md-down-none">
-      <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+      <li class="nav-item"><a class="nav-link" href="/">Webhook-king</a></li>
       <li class="nav-item"><a class="nav-link" href="https://webhook.site">Webhook.site</a></li>
     </ul>
     <ul class="header-nav ms-auto">
-
     </ul>
-
     <ul class="header-nav ms-3">
       <% if signed_in? %>
         <li class="nav-item dropdown d-flex align-items-center">
           <a class="nav-link py-0" data-coreui-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
             <div class="avatar avatar-md"><img class="avatar-img" src="/avatars/8.jpg" alt="user@email.com"></div>
+            <%= current_user.email %>
           </a>
           <div class="dropdown-menu dropdown-menu-end pt-0">
             <div class="dropdown-header bg-light py-2">
@@ -33,7 +22,6 @@
                 Logout
             <% end %>
             </div>
-
           </div>
         </li>
       <% else %>

@@ -1,9 +1,15 @@
 class WebhooksController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:left_list_item]
-  before_action :set_webhook_by_params, only: [:clear_backpacks, :show]
+  before_action :set_webhook_by_params, only: [:clear_backpacks]
 
   def show
-    set_cookie_webhook_token(@webhook.webhook_token) if @webhook.present?
+    if current_user
+      @webhook = Webhook.find_by(user_id: current_user.id, uuid: params[:id])
+      set_cookie_webhook_token(@webhook.webhook_token)
+    else
+      @webhook = Webhook.find_by(webhook_token: cookie_webhook_token)
+    end
+
     if @webhook.nil?
       return redirect_to root_path
     end
@@ -16,9 +22,10 @@ class WebhooksController < ApplicationController
     @webhook.backpacks.destroy_all
     redirect_to webhook_path(@webhook.uuid)
   end
+
   # 新建webhook
   def reset
-    @webhook = BuildWebhookService.new(current_user, '').find_or_create!
+    @webhook = BuildWebhookService.new(current_user, '').create!
     set_cookie_webhook_token(@webhook.webhook_token) if @webhook.present?
     redirect_to webhook_path(@webhook.uuid)
   end

@@ -10,7 +10,10 @@
         <div class="col-md-5">
           <%= render "backpacks/request_detail", backpack: @current_backpack %>
           <%= render "backpacks/request_query", backpack: @current_backpack %>
-          <%#= render "backpacks/request_form", backpack: @current_backpack %>
+          <%= render "backpacks/request_form", backpack: @current_backpack %>
+          <% if !['application/x-www-form-urlencoded', 'multipart/form-data'].include?(@current_backpack.content_type) %>
+            <%= render "backpacks/request_raw_content", backpack: @current_backpack %>
+          <% end %>
         </div>
 
         <div class="col-md-7">
