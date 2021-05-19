@@ -3,15 +3,8 @@ class WebhooksController < ApplicationController
   before_action :set_webhook_by_params, only: [:show, :clear_backpacks, :left_list_item, :update]
 
   def show
-    if current_user
-      @webhook = Webhook.where(user_id: current_user.id).find_by_id_or_uuid(params[:id])
-      set_cookie_webhook_token(@webhook.webhook_token) if @webhook.present?
-    else
-      @webhook = Webhook.where(webhook_token: cookie_webhook_token).find_by_id_or_uuid(params[:id])
-    end
-
     if @webhook.nil?
-      return redirect_to root_path
+      return redirect_to not_found_webhooks_path
     end
 
     @backpacks = @webhook.backpacks.order('id desc')
@@ -28,15 +21,15 @@ class WebhooksController < ApplicationController
     @webhook.backpacks.destroy_all
     redirect_to webhook_path(@webhook.uuid)
   end
+
   # 新建webhook
   def reset
     @webhook = BuildWebhookService.new(current_user, '').create!
-    set_cookie_webhook_token(@webhook.webhook_token) if @webhook.present?
+    set_cookie_webhook_token(@webhook.webhook_token)
     redirect_to webhook_path(@webhook)
   end
 
   def left_list_item
-    @webhook = BuildWebhookService.new(current_user, cookie_webhook_token).find!
     @backpack = @webhook.backpacks.find params[:backpack_id]
     @current_backpack
   end
@@ -44,7 +37,11 @@ class WebhooksController < ApplicationController
   private
 
   def set_webhook_by_params
-    @webhook = BuildWebhookService.new(current_user, params[:id]).find!
+    if current_user
+      @webhook = Webhook.where(user_id: current_user.id).find_by_id_or_uuid(params[:id])
+      set_cookie_webhook_token(@webhook.webhook_token) if @webhook.present?
+    else
+      @webhook = Webhook.where(webhook_token: cookie_webhook_token).find_by_id_or_uuid(params[:id])
+    end
   end
-
 end

@@ -1,6 +1,5 @@
 FROM ruby:2.6.3
 
-#MAINTAINER Self "https://self.com"
 
 RUN sed -i s@/deb.debian.org/@/mirrors.aliyun.com/@g /etc/apt/sources.list
 
@@ -12,7 +11,7 @@ RUN apt-get install -y nodejs imagemagick build-essential libpq-dev &&\
 RUN gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.org/
 RUN gem install bundler rake
 
-ENV APP_HOME /rails6
+ENV APP_HOME /webhook-king
 RUN mkdir -p $APP_HOME
 
 WORKDIR $APP_HOME

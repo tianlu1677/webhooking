@@ -1,0 +1,9 @@
+<%= "这个webhook不存在或者你没有权限，2s后自动跳转" %>
+<script !src="">
+  $(() => {
+    setTimeout(() => {
+      window.location.href = "/"
+    }, 2000)
+  })
+
+</script>

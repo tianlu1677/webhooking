@@ -26,6 +26,9 @@ Rails.application.routes.draw do
       post :left_list_item
       post :reset
     end
+    collection do
+      get :not_found
+    end
   end
   resources :backpacks
 

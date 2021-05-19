@@ -4,7 +4,7 @@ services:
     ports: 
       - 3000:3000
     build: .    
-    container_name: rails6_rails
+    container_name: webhook-king
     command: bash -c "bundle exec rake db:create && bundle exec rake db:migrate && bundle exec rails s -b 0.0.0.0 -p 3000"
     environment:
       - ENV=production
@@ -15,17 +15,17 @@ services:
       - redis
       - db
     volumes:
-      - ./log:/rails6/log
-      - ./public:/rails6/public # nginx 可以处理内容
+      - ./log:/webhook-king/log
+      - ./public:/webhook-king/public # nginx 可以处理内容
       # - ./tmp:/rails6/tmp
-      - ./tmp/pids:/rails6/tmp/pids
+      - ./tmp/pids:/webhook-king/tmp/pids
   db:
     image: postgres:10
     volumes:
       - "./datadir/postgresql:/var/lib/postgresql/data"
     environment:
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=rails6
+      - POSTGRES_PASSWORD=webhook-king
   redis:
     image: redis:4
     volumes:

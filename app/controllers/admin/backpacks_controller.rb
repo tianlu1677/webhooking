@@ -6,7 +6,7 @@ class Admin::BackpacksController < Admin::ApplicationController
   def index
     @q = Backpack.all.ransack(params[:q])
     @backpacks = @q.result.order('backpacks.id desc')#.page(params[:page] || 1).per(params[:per] || 10)
-    @pagy, @backpacks = pagy(@backpacks, items: params[:per_page] || 2, page: params[:page])
+    @pagy, @backpacks = pagy(@backpacks, items: params[:per_page] || 20, page: params[:page])
   end
 
   def show; end

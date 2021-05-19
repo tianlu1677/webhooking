@@ -11,6 +11,8 @@ class Clearance::UsersController < Clearance::BaseController
     skip_before_filter :authorize, only: [:create, :new], raise: false
   end
 
+  after_action :relation_current_webhook, only: [:create]
+
   def new
     @user = user_from_params
     render template: 'clearance/users/new'
@@ -28,6 +30,15 @@ class Clearance::UsersController < Clearance::BaseController
   end
 
   private
+
+  def relation_current_webhook
+    if signed_in? && (webhook_token = cookies.encrypted['webhook_token'].presence).present?
+      webhook = Webhook.find_by(webhook_token: webhook_token)
+      if webhook && webhook.user_id.blank?
+        webhook.update(user_id: @user.id)
+      end
+    end
+  end
 
   def avoid_sign_in
     warn "[DEPRECATION] Clearance's `avoid_sign_in` before_filter is " \
