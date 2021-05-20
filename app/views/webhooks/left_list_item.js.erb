@@ -3,6 +3,13 @@ let dom = document.getElementById("card-list-group")
 if (dom) {
   dom.innerHTML = `<%= j render '/backpacks/left_list_item', backpack: @backpack, current_backpack: nil%>${dom.innerHTML}`
 
+  let a = document.title.match(/^\((\d+)\)/)
+  if(a){
+    let next_id = parseInt(a[1]) + 1
+    document.title = document.title.replace(a[0], `(${next_id})`)
+  }else{
+    document.title = `(1) ${document.title}`
+  }
 }
 
 <%if @backpack %>
