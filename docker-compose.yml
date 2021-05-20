@@ -3,8 +3,8 @@ services:
   webhook-king:
     ports: 
       - 3000:3000
-    build: .    
-    container_name: webhook-king:latest
+    image: webhook-king:latest
+    container_name: webhook-king
     command: bash -c "bundle exec rake db:create && bundle exec rake db:migrate && bundle exec rails s -b 0.0.0.0 -p 3000"
     environment:
       - ENV=production
