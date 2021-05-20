@@ -4,7 +4,7 @@ services:
     ports: 
       - 3000:3000
     build: .    
-    container_name: webhook-king
+    container_name: webhook-king:latest
     command: bash -c "bundle exec rake db:create && bundle exec rake db:migrate && bundle exec rails s -b 0.0.0.0 -p 3000"
     environment:
       - ENV=production
@@ -17,7 +17,9 @@ services:
     volumes:
       - ./log:/webhook-king/log
       - ./public:/webhook-king/public # nginx 可以处理内容
-      # - ./tmp:/rails6/tmp
+      - ./public:/webhook-king/public/ # nginx 可以处理内容
+      - ./public/assets:/webhook-king/public/assets # nginx 可以处理内容
+      - ./public/packs:/webhook-king/public/packs # nginx 可以处理内容
       - ./tmp/pids:/webhook-king/tmp/pids
   db:
     image: postgres:10
