@@ -20,6 +20,8 @@ gem 'redis-objects'
 gem 'redis-rails'
 gem 'liquid' # 用于渲染response 的内容
 gem 'rack-cors'
+gem 'execjs'
+gem 'mini_racer'
 
 gem 'enumerize'
 

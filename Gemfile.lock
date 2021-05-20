@@ -112,6 +112,7 @@ GEM
     erubi (1.10.0)
     et-orbi (1.2.4)
       tzinfo
+    execjs (2.8.1)
     factory_bot (6.2.0)
       activesupport (>= 5.0.0)
     factory_bot_rails (6.2.0)
@@ -139,6 +140,7 @@ GEM
     jbuilder (2.11.2)
       activesupport (>= 5.0.0)
     jwt (2.2.3)
+    libv8-node (15.14.0.1)
     liquid (4.0.3)
     listen (3.5.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
@@ -153,6 +155,8 @@ GEM
     mini_magick (4.11.0)
     mini_mime (1.0.3)
     mini_portile2 (2.5.1)
+    mini_racer (0.4.0)
+      libv8-node (~> 15.14.0.0)
     minitest (5.14.4)
     msgpack (1.4.2)
     newrelic_rpm (7.0.0)
@@ -351,6 +355,7 @@ DEPENDENCIES
   database_cleaner
   dotenv-rails
   enumerize
+  execjs
   factory_bot_rails
   ffaker
   foreman
@@ -361,6 +366,7 @@ DEPENDENCIES
   liquid
   listen (~> 3.2)
   mini_magick
+  mini_racer
   newrelic_rpm
   oj
   pagy (~> 3.10.0)
