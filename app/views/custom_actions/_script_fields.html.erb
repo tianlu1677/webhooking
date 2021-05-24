@@ -1,13 +1,16 @@
 <%= f.hidden_field :category %>
-<%#binding.pry %>
-<div class="form-control">
-  <%= f.label :script_content, 'js脚本'  %>
-  <%= f.text_field :script_content %>
-</div>
+<%= f.text_area :script_content, class: 'visually-hidden' %>
 
-<div class="form-control">
-  <div id="editor">    
-  </div>  
+<code id="oldContent" class="visually-hidden">
+  <%= @custom_action.script_content %>
+</code>
+<div>
+  <h4>JS脚本编辑内容</h4>
+  <p>从上层传递过来的变量，通过 window.params.x 可访问到</p>
+</div>
+<div >
+  <div id="editor" class="form-control" style="width: 600px; height: 300px">
+  </div>
   <div id="answer"></div>
   <% if @custom_action.id.present? %>
     <button type="button" class="btn btn-secondary" onclick="runScript()" >执行</button>
@@ -17,12 +20,19 @@
 
 <script type="text/javascript">
     var JavaScriptMode = ace.require("ace/mode/javascript").Mode;
-
     var editor = ace.edit("editor");
     editor.session.setMode(new JavaScriptMode());
-
-    const webhook_url = "/webhooks/<%= @webhook.uuid %>/custom_actions/exec_script.json"
-    editor.session.setValue("<%= @custom_action.script_content %>")
+    ace.require("ace/ext/language_tools");
+    editor.setOptions({
+      enableBasicAutocompletion: true,
+      enableSnippets: true,
+      enableLiveAutocompletion: true,
+      useWrapMode: true,   // wrap text to view
+      indentedSoftWrap: false, 
+      behavioursEnabled: false,
+    });    
+    
+    editor.session.setValue($('#oldContent').text())
     editor.session.on('change', function(delta) {
       // console.log('delta', delta)
       console.log(editor.getValue());
@@ -30,13 +40,13 @@
     });
 
   function runScript() {
-    const run_webhook_url = "/webhooks/<%= @webhook.uuid %>/custom_actions/exec_script?custom_action_id=<%= @custom_action.id %>.json"
+    const run_script_url = "/webhooks/<%= @webhook.uuid %>/custom_actions/exec_script?custom_action_id=<%= @custom_action.id %>.json"
      $.ajax({
-        url: run_webhook_url,
+        url: run_script_url,
         method: 'POST',
         data: {
           content: $('#custom_action_script_content').val()  
-        }        
+        }
       }).then((res) => {
         console.log('res', res)
         $("#answer").html(JSON.stringify(res))

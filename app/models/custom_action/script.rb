@@ -34,11 +34,11 @@ class CustomAction
         (function () {
           #{original_params[:script_content] || script_content}
         })()
-      JS      
+      JS
       answer
     rescue Selenium::WebDriver::Error::WebDriverError => e
         { jserror: e}
-      rescue => e
+    rescue => e
        { error: e}
     end
   end
