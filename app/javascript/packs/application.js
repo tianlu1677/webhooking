@@ -34,7 +34,6 @@ window.Rails = Rails
 
 
 $(document).on("turbo:load", () => {
-  $('.sortable').railsSortable();
   console.log("turbo!")
   const clipboard = new ClipboardJS('.copy')
   clipboard.on('success', function(e) {

@@ -5,6 +5,7 @@ table
     tr
       th Title
       th Description
+      th Position
       th Category
       th
       th
@@ -12,10 +13,11 @@ table
       th
 
   tbody class='sortable'
-    - @custom_actions.each_with_sortable_id do |custom_action, sortable_id|
-      tr id='#{sortable_id}'
+    - @custom_actions.each do |custom_action|
+      tr id='position-#{custom_action.position}'
         td = custom_action.title
         td = custom_action.description
+        td = custom_action.position
         td = custom_action.category
         td
           - if custom_action.is_a? CustomAction::Variable
