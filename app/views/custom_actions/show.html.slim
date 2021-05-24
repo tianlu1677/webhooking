@@ -20,6 +20,6 @@ p
   strong Input dict:
   = @custom_action.input_dict
 
-=> link_to 'Edit', edit_custom_action_path(@custom_action)
+=> link_to 'Edit', edit_webhook_custom_action_path(@webhook.uuid, @custom_action)
 '|
-=< link_to 'Back', custom_actions_path
+=< link_to 'Back', webhook_custom_actions_path(@webhook.uuid)

@@ -1,8 +1,11 @@
 h1 Editing custom_action
-== render 'incoming_variable_list'
 
-== render 'form'
+.row
+  .col
+    == render 'form'
 
-=> link_to 'Show', webhook_custom_action_path(@webhook, @custom_action)
-'|
-=< link_to 'Back', webhook_custom_actions_path(@webhook.uuid)
+    => link_to 'Show', webhook_custom_action_path(@webhook.uuid, @custom_action)
+    '|
+    =< link_to 'Back', webhook_custom_actions_path(@webhook.uuid)
+  .col
+    = render "incoming_variable_list"

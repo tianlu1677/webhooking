@@ -1,6 +1,6 @@
 class CustomAction
   class Request < ::CustomAction
-    store_accessor :input_dict, :url, :method, :content_type, :body, prefix: 'input'
+    store_accessor :input_dict, :url, :method, :content_type, :trigger_variable, :body, prefix: 'input'
     validates_presence_of :input_url
 
     def build_real_body(original_params, custom_params)
@@ -10,9 +10,14 @@ class CustomAction
       "解析语法错误"
     end
 
+    def build_real_url(original_params, custom_params)
+      template = Liquid::Template.parse(input_url)
+      template.render({"request" => original_params}.merge(custom_params))
+    end
+
     def execute(original_params, custom_params = {})
       dict = {
-        url: input_url,
+        url: build_real_url(original_params, custom_params),
         method: input_method,
         timeout: 5,
         payload: build_real_body(original_params, custom_params),

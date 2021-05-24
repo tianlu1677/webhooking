@@ -1,5 +1,9 @@
 h1 New custom_action
 
-== render 'form'
+.row
+  .col
+    == render 'form'
 
-= link_to 'Back', webhook_custom_actions_path(@webhook.uuid)
+    = link_to 'Back', webhook_custom_actions_path(@webhook.uuid)
+  .col
+    = render "incoming_variable_list"

@@ -1,17 +1,26 @@
 
-.field
-  = f.label :input_url, "请求地址"
-  = f.text_field :input_url
+.row.mb-3
+  .col-2.col-form-label
+    = f.label :input_url, "请求地址"
+  .col-10
+    = f.text_field :input_url, class: 'form-control'
+    p 使用 <a href="https://liquid.bootcss.com/">liquid 模版</a>语法, 即可用{{}} 包裹变量, 如 "My {{request.method}}" 会渲染为 My GET </p>
 
-.field
-  = f.label :input_method, '请求方法'
-  = f.select :input_method, %w[get post put delete]
+.row.mb-3
+  .col-2.col-form-label
+    = f.label :input_method, '请求方法'
+  .col-10
+    = f.select :input_method, %w[get post put delete], {}, class: 'form-select'
 
-.field
-  = f.label :input_content_type, "Content-Type"
-  = f.select :input_content_type, %w[application/json]
+.row.mb-3
+  .col-2.col-form-label
+    = f.label :input_content_type, "Content-Type"
+  .col-10
+    = f.select :input_content_type, %w[application/json], {}, class: 'form-select'
 
-.field
-  = f.label :input_body
-
-  = f.text_area :input_body
+.row.mb-3
+  .col-2.col-form-label
+    = f.label :input_body
+  .col-10
+    = f.text_area :input_body, class: 'form-control'
+    p 使用 <a href="https://liquid.bootcss.com/">liquid 模版</a>语法, 即可用{{}} 包裹变量, 如 "My {{request.method}}" 会渲染为 My GET </p>
