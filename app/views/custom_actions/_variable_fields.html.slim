@@ -1,16 +1,30 @@
-      = f.hidden_field :category
-      .field
-        = f.label :input_from_variable, '数据来源变量'
-        = f.text_field :input_from_variable
+div[data-controller='variable-calc-panel']
+  = f.hidden_field :category
+  .row.mb-3
+    .col-2.col-form-label
+      = f.label :input_from_variable, '数据来源变量'
+    .col-10
+      = f.select :input_from_variable, @request_variables, {}, class: 'form-select', data: {'variable-calc-panel-target' => 'incomingVariable'}
 
-      .field
-        = f.label :input_name, '新变量名称'
-        = f.text_field :input_name
+  .row.mb-3
+    .col-2.col-form-label
+      = f.label :input_name, '新变量名称'
+    .col-10
+      = f.text_field :input_name, class: 'form-control'
+  .row.mb-3
+    .col-2.col-form-label
+      = f.label :input_category, '运算方式'
+    .col-10
+      = f.select :input_category, [["JsonPath", "jsonpath"], ["regex", "regex"], ['render', 'render']],{},   class: 'form-select', data: {'variable-calc-panel-target'=>'category', action: 'variable-calc-panel#select'}
+      div[data-variable-calc-panel-target='categoryInfo']
 
-      .field
-        = f.label :input_category, '运算方式'
-        = f.select :input_category, [["JsonPath", "jsonpath"], ["regex", "regex"], ['render', 'render']]
+  .row.mb-3
+    .col-2.col-form-label
+      = f.label :filter_val, '运算内容'
+    .col-10
+      = f.text_field :input_filter_val, class: 'form-control'
 
-      .field
-        = f.label :filter_val, '运算内容'
-        = f.text_field :input_filter_val
+
+    .row.mb-3
+      .col-2
+      .col-2 = link_to "试运算", "#", data: {'action' => 'variable-calc-panel#try'}

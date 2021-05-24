@@ -33,6 +33,9 @@ Rails.application.routes.draw do
       get :not_found
     end
     resources :custom_actions do
+      collection do
+        get :incoming_variables
+      end
       member do
         post :sort
       end

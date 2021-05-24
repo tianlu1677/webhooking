@@ -1,6 +1,8 @@
 .field[style='height: 300px; overflow:auto ']
-  p  变量列表
+  p  变量列表, 点击即复制
   ul
     - @request_variables.each do |str|
       li
-        p= str
+        p
+          a.link.copy[data-clipboard-text="#{str}" href='']
+            = str
