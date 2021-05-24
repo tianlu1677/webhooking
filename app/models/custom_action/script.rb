@@ -18,6 +18,7 @@ class CustomAction
     store_accessor :input_dict, :script_content, :from_variable, :target_variable
 
     def execute(original_params, custom_params = {})
+      # binding.pry
       @original_params = original_params
       @custom_params = custom_params
 
@@ -32,14 +33,17 @@ class CustomAction
 
       answer = page.evaluate_script(<<~JS)
         (function () {
-          #{original_params[:script_content] || script_content}
+          #{@original_params[:script_content] || script_content}
         })()
       JS
-      answer
+
+      custom_params[:answer] = answer
+      Rails.logger.info("script========= => #{answer}")
+      [original_params, custom_params] 
     rescue Selenium::WebDriver::Error::WebDriverError => e
-        { jserror: e}
+      { jserror: e}
     rescue => e
-       { error: e}
+      { error: e}
     end
   end
 end
