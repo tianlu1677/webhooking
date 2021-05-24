@@ -19,9 +19,12 @@ gem 'redis', require: ["redis", "redis/connection/hiredis"]
 gem 'redis-objects'
 gem 'redis-rails'
 gem 'liquid' # 用于渲染response 的内容
+gem 'rails_sortable'
 gem 'rack-cors'
 
 gem 'enumerize'
+gem 'jsonpath'
+gem 'api_tools'
 
 gem 'pundit'
 gem 'ransack'
@@ -70,7 +73,7 @@ group :test do
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
   gem 'database_cleaner'
-  
+
   gem 'rspec-rails'
   gem 'webmock'
   # Easy installation and use of web drivers to run system tests with browsers

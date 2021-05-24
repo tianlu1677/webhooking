@@ -14,11 +14,13 @@
 #  resp_code         :integer          default(200)
 #  resp_body         :string           default("")
 #  resp_content_type :string           default("text/plain")
+#  cors_enabled      :boolean          default(TRUE)
 #
 class Webhook < ApplicationRecord
   belongs_to :account, optional: true
 
   has_many :backpacks
+  has_many :custom_actions
 
   before_create :set_init_data
   def set_init_data

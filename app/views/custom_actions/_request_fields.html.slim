@@ -1,0 +1,17 @@
+
+.field
+  = f.label :input_url, "请求地址"
+  = f.text_field :input_url
+
+.field
+  = f.label :input_method, '请求方法'
+  = f.select :input_method, %w[get post put delete]
+
+.field
+  = f.label :input_content_type, "Content-Type"
+  = f.select :input_content_type, %w[application/json]
+
+.field
+  = f.label :input_body
+
+  = f.text_area :input_body

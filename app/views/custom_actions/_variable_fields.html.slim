@@ -1,0 +1,16 @@
+      = f.hidden_field :category
+      .field
+        = f.label :input_from_variable, '数据来源变量'
+        = f.text_field :input_from_variable
+
+      .field
+        = f.label :input_name, '新变量名称'
+        = f.text_field :input_name
+
+      .field
+        = f.label :input_category, '运算方式'
+        = f.select :input_category, [["JsonPath", "jsonpath"], ["regex", "regex"], ['render', 'render']]
+
+      .field
+        = f.label :filter_val, '运算内容'
+        = f.text_field :input_filter_val

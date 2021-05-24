@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_19_090044) do
+ActiveRecord::Schema.define(version: 2021_05_20_024741) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,19 @@ ActiveRecord::Schema.define(version: 2021_05_19_090044) do
     t.index ["webhook_id"], name: "index_backpacks_on_webhook_id"
   end
 
+  create_table "custom_actions", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.string "custom_action"
+    t.bigint "webhook_id", null: false
+    t.string "category"
+    t.integer "sort"
+    t.jsonb "input_dict"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["webhook_id"], name: "index_custom_actions_on_webhook_id"
+  end
+
   create_table "operation_logs", force: :cascade do |t|
     t.string "user_id"
     t.string "params"
@@ -114,4 +127,5 @@ ActiveRecord::Schema.define(version: 2021_05_19_090044) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "custom_actions", "webhooks"
 end

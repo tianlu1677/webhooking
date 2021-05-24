@@ -14,6 +14,7 @@
 #  resp_code         :integer          default(200)
 #  resp_body         :string           default("")
 #  resp_content_type :string           default("text/plain")
+#  cors_enabled      :boolean          default(TRUE)
 #
 require 'rails_helper'
 

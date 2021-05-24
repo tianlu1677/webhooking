@@ -9,7 +9,12 @@ import './application.scss'
 import "controllers"
 const ClipboardJS = require('clipboard')
 
-require('jquery');
+
+global.$ = require("jquery")
+
+require("jquery") // Don't really need to require this...
+require("jquery-ui")
+
 import toastr from 'toastr';
 require("@rails/ujs").start()
 require("@rails/activestorage").start()
@@ -29,6 +34,7 @@ window.Rails = Rails
 
 
 $(document).on("turbo:load", () => {
+  $('.sortable').railsSortable();
   console.log("turbo!")
   const clipboard = new ClipboardJS('.copy')
   clipboard.on('success', function(e) {

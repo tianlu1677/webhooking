@@ -1,0 +1,27 @@
+p#notice = notice
+
+p
+  strong Title:
+  = @custom_action.title
+p
+  strong Description:
+  = @custom_action.description
+p
+  strong Custom action:
+  = @custom_action.custom_action
+p
+  strong Webhook:
+  = @custom_action.webhook
+p
+  strong Category:
+  = @custom_action.category
+p
+  strong Sort:
+  = @custom_action.sort
+p
+  strong Input dict:
+  = @custom_action.input_dict
+
+=> link_to 'Edit', edit_custom_action_path(@custom_action)
+'|
+=< link_to 'Back', custom_actions_path

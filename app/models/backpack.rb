@@ -29,7 +29,8 @@ class Backpack < ApplicationRecord
   belongs_to :webhook
 
   before_create :set_init_data
-  after_create :send_websocket_notification
+  after_commit :send_websocket_notification, only: [:create]
+  after_commit :run_custom_actions, only: [:create]
 
   has_many_attached :files
 
@@ -90,4 +91,13 @@ class Backpack < ApplicationRecord
     else
     end
   end
+
+  def run_custom_actions
+    original_params = default_template_params
+    params = {}
+    webhook.custom_actions.order(:sort).each do |custom_action|
+      original_params, params = custom_action.execute original_params, params
+    end
+  end
+
 end

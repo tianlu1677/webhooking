@@ -2,6 +2,7 @@ require 'sidekiq/web'
 require 'sidekiq/cron/web'
 
 Rails.application.routes.draw do
+  resources :custom_actions
   mount Sidekiq::Web => '/admin/sidekiq'
   mount PgHero::Engine, at: '/admin/pghero'
 
@@ -29,6 +30,7 @@ Rails.application.routes.draw do
     collection do
       get :not_found
     end
+    resources :custom_actions
   end
   resources :backpacks
 

@@ -9,6 +9,7 @@
 #  encrypted_password :string(128)      not null
 #  confirmation_token :string(128)
 #  remember_token     :string(128)      not null
+#  is_admin           :boolean          default(FALSE)
 #
 
 require 'rails_helper'

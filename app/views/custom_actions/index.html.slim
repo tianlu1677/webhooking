@@ -1,0 +1,30 @@
+h1 Listing custom_actions
+
+table
+  thead
+    tr
+      th Title
+      th Description
+      th Category
+      th
+      th
+      th
+      th
+
+  tbody class='sortable'
+    - @custom_actions.each_with_sortable_id do |custom_action, sortable_id|
+      tr id='#{sortable_id}'
+        td = custom_action.title
+        td = custom_action.description
+        td = custom_action.category
+        td
+          - if custom_action.is_a? CustomAction::Variable
+            = render "variable_card", variable: custom_action
+          - elsif custom_action.is_a? CustomAction::Request
+            = render "request_card", variable: custom_action
+        td = link_to 'Show', webhook_custom_action_path(id: custom_action.id)
+        td = link_to 'Edit', edit_webhook_custom_action_path(id: custom_action.id)
+        td = link_to 'Destroy', webhook_custom_action_path(id: custom_action.id), data: { confirm: 'Are you sure?' }, method: :delete
+
+
+= link_to 'New Custom action', new_custom_action_path
