@@ -1,6 +1,6 @@
 class CustomActionsController < ApplicationController
   before_action :set_webhook
-  before_action :set_custom_action, only: %i[show edit update destroy]
+  before_action :set_custom_action, only: %i[show edit update destroy sort]
 
   # GET /custom_actions or /custom_actions.json
   def index
@@ -9,6 +9,11 @@ class CustomActionsController < ApplicationController
 
   # GET /custom_actions/1 or /custom_actions/1.json
   def show; end
+
+  def sort
+    @custom_action.insert_at(params[:position].to_i)
+    head :ok
+  end
 
   # GET /custom_actions/new
   def new
@@ -24,7 +29,6 @@ class CustomActionsController < ApplicationController
 
   # POST /custom_actions or /custom_actions.json
   def create
-    byebug
     @custom_action = @webhook.custom_actions.create(custom_action_params)
 
     respond_to do |format|

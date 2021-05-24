@@ -12,9 +12,9 @@ table
       th
       th
 
-  tbody class='sortable'
+  tbody data-controller="drag"  data-drag-url="/webhooks/#{@webhook.uuid}/custom_actions/:id/sort"
     - @custom_actions.each do |custom_action|
-      tr id='position-#{custom_action.position}'
+      tr data-id="#{custom_action.id}"
         td = custom_action.title
         td = custom_action.description
         td = custom_action.position
