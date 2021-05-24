@@ -26,6 +26,7 @@ Rails.application.routes.draw do
       post :left_list_item
       post :reset
       post :run_script
+      post :exec_script
     end
     collection do
       get :not_found

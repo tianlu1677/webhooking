@@ -3,6 +3,13 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="WebhookResponseSettingModalLabel">webhooks js script</h5>
+        <p>
+          可用的全局变量有 
+          window.gooday window.headers
+        </p>
+        <p>
+          脚本必须返回执行函数，函数中返回指定的值的js对象如 {status: 'ok', webhook_id: 'try'}
+        </p>
         <button type="button" class="btn-close"  data-bs-dismiss="modal"></button>
       </div>
         <%= form_with model: @webhook, url: "/webhooks/#{@webhook.uuid}", method: :patch, local: true, html: {"data-turbo" => false} do |f| %>
@@ -39,7 +46,7 @@
     });
 
   function runScript() {
-    const run_webhook_url = "/webhooks/<%= @webhook.uuid %>/run_script.json"
+    const run_webhook_url = "/webhooks/<%= @webhook.uuid %>/exec_script.json"
      $.ajax({
         url: run_webhook_url,
         method: 'POST',

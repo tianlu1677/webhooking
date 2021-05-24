@@ -1,6 +1,7 @@
+require 'capybara/rails'
 class WebhooksController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:left_list_item]
-  before_action :set_webhook_by_params, only: [:show, :clear_backpacks, :left_list_item, :update, :run_script]
+  before_action :set_webhook_by_params, only: [:show, :clear_backpacks, :left_list_item, :update, :run_script, :exec_script]
 
   def show
     if @webhook.nil?
@@ -33,6 +34,34 @@ class WebhooksController < ApplicationController
     @backpack = @webhook.backpacks.find params[:backpack_id]
     @current_backpack
   end
+
+  def exec_script
+    content = params[:content] || @webhook.script_content
+    
+    Capybara.default_driver = :selenium_chrome_headless # :selenium_chrome and :selenium_chrome_headless
+    Capybara.visit('http://ohio.ce04.com') # 先跳转到某个页面
+    page = Capybara.page
+    # 提前注入一些常用的变量为全局变量
+  
+    answer = page.evaluate_script(<<~JS)
+      (function () {
+        window.gooday = "hello";
+        window.headers = "yes";
+      })()
+    JS
+
+    answer = page.evaluate_script(<<~JS)
+      (function () {
+        #{content}
+      })()
+    JS
+    render json: { answer: answer}
+  rescue Selenium::WebDriver::Error::WebDriverError => e
+    render json: { jserror: e}
+  rescue => e
+    render json: { error: e }
+  end
+
 
   def run_script    
     content = params[:content] || @webhook.script_content
