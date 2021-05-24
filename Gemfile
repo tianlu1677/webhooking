@@ -21,6 +21,7 @@ gem 'redis-rails'
 gem 'liquid' # 用于渲染response 的内容
 gem 'rails_sortable'
 gem 'rack-cors'
+gem 'mini_racer'
 
 gem 'enumerize'
 gem 'jsonpath'
@@ -43,7 +44,12 @@ gem 'pagy', '~> 3.10.0'
 gem 'oj'
 gem 'foreman'
 gem "clearance"
+# gem "ferrum"
 # tools
+
+gem 'capybara', '>= 2.15'
+gem 'selenium-webdriver'
+gem 'webdrivers'
 
 gem 'bootsnap', '>= 1.4.2', require: false
 
@@ -70,14 +76,13 @@ end
 
 group :test do
   # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 2.15'
-  gem 'selenium-webdriver'
+
   gem 'database_cleaner'
 
   gem 'rspec-rails'
   gem 'webmock'
   # Easy installation and use of web drivers to run system tests with browsers
-  gem 'webdrivers'
+  # gem 'webdrivers'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

@@ -24,6 +24,6 @@ RUN bundle install --jobs=20
 COPY . $APP_HOME
 # RUN bundle exec rake assets:precompile RAILS_ENV=production
 
-#CMD ["foreman", "start"]
+# CMD ["foreman", "start"]
 #
-#docker build -t rails6_rails .
+# docker build -t webhook-king .

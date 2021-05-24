@@ -1,0 +1,61 @@
+<div class="modal fade " id="WebhookScriptModal" tabindex="-1" aria-labelledby="WebhookScriptModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="WebhookResponseSettingModalLabel">webhooks js script</h5>
+        <p>
+          可用的全局变量有 
+          window.gooday window.headers
+        </p>
+        <p>
+          脚本必须返回执行函数，函数中返回指定的值的js对象如 {status: 'ok', webhook_id: 'try'}
+        </p>
+        <button type="button" class="btn-close"  data-bs-dismiss="modal"></button>
+      </div>
+        <%= form_with model: @webhook, url: "/webhooks/#{@webhook.uuid}", method: :patch, local: true, html: {"data-turbo" => false} do |f| %>
+      <div class="modal-body">
+          <div class='mb-12 row'>            
+            <%= f.text_area :script_content, cols: 5, rows: 4, class: 'form-control visually-hidden'%>
+          </div>
+          <div id="editor"></div>
+      </div>
+      <div id="answer">          
+        </div>
+      <div class="modal-footer">      
+        <button type="button" class="btn btn-secondary" onclick="runScript()" >执行</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+        <%= f.submit "保存", class: 'btn btn-primary' %>
+      </div>
+       <%end %>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+    var JavaScriptMode = ace.require("ace/mode/javascript").Mode;
+
+    var editor = ace.edit("editor");
+    editor.session.setMode(new JavaScriptMode());
+
+    const webhook_url = "/webhooks/<%= @webhook.uuid %>.json"
+    editor.session.setValue("<%= @webhook.script_content %>")
+    editor.session.on('change', function(delta) {
+      // console.log('delta', delta)
+      console.log(editor.getValue());
+      $('#webhook_script_content').val(editor.getValue())     
+    });
+
+  function runScript() {
+    const run_webhook_url = "/webhooks/<%= @webhook.uuid %>/exec_script.json"
+     $.ajax({
+        url: run_webhook_url,
+        method: 'POST',
+        data: {
+          content: $('#webhook_script_content').val()  
+        }        
+      }).then((res) => {
+        console.log('res', res)
+        $("#answer").html(JSON.stringify(res))
+      })
+  }
+</script>

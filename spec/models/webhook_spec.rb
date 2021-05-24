@@ -15,6 +15,10 @@
 #  resp_body         :string           default("")
 #  resp_content_type :string           default("text/plain")
 #  cors_enabled      :boolean          default(TRUE)
+<<<<<<< HEAD
+=======
+#  script_content    :text
+>>>>>>> master
 #
 require 'rails_helper'
 

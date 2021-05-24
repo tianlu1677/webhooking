@@ -149,6 +149,7 @@ GEM
     jsonpath (1.1.0)
       multi_json
     jwt (2.2.3)
+    libv8-node (15.14.0.1)
     liquid (4.0.3)
     listen (3.5.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
@@ -166,6 +167,8 @@ GEM
     mini_magick (4.11.0)
     mini_mime (1.0.3)
     mini_portile2 (2.5.1)
+    mini_racer (0.4.0)
+      libv8-node (~> 15.14.0.0)
     minitest (5.14.4)
     msgpack (1.4.2)
     multi_json (1.15.0)
@@ -387,6 +390,7 @@ DEPENDENCIES
   liquid
   listen (~> 3.2)
   mini_magick
+  mini_racer
   newrelic_rpm
   oj
   pagy (~> 3.10.0)
