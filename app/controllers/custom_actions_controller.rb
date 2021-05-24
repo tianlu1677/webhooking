@@ -12,14 +12,14 @@ class CustomActionsController < ApplicationController
 
   # GET /custom_actions/new
   def new
-    @custom_action = CustomAction.new
+    @custom_action = CustomAction.new(category: params[:category])
+    @url = new_webhook_custom_action_path(@webhook.uuid)
   end
 
   # GET /custom_actions/1/edit
   def edit
     @request_variables = @custom_action.could_used_variable_names
-
-
+    @url = new_webhook_custom_action_path(@webhook.uuid, @custom_action)
   end
 
   # POST /custom_actions or /custom_actions.json
