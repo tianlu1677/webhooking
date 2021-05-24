@@ -10,7 +10,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 2021_05_24_031214) do
 
   # These are extensions that must be enabled in order to support this database
@@ -86,7 +85,7 @@ ActiveRecord::Schema.define(version: 2021_05_24_031214) do
     t.jsonb "input_dict"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "posistion"
+    t.integer "position"
     t.index ["webhook_id"], name: "index_custom_actions_on_webhook_id"
   end
 

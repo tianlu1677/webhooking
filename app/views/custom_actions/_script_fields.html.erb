@@ -1,0 +1,45 @@
+<%= f.hidden_field :category %>
+<%#binding.pry %>
+<div class="form-control">
+  <%= f.label :script_content, 'js脚本'  %>
+  <%= f.text_field :script_content %>
+</div>
+
+<div class="form-control">
+  <div id="editor">    
+  </div>  
+  <div id="answer"></div>
+  <% if @custom_action.id.present? %>
+    <button type="button" class="btn btn-secondary" onclick="runScript()" >执行</button>
+  <% end %>
+</div>
+
+
+<script type="text/javascript">
+    var JavaScriptMode = ace.require("ace/mode/javascript").Mode;
+
+    var editor = ace.edit("editor");
+    editor.session.setMode(new JavaScriptMode());
+
+    const webhook_url = "/webhooks/<%= @webhook.uuid %>/custom_actions/exec_script.json"
+    editor.session.setValue("<%= @custom_action.script_content %>")
+    editor.session.on('change', function(delta) {
+      // console.log('delta', delta)
+      console.log(editor.getValue());
+      $('#custom_action_script_content').val(editor.getValue())     
+    });
+
+  function runScript() {
+    const run_webhook_url = "/webhooks/<%= @webhook.uuid %>/custom_actions/exec_script?custom_action_id=<%= @custom_action.id %>.json"
+     $.ajax({
+        url: run_webhook_url,
+        method: 'POST',
+        data: {
+          content: $('#custom_action_script_content').val()  
+        }        
+      }).then((res) => {
+        console.log('res', res)
+        $("#answer").html(JSON.stringify(res))
+      })
+  }
+</script>

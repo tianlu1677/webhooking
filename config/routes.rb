@@ -36,6 +36,9 @@ Rails.application.routes.draw do
       member do
         post :sort
       end
+      collection do
+        post :exec_script
+      end
     end
   end
   resources :backpacks

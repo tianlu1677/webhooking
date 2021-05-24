@@ -9,4 +9,3 @@ class WebhookNotificationChannel < ApplicationCable::Channel
   end
 
 end
-i

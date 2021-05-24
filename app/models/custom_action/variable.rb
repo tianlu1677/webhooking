@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: custom_actions
+#
+#  id            :bigint           not null, primary key
+#  title         :string
+#  description   :string
+#  custom_action :string
+#  webhook_id    :bigint           not null
+#  category      :string
+#  input_dict    :jsonb
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  position      :integer
+#
 class CustomAction
   class Variable < ::CustomAction
     store_accessor :input_dict, :from_variable, :name, :category, :filter_val, prefix: 'input'

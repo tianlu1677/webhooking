@@ -15,6 +15,8 @@
 #  resp_body         :string           default("")
 #  resp_content_type :string           default("text/plain")
 #  cors_enabled      :boolean          default(TRUE)
+#  script_content    :text
+#
 <<<<<<< HEAD
 =======
 #  script_content    :text

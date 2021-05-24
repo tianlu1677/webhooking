@@ -15,7 +15,9 @@
       = f.text_field :title
     - if @custom_action.is_a? CustomAction::Variable
       == render 'variable_fields', f: f
-    -else
+    - if @custom_action.is_a? CustomAction::Script
+      = render 'script_fields', f: f  
+    - else
       == render 'request_fields', f: f
 
     .field
