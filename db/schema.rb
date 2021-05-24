@@ -11,7 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 
-ActiveRecord::Schema.define(version: 2021_05_20_054140) do
+ActiveRecord::Schema.define(version: 2021_05_24_031214) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,10 +83,10 @@ ActiveRecord::Schema.define(version: 2021_05_20_054140) do
     t.string "custom_action"
     t.bigint "webhook_id", null: false
     t.string "category"
-    t.integer "sort"
     t.jsonb "input_dict"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "posistion"
     t.index ["webhook_id"], name: "index_custom_actions_on_webhook_id"
   end
 

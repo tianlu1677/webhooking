@@ -5,17 +5,19 @@ table
     tr
       th Title
       th Description
+      th Position
       th Category
       th
       th
       th
       th
 
-  tbody class='sortable'
-    - @custom_actions.each_with_sortable_id do |custom_action, sortable_id|
-      tr id='#{sortable_id}'
+  tbody data-controller="drag"  data-drag-url="/webhooks/#{@webhook.uuid}/custom_actions/:id/sort"
+    - @custom_actions.each do |custom_action|
+      tr data-id="#{custom_action.id}"
         td = custom_action.title
         td = custom_action.description
+        td = custom_action.position
         td = custom_action.category
         td
           - if custom_action.is_a? CustomAction::Variable
@@ -28,3 +30,19 @@ table
 
 
 = link_to 'New Custom action', new_custom_action_path
+div[style='width: 1200px']
+  .row
+    .col-4
+      .card
+        .card-body
+          .card-title
+            h5 变量提取
+          .card-text 从常规变量中通过 正则、JSONPath, 或者模版渲染, 提取出新的变量
+          =link_to "新建", new_webhook_custom_action_path(@webhook.uuid, category: 'CustomAction::Variable'), class: "btn btn-primary"
+    .col-4
+      .card
+        .card-body
+          .card-title
+            h5 发起请求
+          .card-text 向设定地址发起一次请求
+          =link_to "新建", new_webhook_custom_action_path(@webhook.uuid, category: 'CustomAction::Request'), class: "btn btn-primary"

@@ -32,7 +32,11 @@ Rails.application.routes.draw do
     collection do
       get :not_found
     end
-    resources :custom_actions
+    resources :custom_actions do
+      member do
+        post :sort
+      end
+    end
   end
   resources :backpacks
 

@@ -21,7 +21,7 @@ class Webhook < ApplicationRecord
   belongs_to :account, optional: true
 
   has_many :backpacks
-  has_many :custom_actions
+  has_many :custom_actions, -> { order(position: :asc) }
 
   before_create :set_init_data
 

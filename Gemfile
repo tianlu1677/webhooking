@@ -19,7 +19,6 @@ gem 'redis', require: ["redis", "redis/connection/hiredis"]
 gem 'redis-objects'
 gem 'redis-rails'
 gem 'liquid' # 用于渲染response 的内容
-gem 'rails_sortable'
 gem 'rack-cors'
 gem 'mini_racer'
 
@@ -32,6 +31,7 @@ gem 'ransack'
 gem 'simple_form'
 gem "slim-rails"
 gem 'paranoia'
+gem 'acts_as_list'
 # sidekiq
 gem 'sidekiq', '~> 5.2.2'
 gem 'sidekiq-cron'

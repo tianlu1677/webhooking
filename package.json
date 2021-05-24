@@ -28,6 +28,7 @@
     "select2": "^4.0.13",
     "sortablejs": "^1.13.0",
     "stimulus": "^2.0.0",
+    "stimulus-sortable": "^2.1.0",
     "tether": "^1.4.7",
     "toastr": "^2.1.4"
   },

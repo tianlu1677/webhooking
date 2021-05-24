@@ -1,34 +1,39 @@
 class CustomActionsController < ApplicationController
   before_action :set_webhook
-  before_action :set_custom_action, only: %i[show edit update destroy]
+  before_action :set_custom_action, only: %i[show edit update destroy sort]
 
   # GET /custom_actions or /custom_actions.json
   def index
-    @custom_actions = @webhook.custom_actions.order(:sort).all
+    @custom_actions = @webhook.custom_actions.all
   end
 
   # GET /custom_actions/1 or /custom_actions/1.json
   def show; end
 
+  def sort
+    @custom_action.insert_at(params[:position].to_i)
+    head :ok
+  end
+
   # GET /custom_actions/new
   def new
-    @custom_action = CustomAction.new
+    @custom_action = @webhook.custom_actions.new(category: params[:category])
+    @url = webhook_custom_actions_path(@webhook.uuid)
   end
 
   # GET /custom_actions/1/edit
   def edit
     @request_variables = @custom_action.could_used_variable_names
-
-
+    @url = new_webhook_custom_action_path(@webhook.uuid, @custom_action)
   end
 
   # POST /custom_actions or /custom_actions.json
   def create
-    @custom_action = CustomAction.new(custom_action_params)
+    @custom_action = @webhook.custom_actions.create(custom_action_params)
 
     respond_to do |format|
       if @custom_action.save
-        format.html { redirect_to @custom_action, notice: 'Custom action was successfully created.' }
+        format.html { redirect_to [@webhook, @custom_action.becomes(CustomAction)], notice: 'Custom action was successfully created.' }
         format.json { render :show, status: :created, location: @custom_action }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -76,10 +81,10 @@ class CustomActionsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def custom_action_params
-    if params[:custom_action_variable]
-      params.require(:custom_action_variable).permit(:category, :title, :input_from_variable, :input_name, :input_category, :input_filter_val)
-    elsif params[:custom_action_request]
-      params.require(:custom_action_request).permit(:category, :title, :input_url, :input_method, :input_content_type, :input_body)
+    if params[:custom_action][:category] == 'CustomAction::Variable'
+      params.require(:custom_action).permit(:category,:position,  :title, :input_from_variable, :input_name, :input_category, :input_filter_val)
+    elsif params[:custom_action][:category] == 'CustomAction::Request'
+      params.require(:custom_action).permit(:category, :position, :title, :input_url, :input_method, :input_content_type, :input_body)
     end
   end
 end
