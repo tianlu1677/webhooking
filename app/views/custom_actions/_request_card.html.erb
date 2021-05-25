@@ -1,9 +1,13 @@
 <div class="card">
   <div class="card-body">
-    <h5 class='card-title'>发起请求 </h5>
+    <h5 class='card-title'>发起请求 <%=variable.title %></h5>
     <div class="card-text">
-    <p><span class='badge bg-success'><%= variable.input_method%></span></p>
-    <p><span class='badge bg-info'>地址</span><%= variable.input_url%></p>
+      <p><span class='badge bg-info'><%= variable.input_url%></span></p>
+      <p>
+        <span class='badge bg-success'><%= variable.input_method%>
+          <%= variable.input_trigger_condition.nil? ? ", 一定执行" : ", #{variable.input_trigger_condition} 变量有值执行"%></span>
+      </p>
+    </div>
   </div>
-  </div>
+  <%= render 'footer', variable: variable %>
 </div>

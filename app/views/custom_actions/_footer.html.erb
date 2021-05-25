@@ -1,0 +1,10 @@
+<div class="card-footer">
+    <div class="row">
+      <div class="col">
+        <%= link_to 'Edit', edit_webhook_custom_action_path(id: variable.id) %>
+      </div>
+      <div class="col">
+        <%= link_to 'Destroy', webhook_custom_action_path(id: variable.id), data: { confirm: 'Are you sure?' }, method: :delete %>
+      </div>
+    </div>
+  </div>
