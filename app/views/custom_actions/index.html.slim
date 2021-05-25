@@ -46,3 +46,12 @@ div[style='width: 1200px']
             h5 发起请求
           .card-text 向设定地址发起一次请求
           =link_to "新建", new_webhook_custom_action_path(@webhook.uuid, category: 'CustomAction::Request'), class: "btn btn-primary"
+
+    .col-4
+      .card
+        .card-body
+          .card-title
+            h5 脚本编辑
+          .card-text 脚本编辑
+          =link_to "新建", new_webhook_custom_action_path(@webhook.uuid, category: 'CustomAction::Script'), class: "btn btn-primary"
+      

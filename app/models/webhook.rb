@@ -15,6 +15,7 @@
 #  resp_body         :string           default("")
 #  resp_content_type :string           default("text/plain")
 #  cors_enabled      :boolean          default(TRUE)
+#  script_content    :text
 #
 class Webhook < ApplicationRecord
   belongs_to :account, optional: true
@@ -23,6 +24,7 @@ class Webhook < ApplicationRecord
   has_many :custom_actions, -> { order(position: :asc) }
 
   before_create :set_init_data
+
   def set_init_data
     self.uuid = SecureRandom.uuid.gsub('-', '')
   end

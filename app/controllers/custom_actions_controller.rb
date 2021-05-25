@@ -80,6 +80,15 @@ class CustomActionsController < ApplicationController
     end
   end
 
+  def exec_script
+    @custom_action = CustomAction.find(params[:custom_action_id])
+    @request_variables = @custom_action.could_used_variable_names
+    content = params[:content] || @custom_action.script_content
+
+    answer = @custom_action.execute({ script_content: content }, {})
+    render json: { answer: answer }
+  end
+
   private
 
   def set_webhook
@@ -102,12 +111,15 @@ class CustomActionsController < ApplicationController
     # elsif params[:custom_action_request]
     #   params.require(:custom_action_request).permit(:category, :position, :title, :input_url, :input_method, :input_content_type, :input_body)
     # end
-    byebug
 
     if params[:custom_action][:category] == 'CustomAction::Variable'
+    category = params[:custom_action][:category]
+    if category == 'CustomAction::Variable'
       params.require(:custom_action).permit(:category, :position,  :title, :input_from_variable, :input_name, :input_category, :input_filter_val)
-    elsif params[:custom_action][:category] == 'CustomAction::Request'
+    elsif category == 'CustomAction::Request'
       params.require(:custom_action).permit(:category, :position, :title, :input_url, :input_method, :input_content_type, :input_body)
+    elsif category == 'CustomAction::Script'
+      params.require(:custom_action).permit(:category, :position, :title, :script_content)
     end
   end
 end

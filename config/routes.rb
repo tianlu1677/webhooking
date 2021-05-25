@@ -26,6 +26,8 @@ Rails.application.routes.draw do
       post :clear_backpacks
       post :left_list_item
       post :reset
+      post :run_script
+      post :exec_script
     end
     collection do
       get :not_found
@@ -36,6 +38,9 @@ Rails.application.routes.draw do
       end
       member do
         post :sort
+      end
+      collection do
+        post :exec_script
       end
     end
   end
