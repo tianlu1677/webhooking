@@ -37,6 +37,7 @@ $(document).on("turbo:load", () => {
   console.log("turbo!")
   const clipboard = new ClipboardJS('.copy')
   clipboard.on('success', function(e) {
+    e.preventDefault();
     console.info('Action:', e.action);
     console.info('Text:', e.text);
     console.info('Trigger:', e.trigger);

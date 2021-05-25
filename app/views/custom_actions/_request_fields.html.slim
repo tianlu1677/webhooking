@@ -1,6 +1,13 @@
 = f.hidden_field :category
 .row.mb-3
   .col-2.col-form-label
+    = f.label :input_trigger_condition, "触发变量"
+  .col-10
+    = f.select :input_trigger_condition, @request_variables, {include_blank: "一定触发"}, {class: 'form-select'}
+    p 变量有值, 则触发
+
+.row.mb-3
+  .col-2.col-form-label
     = f.label :input_url, "请求地址"
   .col-10
     = f.text_field :input_url, class: 'form-control'

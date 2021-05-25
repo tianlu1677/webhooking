@@ -9,9 +9,16 @@ export default class extends Controller {
   }
 
   showPanel(category, need_clean_filter_value = true) {
+    if (need_clean_filter_value){
+      this.filterValueTarget.value = ''
+    }
     var show = 'flex'
     switch (category) {
       case "render":
+        if(need_clean_filter_value){
+          this.filterValueTarget.value = `{{${this.incomingVariableTarget.value}}}`
+        }
+
         this.categoryInfoTarget.innerHTML = '使用 <a href="https://liquid.bootcss.com/">liquid 模版</a>语法, 即用{{}} 包裹变量, 如 "My {{request.method}}" 会渲染为 My GET </p>'
         show = 'none'
         break;
@@ -24,15 +31,13 @@ export default class extends Controller {
       default:
         break;
     }
-    if (need_clean_filter_value){
-      this.filterValueTarget.value = ''
-    }
+
     this.sourceVariablePanelTarget.style.display = show
 
     if (category === 'render'){
       this.tryPanelTarget.style.display = 'none'
     }else{
-      this.tryPanelTarget.style.display = 'block'
+      this.tryPanelTarget.style.display = 'flex'
     }
 
   }

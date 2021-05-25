@@ -34,6 +34,17 @@ class CustomAction < ApplicationRecord
     keys + added_variables
   end
 
+  def fetch_variable(from_variable, dict)
+    arr = if from_variable.start_with?('request')
+            from_variable.split('.')[1..-1] # 排除 Request
+          else
+            from_variable.split('.')
+    end
+    dict.dig(*arr)
+  rescue StandardError
+    nil
+  end
+
   private
 
   # def cal_sort

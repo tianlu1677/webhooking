@@ -37,16 +37,7 @@ class CustomAction
 
     private
 
-    def fetch_variable(from_variable, dict)
-      arr = if from_variable.start_with?('request')
-              from_variable.split('.')[1..-1] # 排除 Request
-            else
-              from_variable.split('.')
-      end
-      dict.dig(*arr)
-    rescue StandardError
-      nil
-    end
+
 
     def calc_new_variable_answer(variable, category, filter_val)
       case category
