@@ -40,7 +40,6 @@ class CustomActionsController < ApplicationController
 
   # POST /custom_actions or /custom_actions.json
   def create
-    byebug
     @custom_action = @webhook.custom_actions.create(custom_action_params)
 
     respond_to do |format|
