@@ -1,36 +1,55 @@
-h1 Listing custom_actions
 
-table
-  thead
-    tr
-      th Title
-      th Description
-      th Position
-      th Category
-      th
-      th
-      th
-      th
+.card
+  .card-header
+    h5 自定义动作
+    .row
+      .col-4
+        .card
+          .card-body
+            .card-title
+              h5 变量提取
+            .card-text 从常规变量中通过 正则、JSONPath, 或者模版渲染, 提取出新的变量
+            =link_to "新建", new_webhook_custom_action_path(@webhook.uuid, category: 'CustomAction::Variable'), class: "btn btn-primary"
+      .col-4
+        .card
+          .card-body
+            .card-title
+              h5 发起请求
+            .card-text 向设定地址发起一次请求
+            =link_to "新建", new_webhook_custom_action_path(@webhook.uuid, category: 'CustomAction::Request'), class: "btn btn-primary"
 
-  tbody data-controller="drag"  data-drag-url="/webhooks/#{@webhook.uuid}/custom_actions/:id/sort"
-    - @custom_actions.each do |custom_action|
-      tr data-id="#{custom_action.id}"
-        td = custom_action.title
-        td = custom_action.description
-        td = custom_action.position
-        td = custom_action.category
-        td
-          - if custom_action.is_a? CustomAction::Variable
-            = render "variable_card", variable: custom_action
-          - elsif custom_action.is_a? CustomAction::Request
-            = render "request_card", variable: custom_action
-        td = link_to 'Show', webhook_custom_action_path(id: custom_action.id)
-        td = link_to 'Edit', edit_webhook_custom_action_path(id: custom_action.id)
-        td = link_to 'Destroy', webhook_custom_action_path(id: custom_action.id), data: { confirm: 'Are you sure?' }, method: :delete
+  .card-body
+    table.table.table-responsive-sm
+      thead
+        tr
+          th Title
+          th Description
+          th Position
+          th Category
+          th
+          th
+          th
+          th
+
+      tbody data-controller="drag"  data-drag-url="/webhooks/#{@webhook.uuid}/custom_actions/:id/sort"
+        - @custom_actions.each do |custom_action|
+          tr data-id="#{custom_action.id}"
+            td = custom_action.title
+            td = custom_action.description
+            td = custom_action.position
+            td = custom_action.category
+            td
+              - if custom_action.is_a? CustomAction::Variable
+                = render "variable_card", variable: custom_action
+              - elsif custom_action.is_a? CustomAction::Request
+                = render "request_card", variable: custom_action
+            td = link_to 'Show', webhook_custom_action_path(id: custom_action.id)
+            td = link_to 'Edit', edit_webhook_custom_action_path(id: custom_action.id)
+            td = link_to 'Destroy', webhook_custom_action_path(id: custom_action.id), data: { confirm: 'Are you sure?' }, method: :delete
 
 
-= link_to 'New Custom action', new_custom_action_path
-div[style='width: 1200px']
+/ = link_to 'New Custom action', new_custom_action_path, class: 'btn btn-primary'
+/ div[style='width: 1200px']
   .row
     .col-4
       .card
@@ -47,7 +66,7 @@ div[style='width: 1200px']
           .card-text 向设定地址发起一次请求
           =link_to "新建", new_webhook_custom_action_path(@webhook.uuid, category: 'CustomAction::Request'), class: "btn btn-primary"
 
-    .col-4
+    / .col-4
       .card
         .card-body
           .card-title

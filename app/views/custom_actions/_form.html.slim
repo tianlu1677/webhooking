@@ -24,6 +24,6 @@
       == render 'request_fields', f: f
 
     .row
-      .col-2
       .col-10
-        = f.submit
+      .col-2
+        = f.submit "保存", class: 'btn btn-success pull-right'
