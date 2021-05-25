@@ -4,7 +4,7 @@ div[data-controller='variable-calc-panel']
     .col-2.col-form-label
       = f.label :input_from_variable, '数据来源变量'
     .col-10
-      = f.select :input_from_variable, @request_variables, {}, class: 'form-select', data: {'variable-calc-panel-target' => 'incomingVariable'}
+      = f.select :input_from_variable, @request_variables, {}, class: 'form-select', data: {'variable-calc-panel-target' => 'incomingVariable', action: 'variable-calc-panel#changeFromVariable'}
 
   .row.mb-3
     .col-2.col-form-label
@@ -27,10 +27,10 @@ div[data-controller='variable-calc-panel']
 
     .row.mb-3[data-variable-calc-panel-target='tryPanel']
       .col-2
-      .col-2 = link_to "试运算", "#", data: {'action' => 'variable-calc-panel#try'}
+      .col-2 = link_to "使用运算方式结果试运算", "#", data: {'action' => 'variable-calc-panel#try'}
       .col-8
         .row.mb-3
-          .col-2.col-form-label www
-          .col-10
-            input[value='xxx', data-variable-calc-panel-target='mockData']
-            p[data-variable-calc-panel-target='mockAnswer']
+          .col-4.col-form-label[data-variable-calc-panel-target='mockTitle'] = "#{@custom_action.input_from_variable} 模拟数据"
+          .col-8
+            input.form-control[value='xxx', data-variable-calc-panel-target='mockData']
+            p[data-variable-calc-panel-target='mockAnswer'] 模拟运行结果
