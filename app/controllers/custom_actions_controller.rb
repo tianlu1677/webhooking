@@ -40,6 +40,7 @@ class CustomActionsController < ApplicationController
 
   # POST /custom_actions or /custom_actions.json
   def create
+    byebug
     @custom_action = @webhook.custom_actions.create(custom_action_params)
 
     respond_to do |format|
@@ -83,7 +84,7 @@ class CustomActionsController < ApplicationController
     @custom_action = CustomAction.find(params[:custom_action_id])
     @request_variables = @custom_action.could_used_variable_names
     content = params[:content] || @custom_action.script_content
-    
+
     answer = @custom_action.execute({ script_content: content }, {})
     render json: { answer: answer }
   end
@@ -105,12 +106,19 @@ class CustomActionsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def custom_action_params
-    category = params[:custom_action][:category]   
+    # if params[:custom_action_variable]
+    #   params.require(:custom_action_variable).permit(:category, :position,  :title, :input_from_variable, :input_name, :input_category, :input_filter_val)
+    # elsif params[:custom_action_request]
+    #   params.require(:custom_action_request).permit(:category, :position, :title, :input_url, :input_method, :input_content_type, :input_body)
+    # end
+
+    if params[:custom_action][:category] == 'CustomAction::Variable'
+    category = params[:custom_action][:category]
     if category == 'CustomAction::Variable'
       params.require(:custom_action).permit(:category, :position,  :title, :input_from_variable, :input_name, :input_category, :input_filter_val)
     elsif category == 'CustomAction::Request'
       params.require(:custom_action).permit(:category, :position, :title, :input_url, :input_method, :input_content_type, :input_body)
-    elsif category == 'CustomAction::Script'      
+    elsif category == 'CustomAction::Script'
       params.require(:custom_action).permit(:category, :position, :title, :script_content)
     end
   end

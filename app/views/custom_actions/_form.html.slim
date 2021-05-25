@@ -1,4 +1,5 @@
-  = form_with  scope: :custom_action, url: @url, method: @custom_action.id.present? ? 'PUT' : 'POST',  local: true,  html: { style:  "width: 900px"} do |f|
+  = form_with  scope: :custom_action, url: @url, local: true, method: (@custom_action.id.nil? ? "POST" : "PUT"),  html: { style:  "width: 900px"} do |f|
+
     - if @custom_action.errors.any?
       #error_explanation
         .alert.alert-info[role="alert"]
@@ -18,7 +19,7 @@
     - if @custom_action.is_a? CustomAction::Variable
       == render 'variable_fields', f: f
     - if @custom_action.is_a? CustomAction::Script
-      = render 'script_fields', f: f  
+      = render 'script_fields', f: f
     - else
       == render 'request_fields', f: f
 
