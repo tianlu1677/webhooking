@@ -1,11 +1,12 @@
-h1 Editing custom_action
-
 .row
-  .col
-    == render 'form'
-
+  .col-md-7
+    .card
+      .card-header
+        h4 编辑自定义内容
+      .card-body
+        == render 'form'  
     => link_to 'Show', webhook_custom_action_path(@webhook.uuid, @custom_action)
     '|
     =< link_to 'Back', webhook_custom_actions_path(@webhook.uuid)
-  .col
+  .col-md-5
     = render "incoming_variable_list"

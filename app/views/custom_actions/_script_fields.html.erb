@@ -4,19 +4,41 @@
 <code id="oldContent" class="visually-hidden">
   <%= @custom_action.script_content %>
 </code>
-<div>
-  <h4>JS脚本编辑内容</h4>
-  <p>从上层传递过来的变量，通过 window.params.x 可访问到</p>
-</div>
-<div >
-  <div id="editor" class="form-control" style="width: 600px; height: 300px">
-  </div>
-  <div id="answer"></div>
-  <% if @custom_action.id.present? %>
-    <button type="button" class="btn btn-secondary" onclick="runScript()" >执行</button>
-  <% end %>
-</div>
 
+<div class="row">
+  <div class="col-md-5">
+    <div>
+      <h6>JS内容编辑</h6>
+      要求最后必须返回以这个js函数, 例如
+      <pre>
+        let method = window.params.method;
+        function goPage() {
+          if(method === 'POST') {
+            return 1;
+          } else {
+            return 2;
+          }
+        }
+
+        return goPage();
+      </pre>
+      <p>从上层传递过来的变量，通过 window.params.x 可访问到, 如</p>
+      <code>window.params.ip</code> 可得到ip
+      <code>window.params.headers.host</code> 可得到headers.host
+    </div>
+  </div>
+
+  <div class="col-md-7">
+    <div >
+      <div id="editor" class="form-control" style="width: 600px; height: 300px">
+      </div>
+      <div id="answer"></div>
+      <% if @custom_action.id.present? %>
+        <button type="button" class="btn btn-secondary" onclick="runScript()" >执行</button>
+      <% end %>
+    </div>
+  </div>
+</div>
 
 <script type="text/javascript">
     var JavaScriptMode = ace.require("ace/mode/javascript").Mode;
@@ -32,7 +54,7 @@
       behavioursEnabled: false,
     });    
     
-    editor.session.setValue($('#oldContent').text())
+    editor.session.setValue($('#oldContent').text().trim())
     editor.session.on('change', function(delta) {
       // console.log('delta', delta)
       console.log(editor.getValue());
