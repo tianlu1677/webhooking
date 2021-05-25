@@ -23,6 +23,9 @@ class CustomAction < ApplicationRecord
   def could_used_variable_names
     keys = webhook.default_template_param_keys
 
+    if id.nil?
+      self.position = webhook.custom_actions.last&.position.to_i + 1
+    end
     return keys if position.to_i.zero?
 
     added_variables = webhook.custom_actions.where("category = 'CustomAction::Variable' and position < ?", position).all.map {|x| x.input_name}
