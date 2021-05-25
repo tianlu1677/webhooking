@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_24_031214) do
+ActiveRecord::Schema.define(version: 2021_05_25_083107) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,17 @@ ActiveRecord::Schema.define(version: 2021_05_24_031214) do
     t.string "media_type"
     t.text "raw_content"
     t.index ["webhook_id"], name: "index_backpacks_on_webhook_id"
+  end
+
+  create_table "custom_action_logs", force: :cascade do |t|
+    t.integer "webhook_id"
+    t.integer "from_custom_action_id"
+    t.integer "next_custon_action_id"
+    t.integer "backpack_id"
+    t.jsonb "original_params"
+    t.jsonb "custom_params"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "custom_actions", force: :cascade do |t|

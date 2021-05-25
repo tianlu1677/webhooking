@@ -27,6 +27,7 @@
 class Backpack < ApplicationRecord
   belongs_to :account, optional: true
   belongs_to :webhook
+  has_many :custom_action_logs
 
   before_create :set_init_data
   after_commit :send_websocket_notification, only: [:create]
@@ -97,6 +98,8 @@ class Backpack < ApplicationRecord
     params = {}
     webhook.custom_actions.order(:position).each do |custom_action|
       original_params, params = custom_action.execute original_params, params
+      CustomActionLog.log!(self, custom_action, original_params: original_params, custom_params: params)
+      [original_params, params]
     end
   end
 

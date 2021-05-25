@@ -15,7 +15,7 @@
 #
 class CustomAction
   class Request < ::CustomAction
-    store_accessor :input_dict, :url, :method, :content_type, :trigger_variable, :body, prefix: 'input'
+    store_accessor :input_dict, :url, :method, :content_type, :trigger_variable, :body, :trigger_condition,  prefix: 'input'
     validates_presence_of :input_url
 
     def build_real_body(original_params, custom_params)
@@ -31,6 +31,10 @@ class CustomAction
     end
 
     def execute(original_params, custom_params = {})
+      if input_trigger_condition
+        return if fetch_variable(input_trigger_condition, original_params.merge(custom_params)).blank?
+      end
+
       dict = {
         url: build_real_url(original_params, custom_params),
         method: input_method,

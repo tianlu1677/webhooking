@@ -19,7 +19,7 @@
     - if @custom_action.is_a? CustomAction::Variable
       == render 'variable_fields', f: f
     - elsif @custom_action.is_a? CustomAction::Script
-      = render 'script_fields', f: f
+      == render 'script_fields', f: f
     - else
       == render 'request_fields', f: f
 

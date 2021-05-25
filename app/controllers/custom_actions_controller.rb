@@ -109,7 +109,7 @@ class CustomActionsController < ApplicationController
     if category == 'CustomAction::Variable'
       params.require(:custom_action).permit(:category, :position,  :title, :input_from_variable, :input_name, :input_category, :input_filter_val)
     elsif category == 'CustomAction::Request'
-      params.require(:custom_action).permit(:category, :position, :title, :input_url, :input_method, :input_content_type, :input_body)
+      params.require(:custom_action).permit(:category, :position, :title, :input_url, :input_method, :input_trigger_condition, :input_content_type, :input_body)
     elsif category == 'CustomAction::Script'
       params.require(:custom_action).permit(:category, :position, :title, :script_content)
     end

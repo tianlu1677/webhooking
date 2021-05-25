@@ -17,12 +17,13 @@ div[data-controller='variable-calc-panel']
     .col-10
       = f.select :input_category, [["JsonPath", "jsonpath"], ["regex", "regex"], ['render', 'render'], ['jscript', 'jscript']],{},   class: 'form-select', data: {'variable-calc-panel-target'=>'category', action: 'variable-calc-panel#select'}
       div[data-variable-calc-panel-target='categoryInfo']
-    = render "variable_jscript_edit"  
+    div[data-variable-calc-panel-target='jseditor']
+      = render "variable_jscript_edit"  
   .row.mb-3
     .col-2.col-form-label
       = f.label :filter_val, '运算内容'
     .col-10
-      = f.text_field :input_filter_val, class: 'form-control', data:  {'variable-calc-panel-target'=>'filterValue'}
+      = f.text_area :input_filter_val, class: 'form-control', data:  {'variable-calc-panel-target'=>'filterValue'}
 
 
     .row.mb-3[data-variable-calc-panel-target='tryPanel']

@@ -37,15 +37,14 @@ class CustomAction
 
     private
 
-    def fetch_variable(from_variable, dict)
-      arr = if from_variable.start_with?('request')
-              from_variable.split('.')[1..-1] # 排除 Request
-            else
-              from_variable.split('.')
-      end
-      dict.dig(*arr)
-    rescue StandardError
-      nil
+    private
+    def exec_jscript(variable, filter_val)
+      # binding.pry
+      context = MiniRacer::Context.new
+      context.attach("request_func", proc{ @original_params } )
+      context.eval("request = request_func()")
+      answer = context.eval(filter_val)
+      answer.to_s
     end
 
     def calc_new_variable_answer(variable, category, filter_val)
@@ -62,8 +61,7 @@ class CustomAction
         template = Liquid::Template.parse(filter_val)
         template.render({"request" => @original_params}.merge(@custom_params))
       when 'jscript'
-        
-
+        exec_jscript(variable, filter_val)
       end
     end
   end

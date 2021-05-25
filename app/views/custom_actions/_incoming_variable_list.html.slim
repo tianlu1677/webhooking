@@ -1,3 +1,4 @@
+
 .card
   .card-header
     p  变量列表, 点击即复制
@@ -6,5 +7,5 @@
       - @request_variables.each do |str|
         li
           p
-            a.link.copy[data-clipboard-text="#{str}" href='']
+            a.link.copy[data-clipboard-text="#{str}" href='#']
               = str

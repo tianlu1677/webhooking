@@ -3,7 +3,7 @@ import { Liquid } from 'liquidjs'
 import jp from 'jsonpath/jsonpath.min'
 
 export default class extends Controller {
-  static targets = ["category", "categoryInfo", 'incomingVariable', 'sourceVariablePanel', 'filterValue', 'mockData', 'mockAnswer', 'tryPanel']
+  static targets = ["category", "categoryInfo", 'incomingVariable', 'sourceVariablePanel', 'filterValue', 'mockData', 'mockAnswer', 'tryPanel', 'jseditor']
   connect() {
     this.showPanel(this.categoryTarget.value, false)
   }
@@ -31,31 +31,39 @@ export default class extends Controller {
       this.filterValueTarget.value = ''
     }
     this.sourceVariablePanelTarget.style.display = show
-
-    if (category === 'render' || category === 'jscript'){
+    console.log('category', category)
+    if (category === 'render'){
       this.tryPanelTarget.style.display = 'none'
-      this.showAce()
+      this.jseditorTarget.style.display = 'none'
+    }else if(category === 'jscript') {
+      this.jseditorTarget.style.display = 'block'
+      this.showAce()    
     }else{
       this.tryPanelTarget.style.display = 'block'
+      this.jseditorTarget.style.display = 'none'
     }
 
   }
 
   showAce() {
-    var JavaScriptMode = ace.require("ace/mode/javascript").Mode;
+    console.log('xxxx')
+    // var JavaScriptMode = ace.require("ace/mode/javascript").Mode;
     var editor = ace.edit("editor");
-    editor.session.setMode(new JavaScriptMode());
+    // editor.session.setMode(new JavaScriptMode());
+    editor.session.setMode("ace/mode/javascript");
     ace.require("ace/ext/language_tools");
     editor.setOptions({
       enableBasicAutocompletion: true,
       enableSnippets: true,
+      selectionStyle: "text",
       enableLiveAutocompletion: true,
-      useWrapMode: true,   // wrap text to view
-      indentedSoftWrap: false, 
-      behavioursEnabled: false,
+      // useWrapMode: true,   // wrap text to view
+      // indentedSoftWrap: false, 
+      // behavioursEnabled: false,
     });    
     
-    editor.session.setValue($('#custom_action_input_filter_val').val().trim())
+    editor.session.setValue($('#raw_code').text().trim())
+    editor.session.setValue($('#custom_action_input_filter_val').val())
     editor.session.on('change', function(delta) {
       // console.log('delta', delta)
       console.log(editor.getValue());
