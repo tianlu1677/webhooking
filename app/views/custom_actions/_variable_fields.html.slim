@@ -1,6 +1,6 @@
 div[data-controller='variable-calc-panel']
   = f.hidden_field :category
-  .row.mb-3
+  .row.mb-3[data-variable-calc-panel-target='sourceVariablePanel']
     .col-2.col-form-label
       = f.label :input_from_variable, '数据来源变量'
     .col-10
@@ -22,9 +22,15 @@ div[data-controller='variable-calc-panel']
     .col-2.col-form-label
       = f.label :filter_val, '运算内容'
     .col-10
-      = f.text_field :input_filter_val, class: 'form-control'
+      = f.text_field :input_filter_val, class: 'form-control', data:  {'variable-calc-panel-target'=>'filterValue'}
 
 
-    .row.mb-3
+    .row.mb-3[data-variable-calc-panel-target='tryPanel']
       .col-2
       .col-2 = link_to "试运算", "#", data: {'action' => 'variable-calc-panel#try'}
+      .col-8
+        .row.mb-3
+          .col-2.col-form-label www
+          .col-10
+            input[value='xxx', data-variable-calc-panel-target='mockData']
+            p[data-variable-calc-panel-target='mockAnswer']

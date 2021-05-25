@@ -17,6 +17,8 @@
     "clipboard": "^2.0.6",
     "jquery": "^3.5.1",
     "jquery-ui-dist": "^1.12.1",
+    "jsonpath": "^1.1.1",
+    "liquidjs": "^9.25.0",
     "moment": "^2.26.0",
     "perfect-scrollbar": "^1.5.0",
     "popper.js": "^1.16.1",

@@ -95,7 +95,7 @@ class Backpack < ApplicationRecord
   def run_custom_actions
     original_params = default_template_params
     params = {}
-    webhook.custom_actions.order(:sort).each do |custom_action|
+    webhook.custom_actions.order(:position).each do |custom_action|
       original_params, params = custom_action.execute original_params, params
     end
   end

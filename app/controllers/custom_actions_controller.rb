@@ -40,6 +40,7 @@ class CustomActionsController < ApplicationController
 
   # POST /custom_actions or /custom_actions.json
   def create
+    byebug
     @custom_action = @webhook.custom_actions.create(custom_action_params)
 
     respond_to do |format|
@@ -101,6 +102,7 @@ class CustomActionsController < ApplicationController
     # elsif params[:custom_action_request]
     #   params.require(:custom_action_request).permit(:category, :position, :title, :input_url, :input_method, :input_content_type, :input_body)
     # end
+    byebug
 
     if params[:custom_action][:category] == 'CustomAction::Variable'
       params.require(:custom_action).permit(:category, :position,  :title, :input_from_variable, :input_name, :input_category, :input_filter_val)

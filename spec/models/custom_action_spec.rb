@@ -8,10 +8,10 @@
 #  custom_action :string
 #  webhook_id    :bigint           not null
 #  category      :string
-#  sort          :integer
 #  input_dict    :jsonb
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  position      :integer
 #
 require 'rails_helper'
 

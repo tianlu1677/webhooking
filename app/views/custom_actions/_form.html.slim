@@ -1,4 +1,4 @@
-  = form_with  scope: :custom_action, url: @url, local: true,  html: { style:  "width: 900px"} do |f|
+  = form_with  scope: :custom_action, url: @url, local: true, method: (@custom_action.id.nil? ? "POST" : "PUT"),  html: { style:  "width: 900px"} do |f|
     - if @custom_action.errors.any?
       #error_explanation
         .alert.alert-info[role="alert"]
