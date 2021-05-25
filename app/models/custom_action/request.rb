@@ -31,9 +31,9 @@ class CustomAction
     end
 
     def execute(original_params, custom_params = {})
-      if input_trigger_condition
-        return if fetch_variable(input_trigger_condition, original_params.merge(custom_params)).blank?
-      end
+      # if input_trigger_condition
+      #   return if fetch_variable(input_trigger_condition, original_params.merge(custom_params)).blank?
+      # end
 
       dict = {
         url: build_real_url(original_params, custom_params),

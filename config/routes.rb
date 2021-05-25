@@ -44,7 +44,11 @@ Rails.application.routes.draw do
       end
     end
   end
-  resources :backpacks
+  resources :backpacks do
+    member do
+      get :custom_action_logs
+    end
+  end
 
   get 'webhooks/:id/:backpack_id', to: 'webhooks#show'
 

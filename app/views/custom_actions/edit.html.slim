@@ -2,7 +2,8 @@
   .col-md-7
     .card
       .card-header
-        h4 编辑自定义内容
+        h4 编辑自定义内容 
+        = link_to "返回列表", webhook_custom_actions_path(@webhook)
       .card-body
         == render 'form'  
     => link_to 'Show', webhook_custom_action_path(@webhook.uuid, @custom_action)

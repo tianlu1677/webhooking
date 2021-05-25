@@ -1,7 +1,7 @@
 
 .card
   .card-header
-    h5 自定义动作
+    h5 = link_to "webhook自定义动作[#{@webhook.uuid}]", webhook_path(@webhook)
     .row
       .col-4
         .card
@@ -16,7 +16,7 @@
             .card-title
               =link_to "新建发起请求", new_webhook_custom_action_path(@webhook.uuid, category: 'CustomAction::Request'), class: "btn btn-primary"
             .card-text 向设定地址发起一次请求
-    = link_to "Try", "#{@webhook.request_url}?now=#{Time.now}&hello=world", method: :post, class: 'btn btn-warning btn-sm'
+    = link_to "Try POST #{@webhook.request_url}?now=#{Time.now}&hello=world", "#{@webhook.request_url}?now=#{Time.now}&hello=world", method: :post, class: 'btn btn-warning btn-sm'
   .card-body
     table.table.table-responsive-sm
       thead
@@ -29,7 +29,6 @@
           th
           th
           th
-
       tbody data-controller="drag"  data-drag-url="/webhooks/#{@webhook.uuid}/custom_actions/:id/sort"
         - @custom_actions.each do |custom_action|
           tr data-id="#{custom_action.id}"

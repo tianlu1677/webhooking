@@ -1,0 +1,15 @@
+<div class="card">
+  <div class="card-header"><i class="fa fa-align-justify"></i></div>
+  <div class="card-body">
+    <table class="table table-responsive-sm">
+      <tbody>
+      <% @custom_action_logs.each do |log| %>
+        <tr>
+          <td><%= log.id %></td>
+          <td><%= log.created_at %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
