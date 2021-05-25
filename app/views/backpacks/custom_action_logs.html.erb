@@ -2,14 +2,68 @@
   <div class="card-header"><i class="fa fa-align-justify"></i></div>
   <div class="card-body">
     <table class="table table-responsive-sm">
+      <thead>
+        <tr>
+           <th>
+            LogID
+          </th>
+          <th>
+            created at
+          </th>          
+          <th>
+            action title
+          </th>
+
+          <th>
+            action variable
+          </th>
+          <th>
+            action original params
+          </th>
+          <th>
+            action custom params
+          </th>
+        </tr>
+      </thead>
       <tbody>
       <% @custom_action_logs.each do |log| %>
+       
         <tr>
           <td><%= log.id %></td>
           <td><%= log.created_at %></td>
+          <% if from_custom_action = log.from_custom_action %>
+            <td><%= link_to from_custom_action.title, edit_webhook_custom_action_path(@webhook.uuid, from_custom_action) %></td>
+            <td>
+              <p> <%= from_custom_action.category %></p>
+              <p> <%= from_custom_action.input_dict %></p>                
+            </td>
+          <% else %>
+            <td>-</td>
+            <td>-</td>
+          <% end %>
+          <td style="word-break: break-all;">
+            <a class="" data-bs-toggle="collapse" href="#log_origin<%= log.id  %>" role="button" aria-expanded="false" aria-controls="collapseExample">
+              <%= truncate(log.original_params.to_s, length: 100) %>
+            </a>
+
+            <div class="collapse" id="log_origin<%= log.id  %>">
+              <div class="card card-body">
+                <% (log.original_params || {}).each do |k,v | %>
+                  <span>{ <%= k %> : <%= v %> }</p>  
+                <% end %>
+              </div>
+            </div>
+          </td>
+          <td>
+            <%= log.custom_params %>
+          </td>
         </tr>
       <% end %>
       </tbody>
     </table>
   </div>
 </div>
+
+<script>
+
+</script>

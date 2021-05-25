@@ -2,6 +2,7 @@
   <div class="card-header">
     <i class="fa fa-align-justify"></i>
     <h6>Request detail</h6>
+    <%= link_to  "custom action log", custom_action_logs_backpack_path(backpack.uuid), class: 'btn btn-warning btn-sm' if backpack.custom_action_logs.exists? %>  
   </div>
   <div class="card-body">
     <table class="table table-responsive-sm table-sm table-borderless table-striped">

@@ -1,8 +1,8 @@
 class CustomActionLog < ApplicationRecord
   belongs_to :webhook, optional: true
   belongs_to :backpack, optional: true
-  has_one :from_custom_action, class_name: 'CustomAction'
-  has_one :next_custom_action, class_name: 'CustomAction'
+  belongs_to :from_custom_action, class_name: 'CustomAction', optional: true
+  belongs_to :next_custom_action, class_name: 'CustomAction',  optional: true
 
   class << self
     def log!(backpack, custom_action, original_params: {}, custom_params: {})
