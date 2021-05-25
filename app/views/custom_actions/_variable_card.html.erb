@@ -1,9 +1,18 @@
 <div class="card">
   <div class="card-body">
-    <h5 class='card-title'>获取变量 <%= variable.input_name %></h5>
+    <h5 class='card-title'>变量提取 <%= variable.title %></h5>
     <div class="card-text">
-    <p><span class='badge bg-success'><%= variable.input_category%></span></p>
-    <p><span class='badge bg-info'>获取值</span><%= variable.input_filter_val%></p>
+      <p>
+        <% if variable.input_category != 'render' %>
+          <span class='badge '>
+            从变量 <%= variable.input_from_variable%> 提取
+          </span>
+        <%end%>
+      </p>
+      <p><span class='badge bg-info'><%= variable.input_name%> = <%= variable.input_filter_val%></span> <span class='badge bg-success'> (<%= variable.input_category%>)</span></p>
+    </div>
   </div>
-  </div>
+
+  <%= render 'footer', variable: variable %>
+
 </div>

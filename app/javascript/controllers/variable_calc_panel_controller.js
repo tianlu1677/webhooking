@@ -3,7 +3,8 @@ import { Liquid } from 'liquidjs'
 import jp from 'jsonpath/jsonpath.min'
 
 export default class extends Controller {
-  static targets = ["category", "categoryInfo", 'incomingVariable', 'sourceVariablePanel', 'filterValue', 'mockData', 'mockAnswer', 'tryPanel', 'jseditor']
+
+  static targets = ["category", "categoryInfo", 'incomingVariable', 'sourceVariablePanel', 'filterValue', 'mockData', 'mockAnswer', 'tryPanel', 'mockTitle', 'jseditor']
   connect() {
     this.showPanel(this.categoryTarget.value, false)
   }
@@ -19,6 +20,7 @@ export default class extends Controller {
         this.categoryInfoTarget.innerHTML = '使用正则, 取正则的第一哥括号, 如 ^(\d), 则输出为变量的第一个字符 '
         break;
       case "jsonpath":
+        this.incomingVariableTarget.value = 'request.json'
         this.categoryInfoTarget.innerHTML = '使用JsonPath (<a href="https://gotest.hz.netease.com/doc/jie-kou-ce-shi/xin-zeng-yong-li/can-shu-xiao-yan/jsonpi-pei/jsonpathyu-fa.html">语法简介</a>)取值, 一般来源变量为 request.json  如值设置为 "$..a", 则为request.json 中的a节点数据'
         break;
       case "jscript":
@@ -32,6 +34,8 @@ export default class extends Controller {
     }
     this.sourceVariablePanelTarget.style.display = show
     console.log('category', category)
+
+
     if (category === 'render'){
       this.tryPanelTarget.style.display = 'none'
       this.jseditorTarget.style.display = 'none'
@@ -69,6 +73,10 @@ export default class extends Controller {
       console.log(editor.getValue());
       $('#custom_action_input_filter_val').val(editor.getValue())     
     });
+  }
+  
+  changeFromVariable(e){
+    this.mockTitleTarget.innerHTML = `${this.incomingVariableTarget.value} 模拟数据:`
   }
 
   select(e) {
