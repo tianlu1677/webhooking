@@ -15,7 +15,7 @@
 #
 class CustomAction
   class Request < ::CustomAction
-    store_accessor :input_dict, :url, :method, :content_type, :trigger_variable, :body, :trigger_condition,  prefix: 'input'
+    store_accessor :input_dict, :url, :method, :content_type, :trigger_variable, :body, :trigger_condition,:response_body, :response_head_code,  prefix: 'input'
     validates_presence_of :input_url
 
     def build_real_body(original_params, custom_params)
@@ -31,9 +31,9 @@ class CustomAction
     end
 
     def execute(original_params, custom_params = {})
-      # if input_trigger_condition
-      #   return if fetch_variable(input_trigger_condition, original_params.merge(custom_params)).blank?
-      # end
+      if input_trigger_condition.to_s != ""
+        return if fetch_variable(input_trigger_condition, original_params.merge(custom_params)).blank?
+      end
 
       dict = {
         url: build_real_url(original_params, custom_params),
@@ -50,10 +50,19 @@ class CustomAction
       end
 
       begin
-        RestClient::Request.execute(
+        r = RestClient::Request.execute(
           dict
         )
-      rescue
+        fill_response_info(r, custom_params)
+
+      rescue => e
+        if e.respond_to? :response
+          fill_response_info(e.response)
+        else
+          fill_response_info(nil, custom_params)
+        end
+
+
         [original_params, custom_params]
       end
       [original_params, custom_params]
@@ -66,6 +75,19 @@ class CustomAction
         content_type: '',
         body: ''
       }
+    end
+
+    def fill_response_info(r, custom_params)
+      if r.nil?
+        r = OpenStruct.new({code: 0, body: 0})
+      end
+
+      unless input_response_head_code.blank?
+        custom_params[input_response_head_code] = r.code
+      end
+      unless input_response_body.blank?
+        custom_params[input_response_body] = r.body
+      end
     end
   end
 end

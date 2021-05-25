@@ -31,3 +31,18 @@
   .col-10
     = f.text_area :input_body, class: 'form-control'
     p 使用 <a href="https://liquid.bootcss.com/">liquid 模版</a>语法, 即可用{{}} 包裹变量, 如 "My {{request.method}}" 会渲染为 My GET </p>
+
+
+
+.row.mb-3
+  .col-2.col-form-label
+    = f.label :input_response_head_code, "响应状态存贮至变量"
+  .col-10
+    = f.text_field :input_response_head_code, class: 'form-control', placeholder: 'responseCode'
+
+
+.row.mb-3
+  .col-2.col-form-label
+    = f.label :input_response_body, "响应body存储至变量"
+  .col-10
+    = f.text_field :input_response_body, class: 'form-control', placeholder: 'respnoseBody'
