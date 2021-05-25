@@ -61,6 +61,9 @@ class CustomAction
       when 'render'
         template = Liquid::Template.parse(filter_val)
         template.render({"request" => @original_params}.merge(@custom_params))
+      when 'jscript'
+        
+
       end
     end
   end

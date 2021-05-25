@@ -15,9 +15,9 @@ div[data-controller='variable-calc-panel']
     .col-2.col-form-label
       = f.label :input_category, '运算方式'
     .col-10
-      = f.select :input_category, [["JsonPath", "jsonpath"], ["regex", "regex"], ['render', 'render']],{},   class: 'form-select', data: {'variable-calc-panel-target'=>'category', action: 'variable-calc-panel#select'}
+      = f.select :input_category, [["JsonPath", "jsonpath"], ["regex", "regex"], ['render', 'render'], ['jscript', 'jscript']],{},   class: 'form-select', data: {'variable-calc-panel-target'=>'category', action: 'variable-calc-panel#select'}
       div[data-variable-calc-panel-target='categoryInfo']
-
+    = render "variable_jscript_edit"  
   .row.mb-3
     .col-2.col-form-label
       = f.label :filter_val, '运算内容'
