@@ -36,15 +36,15 @@ class CustomAction
     end
 
     private
-
-    private
-    def exec_jscript(variable, filter_val)
-      # binding.pry
+    
+    def exec_jscript(variable, filter_val)      
       context = MiniRacer::Context.new
       context.attach("request_func", proc{ @original_params } )
       context.eval("request = request_func()")
       answer = context.eval(filter_val)
       answer.to_s
+    rescue => e
+      "执行js出错 #{e}"
     end
 
     def calc_new_variable_answer(variable, category, filter_val)
