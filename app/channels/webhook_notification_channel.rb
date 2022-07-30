@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class WebhookNotificationChannel < ApplicationCable::Channel
   def subscribed
     # stream_from "some_channel"
@@ -7,5 +9,4 @@ class WebhookNotificationChannel < ApplicationCable::Channel
   def unsubscribed
     # Any cleanup needed when channel is unsubscribed
   end
-
 end

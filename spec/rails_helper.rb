@@ -1,15 +1,17 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
-require File.expand_path('../../config/environment', __FILE__)
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+require File.expand_path('../config/environment', __dir__)
+abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 require 'capybara/rails'
 require 'webmock/rspec'
 require 'sidekiq/testing'
 require 'database_cleaner'
-#require 'pundit/rspec'
+# require 'pundit/rspec'
 require 'ffaker'
-#require "clearance/rspec"
+# require "clearance/rspec"
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -18,7 +20,6 @@ require 'ffaker'
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
-
   config.before(:suite) do
     DatabaseCleaner.strategy = :truncation
   end

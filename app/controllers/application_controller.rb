@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   include Clearance::Controller
   include Pagy::Backend
@@ -6,15 +8,11 @@ class ApplicationController < ActionController::Base
   helper_method :current_account
 
   def auth_current_account
-    if signed_in?
-      @current_account ||= current_user.account
-    end
+    @current_account ||= current_user.account if signed_in?
   end
 
   def current_account
-    if signed_in?
-      @current_account ||= current_user.account
-    end
+    @current_account ||= current_user.account if signed_in?
   end
 
   def cookie_webhook_token
@@ -25,5 +23,4 @@ class ApplicationController < ActionController::Base
     # byebug
     cookies.encrypted['webhook_token'] = value
   end
-
 end

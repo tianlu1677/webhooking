@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class TrackService
   attr_accessor :request, :headers
 
-  def initialize(request, token_uuid = '')
+  def initialize(request, _token_uuid = '')
     @request = request
     @headers = request.headers
   end
@@ -24,9 +26,7 @@ class TrackService
     media_type = request.media_type
     file_params = extra_file_params(request)
     raw_content = request.raw_post
-    if file_params.present?
-      raw_content = ''
-    end
+    raw_content = '' if file_params.present?
     # 当有文件时，把文件都提取出来。
     request_data = {
       headers: headers,
@@ -55,34 +55,33 @@ class TrackService
   def extract_form_params(request)
     return {} unless %w[multipart/form-data application/x-www-form-urlencoded].include?(request.content_type)
 
-    request.request_parameters.select {|k, v| !v.kind_of?(ActionDispatch::Http::UploadedFile)}
+    request.request_parameters.reject { |_k, v| v.is_a?(ActionDispatch::Http::UploadedFile) }
   end
 
   def upload_file_params(file_params, backpack)
     return if file_params.blank?
+
     file_params.each do |key, fileupload|
       backpack.files.attach(io: File.open(fileupload.tempfile),
                             filename: fileupload.original_filename,
                             content_type: fileupload.content_type,
-                            metadata: { params_key: key}
-      )
+                            metadata: { params_key: key })
     end
   end
 
   def binary_upload(request, backpack)
-    if request.media_type.present? && request.media_type != "multipart/form-data" && request.content_type.present? && request.content_length > 0
-    backpack.files.attach(io: StringIO.new(request.raw_post),
-                          filename: 'xxxx',
-                          content_type: request.content_type,
-                          metadata: {
+    if request.media_type.present? && request.media_type != 'multipart/form-data' && request.content_type.present? && request.content_length.positive?
+      backpack.files.attach(io: StringIO.new(request.raw_post),
+                            filename: 'xxxx',
+                            content_type: request.content_type,
+                            metadata: {
                               binary_upload: '1'
-                          }
-    )
+                            })
     end
   end
 
   def extra_file_params(request)
-    request.request_parameters.select {|k, v| v.kind_of?(ActionDispatch::Http::UploadedFile)}
+    request.request_parameters.select { |_k, v| v.is_a?(ActionDispatch::Http::UploadedFile)}
   end
 
   def find_webhook(uuid)
@@ -91,7 +90,7 @@ class TrackService
 
   def extract_http_request_headers(env)
     allow = %w[CONTENT_TYPE CONTENT_LENGTH]
-    env.reject do |k, v|
+    env.reject do |k, _v|
       (!(/^HTTP_[A-Z_]+$/ === k) && !allow.include?(k)) || k == 'HTTP_VERSION'
     end.map do |k, v|
       [reconstruct_header_name(k), v]
@@ -105,8 +104,8 @@ class TrackService
     name.sub(/^HTTP_/, '').gsub('_', '-').downcase
   end
 
-  COOKIE_PARAM_PATTERN = %r{\A([^(),/<>@;:\\"\[\]?={}\s]+)(?:=([^;]*))?\Z}
-  COOKIE_SPLIT_PATTERN = /;\s*/
+  COOKIE_PARAM_PATTERN = %r{\A([^(),/<>@;:\\"\[\]?={}\s]+)(?:=([^;]*))?\Z}.freeze
+  COOKIE_SPLIT_PATTERN = /;\s*/.freeze
 
   def parse_cookie(cookie_str)
     params = cookie_str.split(COOKIE_SPLIT_PATTERN)
@@ -139,5 +138,4 @@ class TrackService
 
     cookie
   end
-
 end

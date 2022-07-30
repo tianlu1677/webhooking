@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: operation_logs
@@ -12,9 +14,9 @@
 #
 FactoryBot.define do
   factory :operation_log do
-    user_id { "MyString" }
-    params { "MyString" }
-    action { "MyString" }
-    controller { "MyString" }
+    user_id { 'MyString' }
+    params { 'MyString' }
+    action { 'MyString' }
+    controller { 'MyString' }
   end
 end

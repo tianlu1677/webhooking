@@ -1,5 +1,6 @@
-class BackpacksController < ApplicationController
+# frozen_string_literal: true
 
+class BackpacksController < ApplicationController
   def show
     @backpack = Backpack.find_by!(uuid: params[:uuid] || '163de852289343438768c751e72d9177')
   end
@@ -9,6 +10,4 @@ class BackpacksController < ApplicationController
     @webhook = @backpack.webhook
     @custom_action_logs = @backpack.custom_action_logs
   end
-
-  private
 end

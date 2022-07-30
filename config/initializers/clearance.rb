@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 Clearance.configure do |config|
-  config.mailer_sender = "reply@example.com"
+  config.mailer_sender = 'reply@example.com'
   config.rotate_csrf_on_sign_in = true
 
   # config.allow_sign_up = true
@@ -19,5 +21,4 @@ Clearance.configure do |config|
   # config.sign_in_guards = []
   # config.user_model = "User"
   # config.parent_controller = "ApplicationController"
-
 end

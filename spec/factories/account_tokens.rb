@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: webhooks
@@ -12,9 +14,9 @@
 #
 FactoryBot.define do
   factory :webhook do
-    uuid { "MyString" }
-    receive_email { "MyString" }
-    expired_at { "2021-05-14 15:18:29" }
+    uuid { 'MyString' }
+    receive_email { 'MyString' }
+    expired_at { '2021-05-14 15:18:29' }
     account_id { 1 }
   end
 end

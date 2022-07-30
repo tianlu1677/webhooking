@@ -1,72 +1,72 @@
 # frozen_string_literal: true
 
-class Clearance::SessionsController < Clearance::BaseController
-  if respond_to?(:before_action)
-    before_action :redirect_signed_in_users, only: [:new]
-    skip_before_action :require_login,
-                       only: [:create, :new, :destroy],
-                       raise: false
-    skip_before_action :authorize,
-                       only: [:create, :new, :destroy],
-                       raise: false
-  else
-    before_filter :redirect_signed_in_users, only: [:new]
-    skip_before_filter :require_login,
-                       only: [:create, :new, :destroy],
-                       raise: false
-    skip_before_filter :authorize,
-                       only: [:create, :new, :destroy],
-                       raise: false
-  end
+module Clearance
+  class SessionsController < Clearance::BaseController
+    if respond_to?(:before_action)
+      before_action :redirect_signed_in_users, only: [:new]
+      skip_before_action :require_login,
+                         only: %i[create new destroy],
+                         raise: false
+      skip_before_action :authorize,
+                         only: %i[create new destroy],
+                         raise: false
+    else
+      before_filter :redirect_signed_in_users, only: [:new]
+      skip_before_filter :require_login,
+                         only: %i[create new destroy],
+                         raise: false
+      skip_before_filter :authorize,
+                         only: %i[create new destroy],
+                         raise: false
+    end
 
-  after_action :relation_current_webhook, only: [:create]
+    after_action :relation_current_webhook, only: [:create]
 
-  def create
-    @user = authenticate(params)
+    def create
+      @user = authenticate(params)
 
-    sign_in(@user) do |status|
-      if status.success?
-        redirect_back_or url_after_create
-      else
-        flash.now.notice = status.failure_message
-        render template: 'clearance/sessions/new', status: :unauthorized
+      sign_in(@user) do |status|
+        if status.success?
+          redirect_back_or url_after_create
+        else
+          flash.now.notice = status.failure_message
+          render template: 'clearance/sessions/new', status: :unauthorized
+        end
       end
     end
-  end
 
-  def destroy
-    sign_out
-    redirect_to url_after_destroy
-  end
+    def destroy
+      sign_out
+      redirect_to url_after_destroy
+    end
 
-  def new
-    render template: 'clearance/sessions/new'
-  end
+    def new
+      render template: 'clearance/sessions/new'
+    end
 
-  private
+    private
 
-  def relation_current_webhook
-    if signed_in? && (webhook_token = cookies.encrypted['webhook_token'].presence).present?
-      webhook = Webhook.find_by(webhook_token: webhook_token)
-      if webhook && webhook.user_id.blank?
-        webhook.update(user_id: @user.id)
+    def relation_current_webhook
+      if signed_in? && (webhook_token = cookies.encrypted['webhook_token'].presence).present?
+        webhook = Webhook.find_by(webhook_token: webhook_token)
+        webhook.update(user_id: @user.id) if webhook && webhook.user_id.blank?
       end
     end
-  end
 
-  def redirect_signed_in_users
-    redirect_to url_for_signed_in_users if signed_in?
-  end
+    def redirect_signed_in_users
+      redirect_to url_for_signed_in_users if signed_in?
+    end
 
-  def url_after_create
-    Clearance.configuration.redirect_url
-  end
+    def url_after_create
+      Clearance.configuration.redirect_url
+    end
 
-  def url_after_destroy
-    sign_in_url
-  end
+    def url_after_destroy
+      sign_in_url
+    end
 
-  def url_for_signed_in_users
-    url_after_create
+    def url_for_signed_in_users
+      url_after_create
+    end
   end
 end

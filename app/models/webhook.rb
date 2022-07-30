@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: webhooks
@@ -35,30 +37,30 @@ class Webhook < ApplicationRecord
 
   def build_response_body(backpack)
     template = Liquid::Template.parse(resp_body)
-    template.render "request" => backpack.default_template_params
-  rescue
-    "解析语法错误"
+    template.render 'request' => backpack.default_template_params
+  rescue StandardError
+    '解析语法错误'
   end
 
   def default_template_param_keys(backpack = nil)
-    backpack ||= backpacks.order("created_at desc").first
+    backpack ||= backpacks.order('created_at desc').first
     return backpack.default_template_param_keys unless backpack.nil?
 
     [
-      "request.uuid",
-      "request.ip",
-      "request.hostname",
+      'request.uuid',
+      'request.ip',
+      'request.hostname',
       'request.method',
-      "request.user_agent",
-      "request.referer",
-      "request.headers",
-      "request.status_code"]
+      'request.user_agent',
+      'request.referer',
+      'request.headers',
+      'request.status_code'
+    ]
   end
 
   class << self
     def find_by_id_or_uuid(id)
-      where("uuid = ? OR id = ?", id.to_s, id.to_i).first
+      where('uuid = ? OR id = ?', id.to_s, id.to_i).first
     end
   end
-
 end

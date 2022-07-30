@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Use this setup block to configure all options available in SimpleForm.
 SimpleForm.setup do |config|
   config.error_notification_class = 'alert alert-danger'
@@ -25,7 +27,7 @@ SimpleForm.setup do |config|
     b.optional :readonly
     b.use :label, class: 'col-md-3 control-label'
 
-    b.use :input, class: 'form-control', wrap_with: {tag: 'div', class: 'col-md-9'}
+    b.use :input, class: 'form-control', wrap_with: { tag: 'div', class: 'col-md-9' }
     b.use :error, wrap_with: { tag: 'span', class: 'help-block' }
     b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
   end
@@ -47,7 +49,7 @@ SimpleForm.setup do |config|
     b.use :html5
     b.optional :readonly
     b.use :label, class: 'control-label col-sm-3'
-    b.use :input, wrap_with: { tag: 'div', class: 'radio-inline col-sm-9'}
+    b.use :input, wrap_with: { tag: 'div', class: 'radio-inline col-sm-9' }
     b.use :error, wrap_with: { tag: 'span', class: 'help-block' }
     b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
   end
@@ -103,7 +105,7 @@ SimpleForm.setup do |config|
     b.use :label, class: 'col-sm-3 control-label'
 
     b.wrapper tag: 'div', class: 'col-sm-9' do |ba|
-      ba.use :input, wrap_with: {tag: 'div', class: 'form-check-label'}
+      ba.use :input, wrap_with: { tag: 'div', class: 'form-check-label' }
       ba.use :error, wrap_with: { tag: 'label', class: 'help-block' }
       ba.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
     end
@@ -139,12 +141,12 @@ SimpleForm.setup do |config|
   # buttons and other elements.
   config.default_wrapper = :horizontal_form
   config.wrapper_mappings = {
-      check_boxes: :vertical_radio_and_checkboxes,
-      radio_buttons: :vertical_radio_and_checkboxes,
-      file: :vertical_file_input,
-      boolean: :vertical_boolean,
-      datetime: :multi_select,
-      date: :multi_select,
-      time: :multi_select
+    check_boxes: :vertical_radio_and_checkboxes,
+    radio_buttons: :vertical_radio_and_checkboxes,
+    file: :vertical_file_input,
+    boolean: :vertical_boolean,
+    datetime: :multi_select,
+    date: :multi_select,
+    time: :multi_select
   }
 end

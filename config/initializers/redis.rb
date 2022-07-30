@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 password = ENV['CACHE_REDIS_PASSWORD']
 $redis = Redis.new(host: ENV['CACHE_REDIS_HOST'], port: ENV['CACHE_REDIS_PORT'], db: ENV['CACHE_REDIS_DB'])

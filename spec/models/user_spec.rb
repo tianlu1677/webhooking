@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -15,7 +17,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  describe "create user" do
+  describe 'create user' do
     it 'ok' do
       user = create(:user)
       expect(user.id).to eq 1

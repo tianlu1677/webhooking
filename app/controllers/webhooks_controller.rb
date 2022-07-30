@@ -1,11 +1,11 @@
+# frozen_string_literal: true
+
 class WebhooksController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:left_list_item]
-  before_action :set_webhook_by_params, only: [:show, :clear_backpacks, :left_list_item, :update, :run_script]
+  before_action :set_webhook_by_params, only: %i[show clear_backpacks left_list_item update run_script]
 
   def show
-    if @webhook.nil?
-      return redirect_to not_found_webhooks_path
-    end
+    return redirect_to not_found_webhooks_path if @webhook.nil?
 
     @backpacks = @webhook.backpacks.order('id desc')
     @current_backpack = Backpack.find_by(uuid: params[:backpack_id]) || @backpacks.first
@@ -36,12 +36,12 @@ class WebhooksController < ApplicationController
 
   # def exec_script
   #   content = params[:content] || @webhook.script_content
-    
+
   #   Capybara.default_driver = :selenium_chrome_headless # :selenium_chrome and :selenium_chrome_headless
   #   Capybara.visit('http://ohio.ce04.com') # 先跳转到某个页面
   #   page = Capybara.page
   #   # 提前注入一些常用的变量为全局变量
-  
+
   #   answer = page.evaluate_script(<<~JS)
   #     (function () {
   #       window.gooday = "hello";
@@ -61,16 +61,15 @@ class WebhooksController < ApplicationController
   #   render json: { error: e }
   # end
 
-
-  def run_script    
+  def run_script
     content = params[:content] || @webhook.script_content
     context = MiniRacer::Context.new
     answer = context.eval(content)
-    render json: { answer: answer}
+    render json: { answer: answer }
   rescue MiniRacer::RuntimeError => e
     render json: { jserror: e }
-  rescue => e
-    render json: { error: e} 
+  rescue StandardError => e
+    render json: { error: e }
   end
 
   private

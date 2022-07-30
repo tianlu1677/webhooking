@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'sidekiq/web'
 require 'sidekiq/cron/web'
 
@@ -26,7 +28,7 @@ Rails.application.routes.draw do
       post :clear_backpacks
       post :left_list_item
       post :reset
-      post :run_script      
+      post :run_script
     end
     collection do
       get :not_found

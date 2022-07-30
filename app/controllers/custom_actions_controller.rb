@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class CustomActionsController < ApplicationController
   before_action :set_webhook
-  before_action :set_custom_action, only: %i[show edit update destroy sort ]
+  before_action :set_custom_action, only: %i[show edit update destroy sort]
 
   # GET /custom_actions or /custom_actions.json
   def index
@@ -17,13 +19,12 @@ class CustomActionsController < ApplicationController
 
   def incoming_variables
     @custom_action = if params[:custom_action_id]
-      @webhook.custom_actions.find params[:custom_action_id]
-    else
-      @webhook.custom_actions.new
-    end
+                       @webhook.custom_actions.find params[:custom_action_id]
+                     else
+                       @webhook.custom_actions.new
+                     end
     @incoming_variables = @custom_action.could_used_variable_names
   end
-
 
   # GET /custom_actions/new
   def new
@@ -54,7 +55,6 @@ class CustomActionsController < ApplicationController
       end
     end
   end
-
 
   # PATCH/PUT /custom_actions/1 or /custom_actions/1.json
   def update
@@ -91,11 +91,11 @@ class CustomActionsController < ApplicationController
   private
 
   def set_webhook
-    if current_user
-      @webhook = Webhook.where(user_id: current_user.id).find_by_id_or_uuid(params[:webhook_id])
-    else
-      @webhook = Webhook.where(webhook_token: cookie_webhook_token).find_by_id_or_uuid(params[:webhook_id])
-    end
+    @webhook = if current_user
+                 Webhook.where(user_id: current_user.id).find_by_id_or_uuid(params[:webhook_id])
+               else
+                 Webhook.where(webhook_token: cookie_webhook_token).find_by_id_or_uuid(params[:webhook_id])
+               end
   end
 
   # Use callbacks to share common setup or constraints between actions.
@@ -107,7 +107,7 @@ class CustomActionsController < ApplicationController
   def custom_action_params
     category = params[:custom_action][:category]
     if category == 'CustomAction::Variable'
-      params.require(:custom_action).permit(:category, :position,  :title, :input_from_variable, :input_name, :input_category, :input_filter_val)
+      params.require(:custom_action).permit(:category, :position, :title, :input_from_variable, :input_name, :input_category, :input_filter_val)
     elsif category == 'CustomAction::Request'
       params.require(:custom_action).permit(:category, :position, :title, :input_url, :input_method, :input_trigger_condition, :input_content_type, :input_body, :input_response_head_code, :input_response_body)
     elsif category == 'CustomAction::Script'

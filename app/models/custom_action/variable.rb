@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: custom_actions
@@ -19,7 +21,7 @@ class CustomAction
     validates_presence_of :input_name
 
     def items
-      [:from_variable, :name, :category, :filter_val].map(&:to_s)
+      %i[from_variable name category filter_val].map(&:to_s)
     end
 
     def execute(original_params, custom_params = {})
@@ -29,21 +31,21 @@ class CustomAction
       old_variable = fetch_variable(input_dict['from_variable'], original_params.merge(custom_params))
       return [original_params, custom_params] if old_variable.nil? && input_category != 'render'
 
-      new_variable_val = calc_new_variable_answer(old_variable, input_dict["category"], input_dict["filter_val"])
+      new_variable_val = calc_new_variable_answer(old_variable, input_dict['category'], input_dict['filter_val'])
 
       custom_params[input_dict['name']] = new_variable_val.to_s
       [original_params, custom_params]
     end
 
     private
-    
-    def exec_jscript(variable, filter_val)      
+
+    def exec_jscript(_variable, filter_val)
       context = MiniRacer::Context.new
-      context.attach("request_func", proc{ @original_params } )
-      context.eval("request = request_func()")
+      context.attach('request_func', proc { @original_params })
+      context.eval('request = request_func()')
       answer = context.eval(filter_val)
       answer.to_s
-    rescue => e
+    rescue StandardError => e
       "执行js出错 #{e}"
     end
 
@@ -59,7 +61,7 @@ class CustomAction
         end
       when 'render'
         template = Liquid::Template.parse(filter_val)
-        template.render({"request" => @original_params}.merge(@custom_params))
+        template.render({ 'request' => @original_params }.merge(@custom_params))
       when 'jscript'
         exec_jscript(variable, filter_val)
       end

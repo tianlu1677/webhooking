@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ReceivesController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :extrack_token

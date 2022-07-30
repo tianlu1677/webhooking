@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: custom_actions
@@ -15,12 +17,12 @@
 #
 FactoryBot.define do
   factory :custom_action do
-    title { "MyString" }
-    description { "MyString" }
-    custom_action { "MyString" }
+    title { 'MyString' }
+    description { 'MyString' }
+    custom_action { 'MyString' }
     webhook { nil }
-    category { "MyString" }
+    category { 'MyString' }
     sort { 1 }
-    input_dict { "" }
+    input_dict { '' }
   end
 end

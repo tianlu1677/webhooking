@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: custom_actions
@@ -23,13 +25,10 @@ class CustomAction < ApplicationRecord
   def could_used_variable_names
     keys = webhook.default_template_param_keys
 
-    if id.nil?
-      self.position = webhook.custom_actions.last&.position.to_i + 1
-    end
+    self.position = webhook.custom_actions.last&.position.to_i + 1 if id.nil?
     return keys if position.to_i.zero?
 
-    added_variables = webhook.custom_actions.where("category = 'CustomAction::Variable' and position < ?", position).all.map {|x| x.input_name}
-
+    added_variables = webhook.custom_actions.where("category = 'CustomAction::Variable' and position < ?", position).all.map(&:input_name)
 
     keys + added_variables
   end
@@ -39,13 +38,11 @@ class CustomAction < ApplicationRecord
             from_variable.split('.')[1..-1] # 排除 Request
           else
             from_variable.split('.')
-    end
+          end
     dict.dig(*arr)
   rescue StandardError
     nil
   end
-
-  private
 
   # def cal_sort
   #   if webhook.custom_actions.first.nil?

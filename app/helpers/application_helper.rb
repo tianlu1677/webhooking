@@ -1,4 +1,5 @@
-module ApplicationHelper
-   include Pagy::Frontend
+# frozen_string_literal: true
 
+module ApplicationHelper
+  include Pagy::Frontend
 end

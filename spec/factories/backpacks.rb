@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: backpacks
@@ -26,8 +28,7 @@
 #
 FactoryBot.define do
   factory :backpack do
-    uuid { "MyString" }
-    url { "MyString" }
-   
+    uuid { 'MyString' }
+    url { 'MyString' }
   end
 end

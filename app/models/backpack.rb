@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: backpacks
@@ -41,7 +43,7 @@ class Backpack < ApplicationRecord
   end
 
   def send_websocket_notification
-    ActionCable.server.broadcast("webhook-notify-#{webhook.id}", {webhook_id: webhook.id, backpack_id: id})
+    ActionCable.server.broadcast("webhook-notify-#{webhook.id}", { webhook_id: webhook.id, backpack_id: id })
   end
 
   def default_template_param_keys
@@ -54,11 +56,12 @@ class Backpack < ApplicationRecord
 
   def json_params
     return JSON.parse(raw_content) if content_type == 'application/json'
-  rescue
+  rescue StandardError
     {}
   end
 
   private
+
   def build_info
     {
       uuid: uuid,
@@ -89,7 +92,6 @@ class Backpack < ApplicationRecord
         answer << "#{prefix}.#{key}"
         add_key_to_keys(value, answer, "#{prefix}.#{key}")
       end
-    else
     end
   end
 
@@ -102,5 +104,4 @@ class Backpack < ApplicationRecord
       [original_params, params]
     end
   end
-
 end
