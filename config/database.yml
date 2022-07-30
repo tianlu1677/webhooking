@@ -1,21 +1,21 @@
 default: &default
   adapter: postgresql
-  host: <%= ENV["DB_HOST"] || '127.0.0.1' %> 
- 
+  host: <%= ENV["DB_HOST"] || '127.0.0.1' %>
+  port: <%= ENV["PG_PORT"] || '5433' %>
 development:
   <<: *default
-  pool: 20
-  database: rails6_development
+  pool: 5
+  database: webhook_king_development
 
 test:
   <<: *default
-  database: rails6_test
+  database: webhook_king_test
 
 production:
   adapter: postgresql
   host: <%= ENV["PG_HOST"]  %>
   pool: <%= ENV["PG_POOL"] || 50 %>
-  username:  <%= ENV['PG_USER'] || 'rails6_postgres' %>
-  password: <%= ENV['PG_PASSWORD'] || 'rails6==' %>
-  database: <%= ENV["PG_NAME"] || 'rails6_production' %>
+  username:  <%= ENV['PG_USER'] || 'webhook_king_postgres' %>
+  password: <%= ENV['PG_PASSWORD'] || 'webhook_king==' %>
+  database: <%= ENV["PG_NAME"] || 'webhook_king_production' %>
   port: <%= ENV["PG_PORT"] || '3433' %>
