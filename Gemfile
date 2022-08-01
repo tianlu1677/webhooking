@@ -17,7 +17,7 @@ gem 'pg'
 gem 'pghero'
 
 gem 'hiredis'
-gem 'liquid' # 用于渲染response 的内容
+gem 'liquid'
 gem 'mini_racer'
 gem 'rack-cors'
 gem 'redis', require: ['redis', 'redis/connection/hiredis']

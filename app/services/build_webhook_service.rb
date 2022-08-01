@@ -2,6 +2,7 @@
 
 class BuildWebhookService
   attr_accessor :user, :webhook_token, :opts
+
   def initialize(user = nil, webhook_token_or_uuid = nil)
     @user = user
     @webhook_token = webhook_token_or_uuid
@@ -19,8 +20,6 @@ class BuildWebhookService
   end
 
   def find!
-    webhook = Webhook.where(user_id: @user&.id).where('id = ? OR webhook_token = ? OR uuid = ?', webhook_token.to_i, webhook_token, webhook_token).first
-
-    webhook
+    Webhook.where(user_id: @user&.id).where('id = ? OR webhook_token = ? OR uuid = ?', webhook_token.to_i, webhook_token, webhook_token).first
   end
 end

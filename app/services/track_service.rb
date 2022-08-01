@@ -81,7 +81,7 @@ class TrackService
   end
 
   def extra_file_params(request)
-    request.request_parameters.select { |_k, v| v.is_a?(ActionDispatch::Http::UploadedFile)}
+    request.request_parameters.select { |_k, v| v.is_a?(ActionDispatch::Http::UploadedFile) }
   end
 
   def find_webhook(uuid)
@@ -91,7 +91,7 @@ class TrackService
   def extract_http_request_headers(env)
     allow = %w[CONTENT_TYPE CONTENT_LENGTH]
     env.reject do |k, _v|
-      (!(/^HTTP_[A-Z_]+$/ === k) && !allow.include?(k)) || k == 'HTTP_VERSION'
+      (k != /^HTTP_[A-Z_]+$/ && !allow.include?(k)) || k == 'HTTP_VERSION'
     end.map do |k, v|
       [reconstruct_header_name(k), v]
     end.each_with_object(Rack::Utils::HeaderHash.new) do |k_v, hash|

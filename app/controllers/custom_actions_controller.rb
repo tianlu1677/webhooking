@@ -45,7 +45,10 @@ class CustomActionsController < ApplicationController
 
     respond_to do |format|
       if @custom_action.save
-        format.html { redirect_to [@webhook, @custom_action.becomes(CustomAction)], notice: 'Custom action was successfully created.' }
+        format.html do
+          redirect_to [@webhook, @custom_action.becomes(CustomAction)],
+                      notice: 'Custom action was successfully created.'
+        end
         format.json { render :show, status: :created, location: @custom_action }
       else
         @request_variables = @custom_action.could_used_variable_names
@@ -60,7 +63,10 @@ class CustomActionsController < ApplicationController
   def update
     respond_to do |format|
       if @custom_action.update(custom_action_params)
-        format.html { redirect_to webhook_custom_actions_path(@webhook), notice: 'Custom action was successfully updated.' }
+        format.html do
+          redirect_to webhook_custom_actions_path(@webhook),
+                      notice: 'Custom action was successfully updated.'
+        end
         format.json { render :show, status: :ok, location: @custom_action }
       else
 
@@ -74,7 +80,10 @@ class CustomActionsController < ApplicationController
   def destroy
     @custom_action.destroy
     respond_to do |format|
-      format.html { redirect_to webhook_custom_actions_url(@webhook.uuid), notice: 'Custom action was successfully destroyed.' }
+      format.html do
+        redirect_to webhook_custom_actions_url(@webhook.uuid),
+                    notice: 'Custom action was successfully destroyed.'
+      end
       format.json { head :no_content }
     end
   end
@@ -106,11 +115,15 @@ class CustomActionsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def custom_action_params
     category = params[:custom_action][:category]
-    if category == 'CustomAction::Variable'
-      params.require(:custom_action).permit(:category, :position, :title, :input_from_variable, :input_name, :input_category, :input_filter_val)
-    elsif category == 'CustomAction::Request'
-      params.require(:custom_action).permit(:category, :position, :title, :input_url, :input_method, :input_trigger_condition, :input_content_type, :input_body, :input_response_head_code, :input_response_body)
-    elsif category == 'CustomAction::Script'
+    case category
+    when 'CustomAction::Variable'
+      params.require(:custom_action).permit(:category, :position, :title,
+                                            :input_from_variable, :input_name, :input_category, :input_filter_val)
+    when 'CustomAction::Request'
+      params.require(:custom_action).permit(:category, :position, :title,
+                                            :input_url, :input_method, :input_trigger_condition, :input_content_type,
+                                            :input_body, :input_response_head_code, :input_response_body)
+    when 'CustomAction::Script'
       params.require(:custom_action).permit(:category, :position, :title, :script_content)
     end
   end

@@ -16,13 +16,11 @@ class WebhooksController < ApplicationController
     redirect_to "/webhooks/#{@webhook.uuid}"
   end
 
-  # 清除底下所有的请求
   def clear_backpacks
     @webhook.backpacks.destroy_all
     redirect_to webhook_path(@webhook.uuid)
   end
 
-  # 新建webhook
   def reset
     @webhook = BuildWebhookService.new(current_user, '').create!
     set_cookie_webhook_token(@webhook.webhook_token)
@@ -38,9 +36,8 @@ class WebhooksController < ApplicationController
   #   content = params[:content] || @webhook.script_content
 
   #   Capybara.default_driver = :selenium_chrome_headless # :selenium_chrome and :selenium_chrome_headless
-  #   Capybara.visit('http://ohio.ce04.com') # 先跳转到某个页面
+  #   Capybara.visit('http://ohio.ce04.com')
   #   page = Capybara.page
-  #   # 提前注入一些常用的变量为全局变量
 
   #   answer = page.evaluate_script(<<~JS)
   #     (function () {

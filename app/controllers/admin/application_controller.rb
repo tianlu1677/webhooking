@@ -16,10 +16,10 @@ module Admin
     helper_method :attributes, :resource, :resource_class, :show_attributes
 
     def auth_admin_role!
-      unless current_user.is_admin?
-        sign_out
-        redirect_to sign_in_path, notice: '你当前没有管理员权限！'
-      end
+      return if current_user.is_admin?
+
+      sign_out
+      redirect_to sign_in_path, notice: '你当前没有管理员权限！'
     end
   end
 end

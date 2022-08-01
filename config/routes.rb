@@ -55,7 +55,6 @@ Rails.application.routes.draw do
 
   match 'r/:backpack_token', via: %i[get post patch delete put head options], to: 'receives#create'
 
-  # 管理后台
   namespace :admin do
     root 'home#index'
     resources :operation_logs

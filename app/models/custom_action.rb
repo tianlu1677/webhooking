@@ -35,7 +35,7 @@ class CustomAction < ApplicationRecord
 
   def fetch_variable(from_variable, dict)
     arr = if from_variable.start_with?('request')
-            from_variable.split('.')[1..-1] # 排除 Request
+            from_variable.split('.')[1..] # 排除 Request
           else
             from_variable.split('.')
           end
