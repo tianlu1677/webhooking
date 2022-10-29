@@ -11,9 +11,8 @@
 
     <%= render "header" %>
     <% if @current_backpack.present? %>
-      <div class=""></div>
       <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-7">
           <%= render "backpacks/request_detail", backpack: @current_backpack %>
           <%= render "backpacks/request_query", backpack: @current_backpack %>
           <%= render "backpacks/request_form", backpack: @current_backpack %>
@@ -23,7 +22,7 @@
           <% end %>
         </div>
 
-        <div class="col-md-7">
+        <div class="col-md-5">
           <%= render "backpacks/request_headers", backpack: @current_backpack %>
         </div>
       </div>

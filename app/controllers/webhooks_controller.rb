@@ -23,7 +23,7 @@ class WebhooksController < ApplicationController
 
   def reset
     @webhook = BuildWebhookService.new(current_user, '').create!
-    set_cookie_webhook_token(@webhook.webhook_token)
+    setup_cookie_webhook_token(@webhook.webhook_token)
     redirect_to webhook_path(@webhook)
   end
 
@@ -74,7 +74,7 @@ class WebhooksController < ApplicationController
   def set_webhook_by_params
     if current_user
       @webhook = Webhook.where(user_id: current_user.id).find_by_id_or_uuid(params[:id])
-      set_cookie_webhook_token(@webhook.webhook_token) if @webhook.present?
+      setup_cookie_webhook_token(@webhook.webhook_token) if @webhook.present?
     else
       @webhook = Webhook.where(webhook_token: cookie_webhook_token).find_by_id_or_uuid(params[:id])
     end

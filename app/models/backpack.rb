@@ -60,6 +60,12 @@ class Backpack < ApplicationRecord
     {}
   end
 
+  def content
+    JSON.parse(raw_content)
+  rescue StandardError
+    raw_content
+  end
+
   private
 
   def build_info
@@ -87,11 +93,11 @@ class Backpack < ApplicationRecord
   end
 
   def add_key_to_keys(search, answer, prefix = 'request')
-    if search.is_a? Hash
-      search.each do |key, value|
-        answer << "#{prefix}.#{key}"
-        add_key_to_keys(value, answer, "#{prefix}.#{key}")
-      end
+    return unless search.is_a? Hash
+
+    search.each do |key, value|
+      answer << "#{prefix}.#{key}"
+      add_key_to_keys(value, answer, "#{prefix}.#{key}")
     end
   end
 

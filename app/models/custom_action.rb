@@ -43,12 +43,4 @@ class CustomAction < ApplicationRecord
   rescue StandardError
     nil
   end
-
-  # def cal_sort
-  #   if webhook.custom_actions.first.nil?
-  #     self.sort = 1
-  #   else
-  #     self.sort ||= webhook.custom_actions.last.sort + 1
-  #   end
-  # end
 end

@@ -33,12 +33,12 @@ module WebHookKing
       g.fixture_replacement :factory_bot, dir: 'spec/factories'
     end
 
-    config.cache_store = [:redis_cache_store, {
-      host: ENV['CACHE_REDIS_HOST'],
-      port: ENV['CACHE_REDIS_PORT'],
-      db: ENV['CACHE_REDIS_DB'],
-      namespace: 'cache',
-      expire_after: 3.days
-    }]
+    # config.cache_store = [:redis_cache_store, {
+    #   host: ENV['CACHE_REDIS_HOST'],
+    #   port: ENV['CACHE_REDIS_PORT'],
+    #   db: ENV['CACHE_REDIS_DB'],
+    #   namespace: 'cache',
+    #   expire_after: 3.days
+    # }]
   end
 end

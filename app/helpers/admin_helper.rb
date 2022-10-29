@@ -15,7 +15,7 @@ module AdminHelper
     link_to button_text, url, class: css.to_s
   end
 
-  def icon_edit_link(text = nil, url)
+  def icon_edit_link(text, url)
     link_to url do
       fa_icon 'pencil-square-o', text: text
     end
@@ -39,7 +39,7 @@ module AdminHelper
     link_to t('action_labels.back_list'), url, class: 'btn btn-md btn-primary margin-right-5'
   end
 
-  def custom_link(text, url, remote: false)
+  def custom_link(text, url)
     return if url.blank?
 
     link_to text, url, class: 'btn btn-sm btn-primary margin-right-5'
