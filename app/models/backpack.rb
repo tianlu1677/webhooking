@@ -14,7 +14,7 @@
 #  referer        :string
 #  headers        :jsonb
 #  status_code    :integer
-#  account_id     :integer
+#  user_id     :integer
 #  token_uuid     :string
 #  webhook_id     :integer
 #  created_at     :datetime         not null
@@ -27,7 +27,7 @@
 #  raw_content    :text
 #
 class Backpack < ApplicationRecord
-  belongs_to :account, optional: true
+  belongs_to :user, optional: true
   belongs_to :webhook
   has_many :custom_action_logs
 

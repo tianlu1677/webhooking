@@ -8,7 +8,7 @@
 #  uuid              :string
 #  receive_email     :string
 #  expired_at        :datetime
-#  account_id        :integer
+#  user_id        :integer
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  webhook_token     :string
@@ -20,7 +20,7 @@
 #  script_content    :text
 #
 class Webhook < ApplicationRecord
-  belongs_to :account, optional: true
+  belongs_to :user, optional: true
 
   has_many :backpacks
   has_many :custom_actions, -> { order(position: :asc) }

@@ -16,14 +16,5 @@
 
 class User < ApplicationRecord
   include Clearance::User
-
-  before_create :init_data
-
-  # has one account
-  has_one :account
   has_many :webhooks
-
-  def init_data
-    build_account
-  end
 end

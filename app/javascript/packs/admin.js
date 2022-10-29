@@ -5,7 +5,7 @@ import "@coreui/coreui"
 import toastr from 'toastr';
 import queryString from 'query-string'
 window.queryString = queryString
-import ReactDOM from 'react-dom'
+// import ReactDOM from 'react-dom'
 require("@hotwired/turbo-rails")
 
 // https://chartkick.com/

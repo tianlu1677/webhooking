@@ -8,7 +8,7 @@
 #  uuid              :string
 #  receive_email     :string
 #  expired_at        :datetime
-#  account_id        :integer
+#  user_id        :integer
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  webhook_token     :string

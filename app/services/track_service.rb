@@ -42,7 +42,7 @@ class TrackService
       content_type: content_type,
       content_length: content_length,
       media_type: media_type,
-      account_id: @webhook.account_id
+      user_id: @webhook.user_id
     }
     Rails.logger.info("request #{request_data}")
 

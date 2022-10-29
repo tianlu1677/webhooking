@@ -14,7 +14,7 @@
 #  referer        :string
 #  headers        :jsonb
 #  status_code    :integer
-#  account_id     :integer
+#  user_id     :integer
 #  token_uuid     :string
 #  webhook_id     :integer
 #  created_at     :datetime         not null

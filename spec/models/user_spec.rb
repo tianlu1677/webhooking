@@ -21,7 +21,7 @@ RSpec.describe User, type: :model do
     it 'ok' do
       user = create(:user)
       expect(user.id).to eq 1
-      expect(user.account.user_id).to eq user.id
+      expect(user.user_id).to eq user.id
     end
   end
 end

@@ -3,7 +3,7 @@
     <p class="alert alert-success copy" data-clipboard-text="<%= "#{ENV['WEBSITE_URL']}/r/#{@webhook.uuid}" %>">
       你当前的链接是 <span style="color: black "><%= @webhook.request_url %></span>  
       <button class="btn btn-sm btn-success">复制</button>
-      <%= link_to "Try", "#{@webhook.request_url}?now=#{Time.now}&hello=world", method: :post, class: 'btn btn-warning btn-sm' %>
+      <%= link_to "Open", "#{@webhook.request_url}", class: 'btn btn-warning btn-sm', target: '_blank' %>
     </p>
     <%= link_to "删除所有请求", clear_backpacks_webhook_path(@webhook.uuid), method: :post, class: 'btn btn-warning btn-sm' %>
 
@@ -11,6 +11,6 @@
 
     <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#WebhookResponseSettingModal">返回内容设置</button>
 
-    <%= link_to  "custom action", webhook_custom_actions_path(@webhook.uuid), class: 'btn btn-warning btn-sm' %>   
+    <%= link_to "custom action", webhook_custom_actions_path(@webhook.uuid), class: 'btn btn-warning btn-sm' %>   
   </div>
 </div>

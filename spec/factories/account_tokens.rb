@@ -8,7 +8,7 @@
 #  uuid          :string
 #  receive_email :string
 #  expired_at    :datetime
-#  account_id    :integer
+#  user_id    :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #
@@ -17,6 +17,6 @@ FactoryBot.define do
     uuid { 'MyString' }
     receive_email { 'MyString' }
     expired_at { '2021-05-14 15:18:29' }
-    account_id { 1 }
+    user_id { 1 }
   end
 end

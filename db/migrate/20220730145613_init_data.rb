@@ -4,15 +4,6 @@ class InitData < ActiveRecord::Migration[6.1]
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
-  create_table 'accounts', force: :cascade do |t|
-    t.integer 'user_id', null: false
-    t.string 'uuid', null: false
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
-    t.index ['user_id'], name: 'index_accounts_on_user_id'
-    t.index ['uuid'], name: 'index_accounts_on_uuid'
-  end
-
   create_table 'active_storage_attachments', force: :cascade do |t|
     t.string 'name', null: false
     t.string 'record_type', null: false
@@ -51,7 +42,7 @@ class InitData < ActiveRecord::Migration[6.1]
     t.string 'referer'
     t.jsonb 'headers'
     t.integer 'status_code'
-    t.integer 'account_id'
+    t.integer 'user_id'
     t.string 'token_uuid'
     t.integer 'webhook_id'
     t.datetime 'created_at', precision: 6, null: false
@@ -114,7 +105,6 @@ class InitData < ActiveRecord::Migration[6.1]
     t.string 'uuid'
     t.string 'receive_email'
     t.datetime 'expired_at'
-    t.integer 'account_id'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
     t.string 'webhook_token'

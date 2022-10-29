@@ -22,7 +22,12 @@ Rails.application.routes.draw do
 
   root 'home#index'
 
-  resources :accounts
+  resources :users, only: [] do
+    collection do
+      get :webhooks
+    end
+  end
+
   resources :webhooks do
     member do
       post :clear_backpacks
@@ -61,6 +66,5 @@ Rails.application.routes.draw do
     resources :users
     resources :backpacks
     resources :webhooks
-    resources :accounts
   end
 end
