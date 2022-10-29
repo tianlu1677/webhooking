@@ -7,7 +7,7 @@
             <div class="card-body">
               <h1>Login</h1>
               <p class="text-medium-emphasis">Sign In to your account</p>
-              <%= simple_form_for :session, url: session_path, "data-turbo": false do |form| %>
+              <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), "data-turbo": false) do |form| %>
                 <% if flash[:notice] %>
                   <div class="alert alert-success">
                     <%= flash[:notice] %>
@@ -19,7 +19,8 @@
                 <% end %>
                 <%= form.input :email, label: "邮箱" %>
                 <%= form.input :password, label: "密码" %>
-                <%= form.submit '登陆', class: 'btn btn-primary form-control px-4 mb-0 mt-4', disabled_with: "登录中..." %>
+                <%= form.input :remember_me, label: '记住我', as: :boolean %>
+                <%= form.submit '登陆', class: 'btn btn-primary form-control px-4 mb-0 mt-4' %>
               <% end %>
               <div class="row">
               </div>
@@ -31,8 +32,8 @@
                 <h2>Sign up</h2>
                 <p>Life is a flower.</p>
 
-                  <% if Clearance.configuration.allow_sign_up? %>
-                  <%= link_to sign_up_path  do%>
+                  <% if devise_mapping.registerable? && controller_name != 'registrations' %>
+                  <%= link_to new_registration_path(resource_name)  do%>
                     <button class="btn btn-lg btn-outline-light mt-3" type="button">
                       注册
                     </button>

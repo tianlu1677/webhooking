@@ -15,7 +15,7 @@ module WebHookKing
     config.active_record.default_timezone = :local
     config.time_zone = 'Beijing'
     config.i18n.available_locales = %i[zh-CN en]
-    config.i18n.default_locale = 'en'
+    config.i18n.default_locale = :en
 
     config.generators do |g|
       g.assets false

@@ -18,7 +18,7 @@
             <div class="dropdown-header bg-light py-2">
               <div class="fw-semibold">Account</div>
             </div>
-            <%= link_to session_path, method: :delete do %>
+            <%= link_to destroy_user_session_path, method: :delete do %>
               <div class="dropdown-item">
                 Logout
             <% end %>
@@ -27,7 +27,7 @@
         </li>
       <% else %>
         <li>
-          <%= link_to '登陆', new_session_path, class: 'btn btn-primary btn-sm' %>
+          <%= link_to '登陆', new_user_session_path, class: 'btn btn-primary btn-sm' %>
         </li>
       <% end %>
     </ul>

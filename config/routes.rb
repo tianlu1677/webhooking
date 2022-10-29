@@ -4,24 +4,30 @@ require 'sidekiq/web'
 require 'sidekiq/cron/web'
 
 Rails.application.routes.draw do
-  resources :custom_actions
+  devise_for :users, controllers: {
+    sessions: 'users/sessions',
+    registrations: 'users/registrations',
+    confirmations: 'users/confirmations',
+    passwords: 'users/passwords'
+    # omniauth_callbacks: 'users/omniauth_callbacks'
+  }
   mount Sidekiq::Web => '/admin/sidekiq'
   mount PgHero::Engine, at: '/admin/pghero'
 
-  resources :passwords, controller: 'clearance/passwords', only: %i[create new]
-  resource :session, controller: 'clearance/sessions' # , only: [:create]
+  # resources :passwords, controller: 'clearance/passwords', only: %i[create new]
+  # resource :session, controller: 'clearance/sessions' # , only: [:create]
 
-  resources :users, controller: 'clearance/users', only: [:create] do
-    resource :password,
-             controller: 'clearance/passwords',
-             only: %i[create edit update]
-  end
+  # resources :users, controller: 'clearance/users', only: [:create] do
+  #   resource :password,
+  #            controller: 'clearance/passwords',
+  #            only: %i[create edit update]
+  # end
 
   # get '/sign_in' => 'clearance/sessions#new', as: 'sign_in'
   # delete '/sign_out' => 'clearance/sessions#destroy', as: 'sign_out'
 
   root 'home#index'
-
+  resources :custom_actions
   resources :users, only: [] do
     collection do
       get :webhooks

@@ -7,19 +7,20 @@ module Admin
     include Pundit
     include Pagy::Backend
 
-    after_action { pagy_headers_merge(@pagy) if @pagy }
-
     protect_from_forgery
-    before_action :require_login
+
+    after_action { pagy_headers_merge(@pagy) if @pagy }
+    before_action :authenticate_user!
+
     before_action :auth_admin_role!
 
     helper_method :attributes, :resource, :resource_class, :show_attributes
 
     def auth_admin_role!
-      return if current_user.is_admin?
+      return if current_user.admin?
 
-      sign_out
-      redirect_to sign_in_path, notice: '你当前没有管理员权限！'
+      sign_out :user
+      redirect_to user_session_path, notice: '你当前没有管理员权限！'
     end
   end
 end

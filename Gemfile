@@ -29,6 +29,7 @@ gem 'enumerize'
 gem 'jsonpath'
 
 gem 'acts_as_list'
+gem 'devise', '~> 4.8'
 gem 'paranoia'
 gem 'pundit'
 gem 'ransack'
@@ -40,7 +41,7 @@ gem 'sidekiq-cron'
 gem 'sidekiq-failures'
 
 # file upload
-gem 'clearance'
+# gem 'clearance'
 gem 'foreman'
 gem 'jwt'
 gem 'mini_magick'

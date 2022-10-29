@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  include Clearance::Controller
+  # include Clearance::Controller
   include Pagy::Backend
 
   after_action { pagy_headers_merge(@pagy) if @pagy }
