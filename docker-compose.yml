@@ -13,7 +13,7 @@ services:
       - PG_HOST=db
       - PG_POOL=30
       - PG_USER=postgres
-      - PG_PASSWORD=rails6
+      - POSTGRES_PASSWORD=rails6
       - PG_NAME=rails6_production
       - PG_PORT=5433
       - REDIS_URL=redis://redis:6379/10

@@ -5,7 +5,7 @@ const  loadItem = async  (webhook_id, request_id) => {
     method: 'post',
   })
   const js = await res.text()
-  console.log(js)
+  // console.log(js)
   eval(js)
 }
 

@@ -16,12 +16,13 @@ import {
   Navigation,
 } from "@coreui/coreui";
 
-const channels = import.meta.glob("./**/*_channel.js", { eager: true });
+import '../controllers/index'
+import '../channels/notification_channel.js'
+
 Turbo.start();
 
-// window.$ = $;
-// window.jQuery = $;
-// window.coreui = coreui;
+window.$ = $;
+window.coreui = coreui;
 
 
 // Array.from(document.querySelectorAll(".toast")).forEach(

@@ -15,7 +15,7 @@ production:
   adapter: postgresql
   host: <%= ENV["PG_HOST"]  %>
   pool: <%= ENV["PG_POOL"] || 50 %>
-  username:  <%= ENV['PG_USER'] || 'webhook_king_postgres' %>
-  password: <%= ENV['PG_PASSWORD'] || 'webhook_king==' %>
+  username:  <%= ENV['POSTGRES_USER'] || 'webhook_king_postgres' %>
+  password: <%= ENV['POSTGRES_PASSWORD'] || 'webhook_king==' %>
   database: <%= ENV["PG_NAME"] || 'webhook_king_production' %>
   port: <%= ENV["PG_PORT"] || '3433' %>

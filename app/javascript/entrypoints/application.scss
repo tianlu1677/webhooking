@@ -26,8 +26,6 @@ html:not([dir=rtl]) .wrapper {
   border-color: white transparent transparent transparent;
 }
 
-button                  .show-when-disabled { display: none; }
-button[disabled]        .show-when-disabled { display: initial; }
-
-button                  .show-when-enabled { display: initial; }
-button[disabled]        .show-when-enabled { display: none; }
+a {
+  text-decoration: none;
+}
