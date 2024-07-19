@@ -10,7 +10,7 @@ class TrackService
 
   def do!
     headers = extract_http_request_headers(request.headers)
-    find_webhook(request.params[:backpack_token])
+    find_webhook(request.params[:request_token])
 
     req_method = request.method
     ip = request.remote_ip
@@ -46,10 +46,10 @@ class TrackService
     }
     Rails.logger.info("request #{request_data}")
 
-    backpack = @webhook.backpacks.create!(request_data)
-    upload_file_params(file_params, backpack)
-    # binary_upload(request, backpack)
-    backpack
+    request = @webhook.requests.create!(request_data)
+    upload_file_params(file_params, request)
+    # binary_upload(request, request)
+    request
   end
 
   def extract_form_params(request)
@@ -58,20 +58,20 @@ class TrackService
     request.request_parameters.reject { |_k, v| v.is_a?(ActionDispatch::Http::UploadedFile) }
   end
 
-  def upload_file_params(file_params, backpack)
+  def upload_file_params(file_params, request)
     return if file_params.blank?
 
     file_params.each do |key, fileupload|
-      backpack.files.attach(io: File.open(fileupload.tempfile),
+      request.files.attach(io: File.open(fileupload.tempfile),
                             filename: fileupload.original_filename,
                             content_type: fileupload.content_type,
                             metadata: { params_key: key })
     end
   end
 
-  def binary_upload(request, backpack)
+  def binary_upload(request, request)
     if request.media_type.present? && request.media_type != 'multipart/form-data' && request.content_type.present? && request.content_length.positive?
-      backpack.files.attach(io: StringIO.new(request.raw_post),
+      request.files.attach(io: StringIO.new(request.raw_post),
                             filename: 'xxxx',
                             content_type: request.content_type,
                             metadata: {

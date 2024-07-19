@@ -17,6 +17,6 @@
               th
                 = resource_class.human_attribute_name(attr)
               th
-                = @backpack.send(attr)
-      = index_link admin_backpacks_path
+                = @request.send(attr)
+      = index_link admin_requests_path
 

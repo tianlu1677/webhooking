@@ -5,7 +5,7 @@ FactoryBot.define do
     webhook_id { 1 }
     from_custom_action_id { 1 }
     next_custon_action_id { 1 }
-    backpack_id { 1 }
+    request_id { 1 }
     original_params { '' }
     custom_params { '' }
   end

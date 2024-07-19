@@ -2,13 +2,13 @@
 
 class WebhooksController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:left_list_item]
-  before_action :set_webhook_by_params, only: %i[show clear_backpacks left_list_item update run_script]
+  before_action :set_webhook_by_params, only: %i[show clear_requests left_list_item update run_script]
 
   def show
     return redirect_to not_found_webhooks_path if @webhook.nil?
 
-    @backpacks = @webhook.backpacks.order('id desc')
-    @current_backpack = Backpack.find_by(uuid: params[:backpack_id]) || @backpacks.first
+    @requests = @webhook.requests.order('id desc')
+    @current_request = Request.find_by(uuid: params[:request_id]) || @requests.first
   end
 
   def update
@@ -16,8 +16,8 @@ class WebhooksController < ApplicationController
     redirect_to "/webhooks/#{@webhook.uuid}"
   end
 
-  def clear_backpacks
-    @webhook.backpacks.destroy_all
+  def clear_requests
+    @webhook.requests.destroy_all
     redirect_to webhook_path(@webhook.uuid)
   end
 
@@ -28,8 +28,8 @@ class WebhooksController < ApplicationController
   end
 
   def left_list_item
-    @backpack = @webhook.backpacks.find params[:backpack_id]
-    @current_backpack
+    @request = @webhook.requests.find params[:request_id]
+    @current_request
   end
 
   # def exec_script

@@ -1,7 +1,7 @@
 import consumer from "./consumer"
 
-const  loadItem = async  (webhook_id, backpack_id) => {
-  const res = await fetch(`/webhooks/${webhook_id}/left_list_item?backpack_id=${backpack_id}`, {
+const  loadItem = async  (webhook_id, request_id) => {
+  const res = await fetch(`/webhooks/${webhook_id}/left_list_item?request_id=${request_id}`, {
     method: 'post',
   })
   const js = await res.text()
@@ -22,7 +22,7 @@ const channel = consumer.subscriptions.create("WebhookNotificationChannel", {
   received(data) {
     console.log("channel send a message", data)
     // Called when there's incoming data on the websocket for this channel
-    const {webhook_id, backpack_id} = data
-    loadItem(webhook_id, backpack_id)
+    const {webhook_id, request_id} = data
+    loadItem(webhook_id, request_id)
   }
 });

@@ -5,7 +5,7 @@
       <button class="btn btn-sm btn-success">复制</button>
       <%= link_to "Open", "#{@webhook.request_url}", class: 'btn btn-warning btn-sm', target: '_blank' %>
     </p>
-    <%= link_to "删除所有请求", clear_backpacks_webhook_path(@webhook.uuid), method: :post, class: 'btn btn-warning btn-sm' %>
+    <%= link_to "删除所有请求", clear_requests_webhook_path(@webhook.uuid), method: :post, class: 'btn btn-warning btn-sm' %>
 
     <%= link_to "重置", reset_webhook_path(@webhook.uuid), method: :post, class: 'btn btn-warning btn-sm' %>
 

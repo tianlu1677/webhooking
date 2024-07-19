@@ -36,7 +36,7 @@ Rails.application.routes.draw do
 
   resources :webhooks do
     member do
-      post :clear_backpacks
+      post :clear_requests
       post :left_list_item
       post :reset
       post :run_script
@@ -56,21 +56,21 @@ Rails.application.routes.draw do
       end
     end
   end
-  resources :backpacks do
+  resources :requests do
     member do
       get :custom_action_logs
     end
   end
 
-  get 'webhooks/:id/:backpack_id', to: 'webhooks#show'
+  get 'webhooks/:id/:request_id', to: 'webhooks#show'
 
-  match 'r/:backpack_token', via: %i[get post patch delete put head options], to: 'receives#create'
+  match 'r/:request_token', via: %i[get post patch delete put head options], to: 'receives#create'
 
   namespace :admin do
     root 'home#index'
     resources :operation_logs
     resources :users
-    resources :backpacks
+    resources :requests
     resources :webhooks
   end
 end

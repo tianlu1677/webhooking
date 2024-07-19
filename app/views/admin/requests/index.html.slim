@@ -5,8 +5,8 @@
       .card-header
         = '☰ '
         = resource_class.model_name.human
-        = new_link new_admin_backpack_path
-        / = page_entries_info @backpacks
+        = new_link new_admin_request_path
+        / = page_entries_info @requests
       .card-block.card-body[style="overflow: scroll"]
         table.table.table-bordered.table-striped.table-condensed
           thead
@@ -18,15 +18,15 @@
               th
                 = t('action_labels.action')
           tbody
-            - @backpacks.each do |backpack|
-              tr id="backpack_#{backpack.id}"
-                td = backpack.id
-                td = backpack.req_method
-                td = "/r/#{backpack.webhook&.uuid}"
-                td = backpack.query_params
+            - @requests.each do |request|
+              tr id="request_#{request.id}"
+                td = request.id
+                td = request.req_method
+                td = "/r/#{request.webhook&.uuid}"
+                td = request.query_params
                 td
-                  = edit_link edit_admin_backpack_path(backpack)
-                  = show_link admin_backpack_path(backpack)
-                  = destroy_link admin_backpack_path(backpack), remote: true
+                  = edit_link edit_admin_request_path(request)
+                  = show_link admin_request_path(request)
+                  = destroy_link admin_request_path(request), remote: true
 
         == pagy_nav @pagy

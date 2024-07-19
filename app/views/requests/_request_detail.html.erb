@@ -2,30 +2,30 @@
   <div class="card-header">
     <i class="fa fa-align-justify"></i>
     <h6>Request detail</h6>
-    <%= link_to  "custom action log", custom_action_logs_backpack_path(backpack.uuid), class: 'btn btn-warning btn-sm' if backpack.custom_action_logs.exists? %>  
+    <%= link_to  "custom action log", custom_action_logs_request_path(request.uuid), class: 'btn btn-warning btn-sm' if request.custom_action_logs.exists? %>  
   </div>
   <div class="card-body">
     <table class="table table-responsive-sm table-sm table-borderless table-striped">
       <tbody>
       <tr>
-        <td><%= backpack.req_method || 'GET' %></td>
-        <td><%= "/r/#{backpack.token_uuid}" %></td>
+        <td><%= request.req_method || 'GET' %></td>
+        <td><%= "/r/#{request.token_uuid}" %></td>
       </tr>
       <tr>
         <td>Host</td>
-        <td><%= backpack.hostname %></td>
+        <td><%= request.hostname %></td>
       </tr>
       <tr>
         <td>Date</td>
-        <td><%= backpack.created_at %></td>
+        <td><%= request.created_at %></td>
       </tr>
       <tr>
         <td>Size</td>
-        <td><%= backpack.content_length %></td>
+        <td><%= request.content_length %></td>
       </tr>
       <tr>
         <td>ID</td>
-        <td><%= backpack.uuid %></td>
+        <td><%= request.uuid %></td>
       </tr>
       </tbody>
     </table>

@@ -1,0 +1,6 @@
+<% if @request.errors.empty? %>
+  $("#request_<%= @request.id %>").html('<%= j( render :partial => 'admin/requests/request', locals: { request: @request} ) %>');
+  toastr.success("执行成功", "温馨提示")
+<% else %>
+  toastr.error("执行失败", "温馨提示")
+<% end %>

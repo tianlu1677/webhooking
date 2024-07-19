@@ -1,13 +1,13 @@
 <div class="card" id="leftRequest" data-controller="scroll">
-  <div class="card-header clearfix"> Request <small><span id='backpacks-count'><%= backpacks.count %></span> count</small>
+  <div class="card-header clearfix"> Request <small><span id='requests-count'><%= requests.count %></span> count</small>
     <div class="spinner-border text-light float-end ml-auto spinner-border-sm" role="status">
       <span class="sr-only"></span>
     </div>
   </div>
   <div class="card-body">
     <div class="list-group" id='card-list-group'>
-      <% backpacks.each do |backpack| %>
-        <%= render '/backpacks/left_list_item', backpack: backpack, current_backpack: current_backpack %>
+      <% requests.each do |request| %>
+        <%= render '/requests/left_list_item', request: request, current_request: current_request %>
       <% end %>
      </div>
   </div>

@@ -3,8 +3,6 @@
 source 'https://gems.ruby-china.com'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.6'
-
 gem 'dotenv-rails'
 gem 'hotwire-rails'
 gem 'jbuilder', '~> 2.11.2'
@@ -13,12 +11,12 @@ gem 'rails', '~> 6.1.3.2'
 gem 'sass-rails', '>= 6'
 gem 'webpacker', '~> 5.3.0'
 # add
-gem 'pg'
+gem 'pg', '~> 1.5.6'
 gem 'pghero'
 
 gem 'hiredis'
 gem 'liquid'
-gem 'mini_racer'
+gem 'mini_racer', '~> 0.12.0'
 gem 'rack-cors'
 gem 'redis', require: ['redis', 'redis/connection/hiredis']
 gem 'redis-objects'

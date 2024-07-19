@@ -1,8 +1,0 @@
-<%= link_to "/webhooks/#{backpack.token_uuid}/#{backpack.uuid}" do %>
-        <div class="list-group-item list-group-item-action flex-column align-items-start <%= current_backpack&.uuid == backpack.uuid  ? 'active' : '' %>">
-            <div class="d-flex w-100 justify-content-between">
-              <h6 class="mb-1"><%= backpack.req_method %></h6><small><%= backpack.created_at.strftime('%Y/%m/%d %H:%M:%S') %></small>
-            </div>
-            <p class="mb-1"><%= backpack.hostname %></p><small>uuid: <%= backpack.uuid  %></small>
-        </div>
-<% end %>

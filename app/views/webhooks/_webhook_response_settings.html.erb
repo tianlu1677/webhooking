@@ -39,7 +39,7 @@
             <p>响应Body 使用 <a href="https://liquid.bootcss.com/">liquid 模版</a>语法,
              可使用参数包括</p>
             <ul style='height: 100px; overflow: auto'>
-              <% @webhook.default_template_param_keys(@current_backpack).each do |item|%>
+              <% @webhook.default_template_param_keys(@current_request).each do |item|%>
               <li>{{<%= item%> }}</li>
             <%end %>
             </ul>

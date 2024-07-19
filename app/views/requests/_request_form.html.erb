@@ -1,9 +1,9 @@
 <div class="card">
-  <div class="card-header"><i class="fa fa-align-justify"></i> Request Params</div>
+  <div class="card-header"><i class="fa fa-align-justify"></i> Form Params</div>
   <div class="card-body">
     <table class="table table-responsive-sm">
       <tbody>
-      <% (backpack.query_params || {}).each do |k, v| %>
+      <% (request.form_params || {}).each do |k, v| %>
         <tr>
           <td><%= k %></td>
           <td><%= v %></td>

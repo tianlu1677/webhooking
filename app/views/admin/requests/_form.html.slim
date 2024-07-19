@@ -5,16 +5,16 @@
         h3
           = t("action_labels.#{action_name}")
           = resource_class.model_name.human
-      = simple_form_for [:admin, backpack], wrapper: :horizontal_form do |f|
+      = simple_form_for [:admin, request], wrapper: :horizontal_form do |f|
         .card-block.card-body
-          - if backpack.errors.any?
+          - if request.errors.any?
             #error_explanation
               .alert.alert-info[role="alert"]
                 strong
-                  = pluralize(backpack.errors.count, "错误")
+                  = pluralize(request.errors.count, "错误")
                   |  导致不能保存:
                 ul
-                  - backpack.errors.full_messages.each do |message|
+                  - request.errors.full_messages.each do |message|
                     li
                       = message
           = f.input :id
@@ -24,4 +24,4 @@
 
         .card-footer
           = save_link
-          = index_link(admin_backpacks_path)
+          = index_link(admin_requests_path)

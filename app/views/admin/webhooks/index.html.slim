@@ -24,7 +24,7 @@
                 td = webhook.user_id
                 td = webhook.uuid
                 td = webhook.webhook_token
-                td = link_to webhook.backpacks.count, admin_backpacks_path(q: {webhook_id_eq: webhook.id })
+                td = link_to webhook.requests.count, admin_requests_path(q: {webhook_id_eq: webhook.id })
                 td = webhook.created_at.try(:strftime, '%Y-%m-%d %H:%M:%S').presence || "-"
                 td
                   = edit_link edit_admin_webhook_path(webhook)

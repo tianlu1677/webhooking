@@ -22,7 +22,7 @@
 class Webhook < ApplicationRecord
   belongs_to :user, optional: true
 
-  has_many :backpacks
+  has_many :requests
   has_many :custom_actions, -> { order(position: :asc) }
 
   before_create :set_init_data
@@ -35,16 +35,16 @@ class Webhook < ApplicationRecord
     "#{ENV['WEBSITE_URL']}/r/#{uuid}"
   end
 
-  def build_response_body(backpack)
+  def build_response_body(request)
     template = Liquid::Template.parse(resp_body)
-    template.render 'request' => backpack.default_template_params
+    template.render 'request' => request.default_template_params
   rescue StandardError
     '解析语法错误'
   end
 
-  def default_template_param_keys(backpack = nil)
-    backpack ||= backpacks.order('created_at desc').first
-    return backpack.default_template_param_keys unless backpack.nil?
+  def default_template_param_keys(request = nil)
+    request ||= requests.order('created_at desc').first
+    return request.default_template_param_keys unless request.nil?
 
     [
       'request.uuid',

@@ -32,7 +32,7 @@ class InitData < ActiveRecord::Migration[6.1]
     t.index %w[blob_id variation_digest], name: 'index_active_storage_variant_records_uniqueness', unique: true
   end
 
-  create_table 'backpacks', force: :cascade do |t|
+  create_table 'requests', force: :cascade do |t|
     t.string 'uuid'
     t.string 'url'
     t.string 'req_method'
@@ -53,14 +53,14 @@ class InitData < ActiveRecord::Migration[6.1]
     t.string 'content_type'
     t.string 'media_type'
     t.text 'raw_content'
-    t.index ['webhook_id'], name: 'index_backpacks_on_webhook_id'
+    t.index ['webhook_id'], name: 'index_requests_on_webhook_id'
   end
 
   create_table 'custom_action_logs', force: :cascade do |t|
     t.integer 'webhook_id'
     t.integer 'from_custom_action_id'
     t.integer 'next_custom_action_id'
-    t.integer 'backpack_id'
+    t.integer 'request_id'
     t.jsonb 'original_params'
     t.jsonb 'custom_params'
     t.datetime 'created_at', precision: 6, null: false

@@ -15,7 +15,7 @@
         <tbody>
         <!-- ngIf: currentRequest.type === 'web' --><tr >
           <td>
-            <span class="label label-info"><%= @backpack.req_method %></span>
+            <span class="label label-info"><%= @request.req_method %></span>
           </td>
           <td id="req-url" class="break">
             <a href="https://webhook.site/151a4b47-2103-441b-bdb7-1923e5be1aff?a=2&amp;c=2%0A" class="ng-binding">https://webhook.site/151a4b47-2103-441b-bdb7-1923e5be1aff?a=2&amp;c=2%0A</a>
@@ -24,15 +24,15 @@
         <tr >
           <td>Host</td>
           <td id="req-ip" class="ng-binding">
-            <%= @backpack.ip %>
-            <a class="small" target="_blank" href="https://who.is/whois-ip/ip-address/<%= @backpack.ip %>">whois</a>
+            <%= @request.ip %>
+            <a class="small" target="_blank" href="https://who.is/whois-ip/ip-address/<%= @request.ip %>">whois</a>
           </td>
         </tr>
 
         <tr>
           <td>Date</td>
-          <td id="req-date" title="<%= @backpack.created_at %>">
-            <span ng-show="hasRequests" class="ng-binding"><%= @backpack.created_at %></span>
+          <td id="req-date" title="<%= @request.created_at %>">
+            <span ng-show="hasRequests" class="ng-binding"><%= @request.created_at %></span>
           </td>
         </tr>
         <tr>
@@ -41,7 +41,7 @@
         </tr>
         <tr>
           <td width="15%" d="">ID</td>
-          <td id="req-date" class="ng-binding"><%= @backpack.uuid %></td>
+          <td id="req-date" class="ng-binding"><%= @request.uuid %></td>
         </tr>
         </tbody>
       </table>
@@ -58,7 +58,7 @@
           <td width="25%" class="ng-binding">connection</td>
           <td class="long">
             <code class="ng-binding">
-              <%= @backpack.headers['CONNECTION'] %>
+              <%= @request.headers['CONNECTION'] %>
             </code>
           </td>
         </tr><tr >
@@ -72,14 +72,14 @@
           <td width="25%" class="ng-binding">accept-encoding</td>
           <td class="long">
             <code class="ng-binding">
-              <%= @backpack.headers['ACCEPT-ENCODING'] %>
+              <%= @request.headers['ACCEPT-ENCODING'] %>
             </code>
           </td>
         </tr><tr >
           <td width="25%" class="ng-binding">host</td>
           <td class="long">
             <code class="ng-binding">
-              <%= @backpack.headers['HOST'] %>
+              <%= @request.headers['HOST'] %>
             </code>
           </td>
         </tr><tr >

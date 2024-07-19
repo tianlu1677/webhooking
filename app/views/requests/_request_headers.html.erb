@@ -5,7 +5,7 @@
   <div class="card-body">
     <table class="table table-responsive-sm table-striped">
       <tbody style="word-break: break-all;">
-      <% backpack.headers.each do |k, v| %>
+      <% request.headers.each do |k, v| %>
       <tr>
         <td width="30%"><%= k %></td>
         <td><%= v %></td>

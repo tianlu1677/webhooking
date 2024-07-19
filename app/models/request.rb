@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: backpacks
+# Table name: requests
 #
 #  id             :bigint           not null, primary key
 #  uuid           :string
@@ -26,7 +26,7 @@
 #  media_type     :string
 #  raw_content    :text
 #
-class Backpack < ApplicationRecord
+class Request < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :webhook
   has_many :custom_action_logs
@@ -43,7 +43,7 @@ class Backpack < ApplicationRecord
   end
 
   def send_websocket_notification
-    ActionCable.server.broadcast("webhook-notify-#{webhook.id}", { webhook_id: webhook.id, backpack_id: id })
+    ActionCable.server.broadcast("webhook-notify-#{webhook.id}", { webhook_id: webhook.id, request_id: id })
   end
 
   def default_template_param_keys

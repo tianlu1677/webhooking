@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: backpacks
+# Table name: requests
 #
 #  id             :bigint           not null, primary key
 #  uuid           :string
@@ -27,7 +27,7 @@
 #  raw_content    :text
 #
 FactoryBot.define do
-  factory :backpack do
+  factory :request do
     uuid { 'MyString' }
     url { 'MyString' }
   end
