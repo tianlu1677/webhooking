@@ -8,10 +8,10 @@ class CustomActionLog < ApplicationRecord
 
   class << self
     def log!(request, custom_action, original_params: {}, custom_params: {})
-      CustomActionLog.create(request: request,
+      CustomActionLog.create(request:,
                              from_custom_action_id: custom_action.id,
-                             original_params: original_params,
-                             custom_params: custom_params)
+                             original_params:,
+                             custom_params:)
     end
   end
 end

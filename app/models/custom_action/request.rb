@@ -33,9 +33,7 @@ class CustomAction
     end
 
     def execute(original_params, custom_params = {})
-      if input_trigger_condition.to_s != ''
-        return if fetch_variable(input_trigger_condition, original_params.merge(custom_params)).blank?
-      end
+      return if input_trigger_condition.to_s != '' && fetch_variable(input_trigger_condition, original_params.merge(custom_params)).blank?
 
       dict = {
         url: build_real_url(original_params, custom_params),
@@ -50,10 +48,10 @@ class CustomAction
       dict[:headers][:content_type] = input_content_type unless input_content_type.blank?
 
       begin
-        r = RestClient::Request.execute(
+        res = RestClient::Request.execute(
           dict
         )
-        fill_response_info(r, custom_params)
+        fill_response_info(res, custom_params)
       rescue StandardError => e
         if e.respond_to? :response
           fill_response_info(e.response)
@@ -75,11 +73,11 @@ class CustomAction
       }
     end
 
-    def fill_response_info(r, custom_params)
-      r = OpenStruct.new({ code: 0, body: 0 }) if r.nil?
+    def fill_response_info(res, custom_params)
+      res = Struct.new({ code: 0, body: 0 }) if res.nil?
 
-      custom_params[input_response_head_code] = r.code unless input_response_head_code.blank?
-      custom_params[input_response_body] = r.body unless input_response_body.blank?
+      custom_params[input_response_head_code] = res.code unless input_response_head_code.blank?
+      custom_params[input_response_body] = res.body unless input_response_body.blank?
     end
   end
 end

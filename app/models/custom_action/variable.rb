@@ -56,7 +56,7 @@ class CustomAction
         path.on(variable)&.first
       when 'regex'
         re = Regexp.new(filter_val)
-        if x = variable.match(re)
+        if (x = variable.match(re))
           x[0]
         end
       when 'render'

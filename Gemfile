@@ -29,17 +29,17 @@ gem 'turbo-rails', '~> 1.0.1'
 gem 'vite_rails', '~> 3.0.15'
 
 # backend jobs
+gem 'acts_as_list'
+gem 'api_tools'
+gem 'jsonpath'
+gem 'liquid'
+gem 'mini_racer', '~> 0.12.0'
 gem 'sidekiq', '~> 7.1'
 gem 'sidekiq-cron'
 gem 'sidekiq-failures', '~> 1.0.4'
 gem 'sidekiq_prometheus', '~> 2.0'
 gem 'sidekiq-status', '~> 3.0'
 gem 'sidekiq-throttled'
-gem 'liquid'
-gem 'mini_racer', '~> 0.12.0'
-gem 'api_tools'
-gem 'jsonpath'
-gem 'acts_as_list'
 
 # user center
 gem 'devise', '~> 4.9.4'
@@ -96,8 +96,8 @@ end
 group :development do
   gem 'web-console'
   # gem "rack-mini-profiler"
-  gem 'spring'
   gem 'annotate', '~> 3.2'
+  gem 'spring'
 end
 
 group :test do
@@ -108,4 +108,3 @@ group :test do
   gem 'selenium-webdriver'
   gem 'webmock'
 end
-

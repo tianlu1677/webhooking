@@ -32,7 +32,7 @@ class Webhook < ApplicationRecord
   end
 
   def request_url
-    "#{ENV['WEBSITE_URL']}/r/#{uuid}"
+    "#{ENV.fetch('WEBSITE_URL', nil)}/r/#{uuid}"
   end
 
   def build_response_body(request)

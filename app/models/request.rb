@@ -55,7 +55,7 @@ class Request < ApplicationRecord
   end
 
   def json_params
-    return JSON.parse(raw_content) if content_type == 'application/json'
+    JSON.parse(raw_content) if content_type == 'application/json'
   rescue StandardError
     {}
   end
@@ -70,14 +70,14 @@ class Request < ApplicationRecord
 
   def build_info
     {
-      uuid: uuid,
-      ip: ip,
-      hostname: hostname,
+      uuid:,
+      ip:,
+      hostname:,
       method: req_method,
-      user_agent: user_agent,
-      referer: referer,
-      headers: headers,
-      status_code: status_code,
+      user_agent:,
+      referer:,
+      headers:,
+      status_code:,
       query: query_params,
       form: form_params,
       json: json_params
@@ -106,7 +106,7 @@ class Request < ApplicationRecord
     params = {}
     webhook.custom_actions.order(:position).each do |custom_action|
       original_params, params = custom_action.execute original_params, params
-      CustomActionLog.log!(self, custom_action, original_params: original_params, custom_params: params)
+      CustomActionLog.log!(self, custom_action, original_params:, custom_params: params)
       [original_params, params]
     end
   end

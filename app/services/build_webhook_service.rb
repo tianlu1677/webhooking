@@ -16,7 +16,7 @@ class BuildWebhookService
   end
 
   def create!
-    webhook = Webhook.create(user_id: @user&.id, webhook_token: SecureRandom.hex)
+    Webhook.create(user_id: @user&.id, webhook_token: SecureRandom.hex)
   end
 
   def find!

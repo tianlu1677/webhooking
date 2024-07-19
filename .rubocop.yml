@@ -1,5 +1,11 @@
 AllCops:
-    NewCops: enable
+  TargetRubyVersion: 3.2.2
+  NewCops: enable
+  SuggestExtensions: false
+  Exclude:
+    - db/**/*
+    - db/schema.rb
+    - app/controllers/concerns/admin/resource_content.rb
 Style/Documentation:
   Enabled: false
 Metrics/ClassLength:
@@ -11,4 +17,10 @@ Metrics/MethodLength:
 Style/AsciiComments:
   Enabled: false
 Layout/LineLength:
+  Enabled: false
+Style/StringLiterals:
+  Enabled: false
+Metrics/AbcSize:
+  Enabled: false
+Metrics/PerceivedComplexity:
   Enabled: false

@@ -29,19 +29,19 @@ class TrackService
     raw_content = '' if file_params.present?
     # 当有文件时，把文件都提取出来。
     req_data = {
-      headers: headers,
-      req_method: req_method,
-      ip: ip,
-      hostname: hostname,
-      user_agent: user_agent,
-      referer: referer,
-      status_code: status_code,
-      query_params: query_params,
-      form_params: form_params,
-      raw_content: raw_content,
-      content_type: content_type,
-      content_length: content_length,
-      media_type: media_type,
+      headers:,
+      req_method:,
+      ip:,
+      hostname:,
+      user_agent:,
+      referer:,
+      status_code:,
+      query_params:,
+      form_params:,
+      raw_content:,
+      content_type:,
+      content_length:,
+      media_type:,
       user_id: @webhook.user_id
     }
     Rails.logger.info("req #{req_data}")
@@ -63,9 +63,9 @@ class TrackService
 
     file_params.each do |key, fileupload|
       request.files.attach(io: File.open(fileupload.tempfile),
-                            filename: fileupload.original_filename,
-                            content_type: fileupload.content_type,
-                            metadata: { params_key: key })
+                           filename: fileupload.original_filename,
+                           content_type: fileupload.content_type,
+                           metadata: { params_key: key })
     end
   end
 
@@ -85,7 +85,7 @@ class TrackService
   end
 
   def find_webhook(uuid)
-    @webhook = Webhook.find_by!(uuid: uuid)
+    @webhook = Webhook.find_by!(uuid:)
   end
 
   def extract_http_req_headers(env)
@@ -104,8 +104,8 @@ class TrackService
     name.sub(/^HTTP_/, '').gsub('_', '-').downcase
   end
 
-  COOKIE_PARAM_PATTERN = %r{\A([^(),/<>@;:\\"\[\]?={}\s]+)(?:=([^;]*))?\Z}.freeze
-  COOKIE_SPLIT_PATTERN = /;\s*/.freeze
+  COOKIE_PARAM_PATTERN = %r{\A([^(),/<>@;:\\"\[\]?={}\s]+)(?:=([^;]*))?\Z}
+  COOKIE_SPLIT_PATTERN = /;\s*/
 
   def parse_cookie(cookie_str)
     params = cookie_str.split(COOKIE_SPLIT_PATTERN)

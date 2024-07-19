@@ -2,7 +2,7 @@
 
 module AdminHelper
   def new_link(url, remote: false)
-    link_to t('action_labels.new'), url, class: 'btn btn-md btn-success margin-right-5 pull-right float-right', remote: remote
+    link_to t('action_labels.new'), url, class: 'btn btn-md btn-success margin-right-5 pull-right float-right', remote:
   end
 
   def show_link(url)
@@ -17,7 +17,7 @@ module AdminHelper
 
   def icon_edit_link(text, url)
     link_to url do
-      fa_icon 'pencil-square-o', text: text
+      fa_icon 'pencil-square-o', text:
     end
   end
 
@@ -30,7 +30,7 @@ module AdminHelper
   def destroy_link(url, remote: false, opts: { css: nil })
     css = opts[:css] || 'btn btn-sm btn-danger margin-right-5'
     link_to t('action_labels.destroy'), url,
-            method: :delete, data: { confirm: t('action_labels.are_you_sure') }, class: css.to_s, remote: remote
+            method: :delete, data: { confirm: t('action_labels.are_you_sure') }, class: css.to_s, remote:
   end
 
   def index_link(url)
@@ -51,13 +51,13 @@ module AdminHelper
     link_url = url.gsub(/\?.*/, '')
     link_url += '?imageView2/0/h/100/interlace/1|imageslim'
     link_to link_url, target: '_blank' do
-      image_tag url, size: size, alt: 'image'
+      image_tag url, size:, alt: 'image'
     end
   end
 
   def video_link(url, size: '80x80')
     return if url.blank?
 
-    video_tag rul, size: size
+    video_tag rul, size:
   end
 end

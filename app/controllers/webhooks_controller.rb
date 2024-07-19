@@ -62,7 +62,7 @@ class WebhooksController < ApplicationController
     content = params[:content] || @webhook.script_content
     context = MiniRacer::Context.new
     answer = context.eval(content)
-    render json: { answer: answer }
+    render json: { answer: }
   rescue MiniRacer::RuntimeError => e
     render json: { jserror: e }
   rescue StandardError => e

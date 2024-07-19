@@ -2,6 +2,7 @@
 
 if Rails.env.production?
   return unless ENV.fetch('SENTRY_DSN', nil)
+
   Sentry.init do |config|
     config.dsn = ENV.fetch('SENTRY_DSN', nil)
 

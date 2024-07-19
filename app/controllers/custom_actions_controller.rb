@@ -94,7 +94,7 @@ class CustomActionsController < ApplicationController
     content = params[:content] || @custom_action.script_content
 
     answer = @custom_action.execute({ script_content: content }, {})
-    render json: { answer: answer }
+    render json: { answer: }
   end
 
   private
