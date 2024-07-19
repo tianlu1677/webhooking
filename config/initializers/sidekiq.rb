@@ -3,7 +3,7 @@
 Sidekiq::Extensions.enable_delay!
 Sidekiq.default_worker_options = { 'backtrace' => true }
 
-redis_url = ENV['JOB_REDIS_URL']
+redis_url = ENV['REDIS_URL']
 Sidekiq.configure_server do |config|
   config.redis = { url: redis_url }
 end

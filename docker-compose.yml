@@ -3,14 +3,23 @@ services:
   webhook-king:
     ports: 
       - 3000:3000
-    image: webhook-king:latest
+    # image: webhook-king:latest
+    build: .
     container_name: webhook-king
     command: bash -c "bundle exec rake db:create && bundle exec rake db:migrate && bundle exec rails s -b 0.0.0.0 -p 3000"
     environment:
       - ENV=production
       - RAILS_ENV=production
-    env_file:
-      - .env
+      - PG_HOST=db
+      - PG_POOL=30
+      - PG_USER=postgres
+      - PG_PASSWORD=rails6
+      - PG_NAME=rails6_production
+      - PG_PORT=5433
+      - REDIS_URL=redis://redis:6379/10
+      - REDIS_URL=redis://redis:6379/10
+      - SENTRY_DSN=
+      - WEBSITE_URL=http://localhost:3005
     depends_on:
       - redis
       - db
@@ -22,7 +31,7 @@ services:
       - ./public/packs:/webhook-king/public/packs # nginx 可以处理内容
       - ./tmp/pids:/webhook-king/tmp/pids
   db:
-    image: postgres:10
+    image: postgres:12
     volumes:
       - "./datadir/postgresql:/var/lib/postgresql/data"
     environment:
