@@ -6,12 +6,14 @@
     <meta charset="utf8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="后台管理">
-    <meta name="author" content="tianlu">
-    <link rel="icon" href="/maolv.png">
-
-    <%= javascript_pack_tag 'admin', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_pack_tag 'admin', 'data-turbolinks-track': 'reload' %>
-    <%#= stylesheet_pack_tag 'admin/style', 'data-turbolinks-track': 'reload' %>
+    <meta name="author" content="tianlu">    
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= vite_client_tag %>
+    <%#= stylesheet_link_tag 'tailwind', 'inter-font', 'data-turbo-track': 'reload' %>
+    <%= vite_javascript_tag 'application' %>
+    <%= vite_stylesheet_tag 'application.scss' %>
+    <link rel="icon" href="/favicon.png">
 
     <meta name="turbolinks-cache-control" content="no-cache">
   </head>

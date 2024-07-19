@@ -6,7 +6,8 @@ module Admin
     include Admin::ResourceContent
     include Pundit
     include Pagy::Backend
-
+    include ActionView::RecordIdentifier
+    
     protect_from_forgery
 
     after_action { pagy_headers_merge(@pagy) if @pagy }

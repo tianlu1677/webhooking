@@ -1,39 +1,16 @@
 # frozen_string_literal: true
 
-# https://gorails.com/episodes/devise-hotwire-turbo
-class TurboFailureApp < Devise::FailureApp
-  def respond
-    if request_format == :turbo_stream
-      redirect
-    else
-      super
-    end
-  end
-
-  def skip_format?
-    %w[html turbo_stream */*].include? request_format.to_s
-  end
-end
-
-# Assuming you have not yet modified this file, each configuration option below
-# is set to its default value. Note that some are commented out while others
-# are not: uncommented lines are intended to protect your configuration from
-# breaking changes in upgrades (i.e., in the event that future versions of
-# Devise change the default values for those options).
-#
-# Use this hook to configure devise mailer, warden hooks and so forth.
-# Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '83ce1ea7f9b9be13565f3980ae29fdb4c2a221f8dc6700044d20669a32fe754657eec3c32058f7d22a0be4cfaa872ebe1556c9085dba48c31473c832970b12c4'
+  # config.secret_key = '07da31837dc2d5a13e2c59918a8375b5f787f776f880c01f047db30011619ef3264dab03af7f561c008f45b06acea945b91122765ef4f0451870fa9507ca0101'
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
-  config.parent_controller = 'Users::DeviseController'
+  # config.parent_controller = 'Users::DeviseController'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -42,7 +19,7 @@ Devise.setup do |config|
   config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
 
   # Configure the class responsible to send e-mails.
-  # config.mailer = 'Devise::Mailer'
+  config.mailer = 'Devise::Mailer'
 
   # Configure the parent class responsible to send e-mails.
   # config.parent_mailer = 'ActionMailer::Base'
@@ -84,7 +61,7 @@ Devise.setup do |config|
   # It can be set to an array that will enable params authentication only for the
   # given strategies, for example, `config.params_authenticatable = [:database]` will
   # enable it only for database (email + password) authentication.
-  # config.params_authenticatable = true
+  config.params_authenticatable = true
 
   # Tell if authentication through HTTP Auth is enabled. False by default.
   # It can be set to an array that will enable http authentication only for the
@@ -124,7 +101,7 @@ Devise.setup do |config|
   # This can reduce the time taken to boot the app but if your application
   # requires the Devise mappings to be loaded during boot time the application
   # won't boot properly.
-  # config.reload_routes = true
+  config.reload_routes = true
 
   # ==> Configuration for :database_authenticatable
   # For bcrypt, this is the cost for hashing the password and defaults to 12. If
@@ -141,7 +118,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 12
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = '0e1b86586041f57634d474c6cf80bd0a1d0b2a7dfceefdc4d0a348ff9e57a97e8bed7ef435680687909be3d592a19e1256335e114a051b036ea3cc8a0ead6d25'
+  # config.pepper = '0f42d12dd7c1be7dec68e4ff06a85dbec7de65ead1e68bb37c0e4ff1f0cef791dd97f6634d1f175a8f47c5e4746e9d0bb609b0716dab682bd8372b0aac955363'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
@@ -278,15 +255,15 @@ Devise.setup do |config|
   # should add them to the navigational formats lists.
   #
   # The "*/*" below is required to match Internet Explorer requests.
-  # config.navigational_formats = ['*/*', :html]
+  config.navigational_formats = ['*/*', :html, :turbo_stream]
 
   # The default HTTP method used to sign out a resource. Default is :delete.
-  config.sign_out_via = :delete
+  config.sign_out_via = :get
 
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
+  config.omniauth :github, ENV.fetch('GITHUB_APP_ID', nil), ENV.fetch('GITHUB_APP_ID', nil), scope: 'user,public_repo' if ENV.fetch('GITHUB_APP_ID', nil)
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
@@ -323,4 +300,13 @@ Devise.setup do |config|
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
+end
+
+# https://github.com/heartcombo/devise/wiki/How-To%3A-Create-custom-layouts
+Rails.application.config.to_prepare do
+  Devise::SessionsController.layout 'login'
+  Devise::RegistrationsController.layout proc { |_controller| user_signed_in? ? 'application' : 'login' }
+  Devise::ConfirmationsController.layout 'login'
+  Devise::UnlocksController.layout 'login'
+  Devise::PasswordsController.layout 'login'
 end

@@ -5,9 +5,8 @@ class ReceivesController < ApplicationController
   before_action :extrack_token
 
   def create
-    # binding.pry
-    request = TrackService.new(request).do!
-    render body: @webhook.build_response_body(request), content_type: @webhook.resp_content_type, status: @webhook.resp_code
+    webhook_request = TrackService.new(request).do!
+    render body: @webhook.build_response_body(webhook_request), content_type: @webhook.resp_content_type, status: @webhook.resp_code
   end
 
   private

@@ -1,0 +1,33 @@
+@import '@coreui/icons';
+@import 'simplebar/dist/simplebar.min.css';
+@import "@coreui/coreui/scss/coreui";
+
+html:not([dir=rtl]) .wrapper {
+    padding-left: var(--cui-sidebar-occupy-start, 0);
+}
+
+.search_form {
+  padding: 10px;
+  background-color:  #f4f1f1;
+}
+
+.simplebar-content{
+  display:flex;
+  flex-direction:column;
+  min-height:100%;
+}
+
+[data-popover-target='card']::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 1rem;
+  border-width: 0.75rem;
+  border-color: white transparent transparent transparent;
+}
+
+button                  .show-when-disabled { display: none; }
+button[disabled]        .show-when-disabled { display: initial; }
+
+button                  .show-when-enabled { display: initial; }
+button[disabled]        .show-when-enabled { display: none; }

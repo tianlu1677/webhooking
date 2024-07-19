@@ -1,21 +1,15 @@
 # frozen_string_literal: true
 
-Sidekiq::Extensions.enable_delay!
-Sidekiq.default_worker_options = { 'backtrace' => true }
-
-redis_url = ENV['REDIS_URL']
+sidekiq_redis = ENV.fetch('REDIS_URL', 'redis://127.0.0.1:6379/0')
 Sidekiq.configure_server do |config|
-  config.redis = { url: redis_url }
+  config.redis = { url: sidekiq_redis }
 end
 
 Sidekiq.configure_client do |config|
-  config.redis = { url: redis_url }
+  config.redis = { url: sidekiq_redis }
 end
 
-schedule_file = 'config/sidekiq_schedule.yml'
+# https://github.com/ondrejbartas/sidekiq-cron
+schedule_file = 'config/sidekiq_cron.yml'
 
 Sidekiq::Cron::Job.load_from_hash YAML.load_file(schedule_file) if File.exist?(schedule_file) && Sidekiq.server?
-
-# Sidekiq::Web.use Rack::Auth::Basic do |username, password|
-#   [username, password] == ['good', 'today']
-# end

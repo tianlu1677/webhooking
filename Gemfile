@@ -1,84 +1,111 @@
 # frozen_string_literal: true
 
-source 'https://gems.ruby-china.com'
+if ENV['ORIGIN']
+  source 'https://rubygems.org'
+else
+  source 'https://gems.ruby-china.com'
+end
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-gem 'dotenv-rails'
-gem 'hotwire-rails'
-gem 'jbuilder', '~> 2.11.2'
-gem 'puma', '~> 4.1'
-gem 'rails', '~> 6.1.3.2'
-gem 'sass-rails', '>= 6'
-gem 'webpacker', '~> 5.3.0'
-# add
-gem 'pg', '~> 1.5.6'
-gem 'pghero'
+gem 'rails', '7.0.8.1'
 
-gem 'hiredis'
+# db and server
+gem 'pg', '~> 1.5.6'
+gem 'pghero', '~> 3.4.1'
+gem 'puma', '6.4.2'
+gem 'redis', '~> 5.2'
+gem 'redis-namespace'
+
+# front tools
+gem 'chartkick'
+gem 'react-rails'
+gem 'sassc-rails'
+gem 'simple_form'
+gem 'slim'
+gem 'sprockets-rails'
+gem 'stimulus-rails'
+gem 'tailwindcss-rails', '~> 2.6.0'
+gem 'turbo-rails', '~> 1.0.1'
+gem 'vite_rails', '~> 3.0.15'
+
+# backend jobs
+gem 'sidekiq', '~> 7.1'
+gem 'sidekiq-cron'
+gem 'sidekiq-failures', '~> 1.0.4'
+gem 'sidekiq_prometheus', '~> 2.0'
+gem 'sidekiq-status', '~> 3.0'
+gem 'sidekiq-throttled'
 gem 'liquid'
 gem 'mini_racer', '~> 0.12.0'
-gem 'rack-cors'
-gem 'redis', require: ['redis', 'redis/connection/hiredis']
-gem 'redis-objects'
-gem 'redis-rails'
-
 gem 'api_tools'
-gem 'enumerize'
 gem 'jsonpath'
-
 gem 'acts_as_list'
-gem 'devise', '~> 4.8'
-gem 'paranoia'
+
+# user center
+gem 'devise', '~> 4.9.4'
+gem 'omniauth-github'
+gem 'omniauth-rails_csrf_protection'
+
+# api
+gem 'oj'
+gem 'rack-attack', '~> 6.6.0'
+gem 'rack-cors', require: 'rack/cors'
+
+# tools
+gem 'bcrypt', '~> 3.1.7'
+gem 'bootsnap', require: false
+gem 'dotenv-rails', '~> 3.1.2'
+gem 'enumerize', '~> 2.8.0'
+gem 'groupdate', '~> 6.0'
+gem 'image_processing', '~> 1.2'
+gem 'jbuilder'
+gem 'meta-tags', '~> 2.21.0'
+gem 'net-http'
+gem 'nokogiri', '>= 1.16.4'
+gem 'pagy', '~> 8.4.0'
 gem 'pundit'
 gem 'ransack'
-gem 'simple_form'
-gem 'slim-rails'
-# sidekiq
-gem 'sidekiq', '~> 5.2.2'
-gem 'sidekiq-cron'
-gem 'sidekiq-failures'
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
-# file upload
-# gem 'clearance'
-gem 'foreman'
-gem 'jwt'
-gem 'mini_magick'
-gem 'oj'
-gem 'pagy', '~> 3.10.0'
-# gem "ferrum"
-# tools
+# gem 'gon', '~> 6.4.0'
 
-gem 'capybara', '>= 2.15'
-gem 'selenium-webdriver'
-gem 'webdrivers'
+# monitor
+gem 'sentry-ruby'
+gem 'sentry-sidekiq'
 
-gem 'bootsnap', '>= 1.4.2', require: false
+gem 'brakeman'
+gem 'bundler-audit'
 
-group :production do
-  gem 'newrelic_rpm'
-end
 group :development, :test do
-  gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'factory_bot_rails'
-  gem 'ffaker'
-  gem 'pry'
+  gem 'debug', platforms: %i[mri mingw x64_mingw]
+  gem 'ffaker', '~> 2.20'
+  gem 'foreman'
   gem 'pry-rails'
+  gem 'rspec-rails', '~> 6.1.2'
+
+  gem 'erb_lint', require: false
+  gem 'lefthook'
+  gem 'rubocop'
+  gem 'rubocop-ast'
+  gem 'rubocop-performance'
+  gem 'rubocop-rails'
+  gem 'rubocop-rake'
+  gem 'rubocop-rspec'
 end
 
 group :development do
-  gem 'listen', '~> 3.2'
+  gem 'web-console'
+  # gem "rack-mini-profiler"
   gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'web-console', '>= 3.3.0'
+  gem 'annotate', '~> 3.2'
 end
 
 group :test do
+  gem 'capybara'
   gem 'database_cleaner'
-
-  gem 'rspec-rails'
+  gem 'factory_bot_rails'
+  gem 'mocha'
+  gem 'selenium-webdriver'
   gem 'webmock'
-  # gem 'webdrivers'
 end
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-# gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

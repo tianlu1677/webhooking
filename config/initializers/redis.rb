@@ -2,4 +2,4 @@
 
 # password = ENV['CACHE_REDIS_PASSWORD']
 $redis = Redis.new(url: ENV['REDIS_URL'])
-Redis::Objects.redis = $redis
+# Redis::Objects.redis = $redis

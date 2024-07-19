@@ -2,19 +2,26 @@
 <html>
 <head>
   <title>Webhook</title>
+  
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
-  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-
+  <%= vite_client_tag %>
+  <%#= stylesheet_link_tag 'tailwind', 'inter-font', 'data-turbo-track': 'reload' %>
+  <%= vite_javascript_tag 'application' %>
+  <%= vite_stylesheet_tag 'application.scss' %>    
   <link rel="icon" href="/favicon.png">
+    <%= vite_client_tag %>
+    <%= vite_javascript_tag 'application' %>
+    <!--
+      If using a TypeScript entrypoint file:
+        vite_typescript_tag 'application'
 
-  <script src="https://cdn.bootcdn.net/ajax/libs/ace/1.4.9/ace.min.js"></script>
-  <script src="https://cdn.bootcdn.net/ajax/libs/ace/1.4.9/mode-css.min.js"></script>
-  <script src="https://cdn.bootcdn.net/ajax/libs/ace/1.4.9/mode-javascript.min.js"></script>
-  <script src="https://cdn.bootcdn.net/ajax/libs/ace/1.4.9/ext-beautify.min.js"></script>
-  <script src="https://cdn.bootcdn.net/ajax/libs/ace/1.4.9/ext-code_lens.min.js"></script>
-  
+      If using a .jsx or .tsx entrypoint, add the extension:
+        vite_javascript_tag 'application.jsx'
+
+      Visit the guide for more information: https://vite-ruby.netlify.app/guide/rails
+    -->
+
 </head>
 <body class="page-<%= controller_name %>">
   <div class="wrapper d-flex flex-column min-vh-100 bg-light">

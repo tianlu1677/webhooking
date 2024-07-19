@@ -1,34 +1,34 @@
 # frozen_string_literal: true
 
 class TrackService
-  attr_accessor :request, :headers
+  attr_accessor :req, :headers
 
-  def initialize(request, _token_uuid = '')
-    @request = request
-    @headers = request.headers
+  def initialize(req, _token_uuid = '')
+    @req = req
+    @headers = req.headers
   end
 
   def do!
-    headers = extract_http_request_headers(request.headers)
-    find_webhook(request.params[:request_token])
+    headers = extract_http_req_headers(req.headers)
+    find_webhook(req.params[:request_token])
 
-    req_method = request.method
-    ip = request.remote_ip
-    hostname = request.hostname
-    user_agent = request.user_agent
-    referer = request.referer
-    content_length = request.content_length
+    req_method = req.method
+    ip = req.remote_ip
+    hostname = req.hostname
+    user_agent = req.user_agent
+    referer = req.referer
+    content_length = req.content_length
     status_code = 200
 
-    query_params = request.query_parameters
-    form_params = extract_form_params(request)
-    content_type = request.content_type
-    media_type = request.media_type
-    file_params = extra_file_params(request)
-    raw_content = request.raw_post
+    query_params = req.query_parameters
+    form_params = extract_form_params(req)
+    content_type = req.content_type
+    media_type = req.media_type
+    file_params = extra_file_params(req)
+    raw_content = req.raw_post
     raw_content = '' if file_params.present?
     # 当有文件时，把文件都提取出来。
-    request_data = {
+    req_data = {
       headers: headers,
       req_method: req_method,
       ip: ip,
@@ -44,18 +44,18 @@ class TrackService
       media_type: media_type,
       user_id: @webhook.user_id
     }
-    Rails.logger.info("request #{request_data}")
+    Rails.logger.info("req #{req_data}")
 
-    request = @webhook.requests.create!(request_data)
+    request = @webhook.requests.create!(req_data)
     upload_file_params(file_params, request)
-    # binary_upload(request, request)
+    # binary_upload(req, req)
     request
   end
 
-  def extract_form_params(request)
-    return {} unless %w[multipart/form-data application/x-www-form-urlencoded].include?(request.content_type)
+  def extract_form_params(req)
+    return {} unless %w[multipart/form-data application/x-www-form-urlencoded].include?(req.content_type)
 
-    request.request_parameters.reject { |_k, v| v.is_a?(ActionDispatch::Http::UploadedFile) }
+    req.request_parameters.reject { |_k, v| v.is_a?(ActionDispatch::Http::UploadedFile) }
   end
 
   def upload_file_params(file_params, request)
@@ -69,26 +69,26 @@ class TrackService
     end
   end
 
-  def binary_upload(request, request)
-    if request.media_type.present? && request.media_type != 'multipart/form-data' && request.content_type.present? && request.content_length.positive?
-      request.files.attach(io: StringIO.new(request.raw_post),
-                            filename: 'xxxx',
-                            content_type: request.content_type,
-                            metadata: {
-                              binary_upload: '1'
-                            })
-    end
-  end
+  # def binary_upload(request, request)
+  #   if request.media_type.present? && request.media_type != 'multipart/form-data' && request.content_type.present? && request.content_length.positive?
+  #     request.files.attach(io: StringIO.new(request.raw_post),
+  #                           filename: 'xxxx',
+  #                           content_type: request.content_type,
+  #                           metadata: {
+  #                             binary_upload: '1'
+  #                           })
+  #   end
+  # end
 
-  def extra_file_params(request)
-    request.request_parameters.select { |_k, v| v.is_a?(ActionDispatch::Http::UploadedFile) }
+  def extra_file_params(req)
+    req.request_parameters.select { |_k, v| v.is_a?(ActionDispatch::Http::UploadedFile) }
   end
 
   def find_webhook(uuid)
     @webhook = Webhook.find_by!(uuid: uuid)
   end
 
-  def extract_http_request_headers(env)
+  def extract_http_req_headers(env)
     allow = %w[CONTENT_TYPE CONTENT_LENGTH]
     env.reject do |k, _v|
       (k != /^HTTP_[A-Z_]+$/ && !allow.include?(k)) || k == 'HTTP_VERSION'
