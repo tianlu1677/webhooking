@@ -10,7 +10,7 @@ Running the app finally
 
 ```bash
 
-cd webhook-king
+cd webhooking
 bundle install
 yarn install
 cp .env.template .env

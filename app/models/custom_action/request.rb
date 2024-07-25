@@ -41,7 +41,7 @@ class CustomAction
         timeout: 5,
         payload: build_real_body(original_params, custom_params),
         headers: {
-          'user-agent' => 'webhook-king custom action'
+          'user-agent' => 'webhooking custom action'
         }
       }
 

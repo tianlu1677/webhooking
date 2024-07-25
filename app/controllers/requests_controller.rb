@@ -2,11 +2,11 @@
 
 class RequestsController < ApplicationController
   def show
-    @request = Request.find_by!(uuid: params[:uuid] || '163de852289343438768c751e72d9177')
+    @request = Request.find_by!(uuid: params[:uuid])
   end
 
   def custom_action_logs
-    @request = Request.find_by!(uuid: params[:id] || '163de852289343438768c751e72d9177')
+    @request = Request.find_by!(uuid: params[:id])
     @webhook = @request.webhook
     @custom_action_logs = @request.custom_action_logs
   end

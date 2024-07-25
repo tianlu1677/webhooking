@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Webhook</title>
+  <title>Webhooking</title>
   
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
@@ -10,18 +10,6 @@
   <%= vite_javascript_tag 'application' %>
   <%= vite_stylesheet_tag 'application.scss' %>    
   <link rel="icon" href="/favicon.png">
-    <%= vite_client_tag %>
-    <%= vite_javascript_tag 'application' %>
-    <!--
-      If using a TypeScript entrypoint file:
-        vite_typescript_tag 'application'
-
-      If using a .jsx or .tsx entrypoint, add the extension:
-        vite_javascript_tag 'application.jsx'
-
-      Visit the guide for more information: https://vite-ruby.netlify.app/guide/rails
-    -->
-
 </head>
 <body class="page-<%= controller_name %>">
   <div class="wrapper d-flex flex-column min-vh-100 bg-light">
@@ -30,8 +18,8 @@
       <%= yield %>
     </div>
     <footer class="footer">
-      <div><a href="https://webhook-king.io">webhook-king</a> © 2021 creativeLabs.</div>
-      <div class="ms-auto">Powered by&nbsp;<a href="https://webhook-king.io/">webhook-king</a></div>
+      <div><a href="https://webhooking.io">webhooking</a> © 2021 creativeLabs.</div>
+      <div class="ms-auto">Powered by&nbsp;<a href="https://webhooking.io/">webhooking</a></div>
     </footer>
   </div>
 </body>

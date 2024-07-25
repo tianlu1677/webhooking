@@ -1,6 +1,0 @@
-<% if @webhook.errors.empty? %>
-  $("#webhook_<%= @webhook.id %>").html('<%= j( render :partial => 'admin/webhooks/webhook', locals: { webhook: @webhook} ) %>');
-  toastr.success("执行成功", "温馨提示")
-<% else %>
-  toastr.error("执行失败", "温馨提示")
-<% end %>

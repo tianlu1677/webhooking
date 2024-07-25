@@ -1,11 +1,11 @@
 version: '3'
 services:
-  webhook-king:
+  webhooking:
     ports: 
       - 3000:3000
-    # image: webhook-king:latest
+    # image: webhooking:latest
     build: .
-    container_name: webhook-king
+    container_name: webhooking
     command: bash -c "bundle exec rake db:create && bundle exec rake db:migrate && bundle exec rails s -b 0.0.0.0 -p 3000"
     environment:
       - ENV=production
@@ -13,10 +13,9 @@ services:
       - PG_HOST=db
       - PG_POOL=30
       - PG_USER=postgres
-      - POSTGRES_PASSWORD=rails6
-      - PG_NAME=rails6_production
+      - POSTGRES_PASSWORD=webhooking
+      - PG_NAME=webhooking_production
       - PG_PORT=5433
-      - REDIS_URL=redis://redis:6379/10
       - REDIS_URL=redis://redis:6379/10
       - SENTRY_DSN=
       - WEBSITE_URL=http://localhost:3005
@@ -24,20 +23,20 @@ services:
       - redis
       - db
     volumes:
-      - ./log:/webhook-king/log
-      - ./public:/webhook-king/public # nginx 可以处理内容
-      - ./public:/webhook-king/public/ # nginx 可以处理内容
-      - ./public/assets:/webhook-king/public/assets # nginx 可以处理内容
-      - ./public/packs:/webhook-king/public/packs # nginx 可以处理内容
-      - ./tmp/pids:/webhook-king/tmp/pids
+      - ./log:/webhooking/log
+      - ./public:/webhooking/public # nginx 可以处理内容
+      - ./public:/webhooking/public/ # nginx 可以处理内容
+      - ./public/assets:/webhooking/public/assets # nginx 可以处理内容
+      - ./public/packs:/webhooking/public/packs # nginx 可以处理内容
+      - ./tmp/pids:/webhooking/tmp/pids
   db:
-    image: postgres:12
+    image: postgres:14
     volumes:
       - "./datadir/postgresql:/var/lib/postgresql/data"
     environment:
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=webhook-king
+      - POSTGRES_PASSWORD=webhooking
   redis:
-    image: redis:4
+    image: redis:6
     volumes:
       - './datadir/redis:/data'

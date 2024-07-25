@@ -1,10 +1,7 @@
 # frozen_string_literal: true
 
-if ENV['ORIGIN']
-  source 'https://rubygems.org'
-else
-  source 'https://gems.ruby-china.com'
-end
+source 'https://rubygems.org'
+
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gem 'rails', '7.0.8.1'
@@ -37,9 +34,6 @@ gem 'mini_racer', '~> 0.12.0'
 gem 'sidekiq', '~> 7.1'
 gem 'sidekiq-cron'
 gem 'sidekiq-failures', '~> 1.0.4'
-gem 'sidekiq_prometheus', '~> 2.0'
-gem 'sidekiq-status', '~> 3.0'
-gem 'sidekiq-throttled'
 
 # user center
 gem 'devise', '~> 4.9.4'
@@ -63,11 +57,8 @@ gem 'meta-tags', '~> 2.21.0'
 gem 'net-http'
 gem 'nokogiri', '>= 1.16.4'
 gem 'pagy', '~> 8.4.0'
-gem 'pundit'
 gem 'ransack'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
-
-# gem 'gon', '~> 6.4.0'
 
 # monitor
 gem 'sentry-ruby'
