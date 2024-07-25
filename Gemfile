@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-gem 'rails', '7.0.8.1'
+gem 'rails', '7.1.3.4'
 
 # db and server
 gem 'pg', '~> 1.5.6'

@@ -14,7 +14,7 @@ services:
       - PG_POOL=30
       - PG_USER=postgres
       - POSTGRES_PASSWORD=webhooking
-      - PG_NAME=webhooking_production
+      - POSTGRES_DB=webhooking_production
       - PG_PORT=5433
       - REDIS_URL=redis://redis:6379/10
       - SENTRY_DSN=

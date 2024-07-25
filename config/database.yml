@@ -1,21 +1,21 @@
 default: &default
   adapter: postgresql
-  host: <%= ENV["DB_HOST"] || '127.0.0.1' %>
+  host: <%= ENV["PG_HOST"] || '127.0.0.1' %>
   port: <%= ENV["PG_PORT"] || '5432' %>
 development:
   <<: *default
   pool: 5
-  database: webhook_king_development
+  database: webhooking_development
 
 test:
   <<: *default
-  database: webhook_king_test
+  database: webhooking_test
 
 production:
   adapter: postgresql
   host: <%= ENV["PG_HOST"]  %>
   pool: <%= ENV["PG_POOL"] || 50 %>
-  username:  <%= ENV['POSTGRES_USER'] || 'webhook_king_postgres' %>
-  password: <%= ENV['POSTGRES_PASSWORD'] || 'webhook_king==' %>
-  database: <%= ENV["PG_NAME"] || 'webhook_king_production' %>
+  username:  <%= ENV['POSTGRES_USER'] || 'webhooking_postgres' %>
+  password: <%= ENV['POSTGRES_PASSWORD'] || 'webhooking==' %>
+  database: <%= ENV["POSTGRES_DBPOSTGRES_DB"] || 'webhooking_production' %>
   port: <%= ENV["PG_PORT"] || '3433' %>
