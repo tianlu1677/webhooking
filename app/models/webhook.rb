@@ -35,6 +35,14 @@ class Webhook < ApplicationRecord
     "#{ENV.fetch('WEBSITE_URL', nil)}/r/#{uuid}"
   end
 
+  def self.ransackable_associations(auth_object = nil)
+    ["custom_actions", "requests", "user"]
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["cors_enabled", "created_at", "expired_at", "id", "receive_email", "resp_body", "resp_code", "resp_content_type", "script_content", "updated_at", "user_id", "uuid", "webhook_token"]
+  end
+
   def build_response_body(request)
     template = Liquid::Template.parse(resp_body)
     template.render 'request' => request.default_template_params

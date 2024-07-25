@@ -2,14 +2,14 @@
   <div class="card-body">
     <p class="alert alert-success copy" data-controller="clipboard" data-clipboard-success-content-value="Copied!">
 
-      你当前的链接是 <span style="color: black " data-clipboard-target="source"><%= @webhook.request_url %></span>  
+      Current Webhook Url <span style="color: black " data-clipboard-target="source"><%= @webhook.request_url %></span>  
     
      <button class="btn btn-sm btn-success" data-action="clipboard#copy" data-clipboard-target="button">Copy</button>
       <%= link_to "Open", "#{@webhook.request_url}", class: 'btn btn-warning btn-sm', target: '_blank' %>
     </p>
-    <%= link_to "删除所有请求", clear_requests_webhook_path(@webhook.uuid), data: { 'turbo-method': :post }, class: 'btn btn-warning btn-sm' %>
+    <%= link_to "Clean All", clear_requests_webhook_path(@webhook.uuid), data: { 'turbo-method': :post }, class: 'btn btn-warning btn-sm' %>
 
-    <%= link_to "重置", reset_webhook_path(@webhook.uuid), data: { 'turbo-method': :post }, class: 'btn btn-warning btn-sm' %>
+    <%= link_to "Reset", reset_webhook_path(@webhook.uuid), data: { 'turbo-method': :post }, class: 'btn btn-warning btn-sm' %>
 
     <button type="button" class="btn btn-warning btn-sm" data-coreui-toggle="modal" data-coreui-target="#WebhookResponseSettingModal">返回内容设置</button>
 

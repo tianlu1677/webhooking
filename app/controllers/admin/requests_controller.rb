@@ -12,22 +12,6 @@ module Admin
 
     def show; end
 
-    def new
-      @request = Request.new
-    end
-
-    def edit; end
-
-    def create
-      @request = Request.new(requests_params)
-
-      if @request.save
-        redirect_to(admin_requests_path, notice: '创建成功。')
-      else
-        render :new
-      end
-    end
-
     def update
       if @request.update(request_params)
         respond_to do |format|

@@ -7,12 +7,12 @@
         = '☰ '
         = resource_class.model_name.human
         / = page_entries_info @users
-        = new_link new_admin_user_path
+        / = new_link new_admin_user_path
       .card-block.card-body[style="overflow: scroll"]
         table.table.table-bordered.table-striped.table-condensed
           thead
             tr
-              - attributes = %w[id email is_admin]
+              - attributes = %w[id email admin]
               - attributes.each do |attr|
                 th
                   = resource_class.human_attribute_name(attr)

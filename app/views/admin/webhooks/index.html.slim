@@ -5,7 +5,7 @@
       .card-header
         = '☰ '
         = resource_class.model_name.human
-        = new_link new_admin_webhook_path
+        / = new_link new_admin_webhook_path
         / = page_entries_info @webhooks
       .card-block.card-body[style="overflow: scroll"]
         table.table.table-bordered.table-striped.table-condensed

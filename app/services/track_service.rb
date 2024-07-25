@@ -1,23 +1,22 @@
 # frozen_string_literal: true
 
 class TrackService
-  attr_accessor :req, :headers
+  attr_accessor :req, :webhook
 
-  def initialize(req, _token_uuid = '')
+  def initialize(webhook, req)
+    @webhook = webhook
     @req = req
-    @headers = req.headers
   end
 
   def do!
-    headers = extract_http_req_headers(req.headers)
-    find_webhook(req.params[:request_token])
-
+    headers = extract_http_req_headers(req.headers.to_h)
     req_method = req.method
     ip = req.remote_ip
     hostname = req.hostname
     user_agent = req.user_agent
     referer = req.referer
     content_length = req.content_length
+
     status_code = 200
 
     query_params = req.query_parameters
@@ -42,13 +41,12 @@ class TrackService
       content_type:,
       content_length:,
       media_type:,
-      user_id: @webhook.user_id
+      user_id: webhook.user_id
     }
     Rails.logger.info("req #{req_data}")
 
-    request = @webhook.requests.create!(req_data)
-    upload_file_params(file_params, request)
-    # binary_upload(req, req)
+    request = webhook.requests.create!(req_data)
+    upload_file_params(file_params, request)    
     request
   end
 
@@ -84,14 +82,10 @@ class TrackService
     req.request_parameters.select { |_k, v| v.is_a?(ActionDispatch::Http::UploadedFile) }
   end
 
-  def find_webhook(uuid)
-    @webhook = Webhook.find_by!(uuid:)
-  end
-
-  def extract_http_req_headers(env)
-    allow = %w[CONTENT_TYPE CONTENT_LENGTH]
-    env.reject do |k, _v|
-      (k != /^HTTP_[A-Z_]+$/ && !allow.include?(k)) || k == 'HTTP_VERSION'
+  def extract_http_req_headers(request_headers)
+    not_allowed = %[HTTP_COOKIE]
+    request_headers.select do |k, _v|
+      (k =~ /^HTTP.+$/) && !not_allowed.include?(k)
     end.map do |k, v|
       [reconstruct_header_name(k), v]
     end.each_with_object(Rack::Utils::HeaderHash.new) do |k_v, hash|

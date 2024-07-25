@@ -1,7 +1,7 @@
 <div class="card mt-2">
   <div class="card-header">
     <i class="fa fa-align-justify"></i>
-    <h6>Request detail</h6>
+    <h6>Request details</h6>
     <%= link_to  "custom action log", custom_action_logs_request_path(request.uuid), class: 'btn btn-warning btn-sm' if request.custom_action_logs.exists? %>  
   </div>
   <div class="card-body">
@@ -21,11 +21,19 @@
       </tr>
       <tr>
         <td>Size</td>
-        <td><%= request.content_length %></td>
+        <td><%= request.content_length %> bytes</td>
+      </tr>
+      <tr>
+        <td>Time</td>
+        <td><%= request.content_length %> bytes</td>
       </tr>
       <tr>
         <td>ID</td>
         <td><%= request.uuid %></td>
+      </tr>
+      <tr>
+        <td>Note</td>
+        <td>Note</td>
       </tr>
       </tbody>
     </table>
