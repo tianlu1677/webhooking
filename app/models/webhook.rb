@@ -27,7 +27,7 @@ class Webhook < ApplicationRecord
   validates :uuid, presence: true, uniqueness: true
   validates :short, length: { minimum: 4, maximum: 50 }, uniqueness: true, allow_blank: true
 
-  before_create :init_data
+  before_validation :set_uuid
 
   def request_url
     "#{ENV.fetch('WEBSITE_URL', nil)}/r/#{short || uuid}"
@@ -66,7 +66,7 @@ class Webhook < ApplicationRecord
 
   private
 
-  def init_data
+  def set_uuid
     self.uuid = SecureRandom.uuid.gsub('-', '')
   end
 
