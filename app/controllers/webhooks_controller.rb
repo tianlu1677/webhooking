@@ -13,7 +13,7 @@ class WebhooksController < ApplicationController
 
   def update
     @webhook.update(webhook_params)
-    redirect_to "/webhooks/#{@webhook.uuid}"
+    redirect_to "/webhooks/#{@webhook.short || @webhook.uuid}"
   end
 
   def clear_requests

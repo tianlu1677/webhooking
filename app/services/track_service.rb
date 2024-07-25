@@ -9,6 +9,7 @@ class TrackService
   end
 
   def do!
+    # binding.pry
     headers = extract_http_req_headers(req.headers.to_h)
     req_method = req.method
     ip = req.remote_ip
@@ -16,6 +17,7 @@ class TrackService
     user_agent = req.user_agent
     referer = req.referer
     content_length = req.content_length
+    path = "#{req.host}#{req.path}"
 
     status_code = 200
 
@@ -28,6 +30,7 @@ class TrackService
     raw_content = '' if file_params.present?
     # 当有文件时，把文件都提取出来。
     req_data = {
+      path:,
       headers:,
       req_method:,
       ip:,

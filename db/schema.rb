@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_25_151213) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_25_160905) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -87,6 +87,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_25_151213) do
     t.string "content_type"
     t.string "media_type"
     t.text "raw_content"
+    t.string "path"
     t.index ["webhook_id"], name: "index_requests_on_webhook_id"
   end
 

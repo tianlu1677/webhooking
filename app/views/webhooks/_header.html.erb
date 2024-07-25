@@ -2,7 +2,7 @@
   <div class="card-body">
     <p class="alert alert-success copy" data-controller="clipboard" data-clipboard-success-content-value="Copied!">
 
-      Current Webhook Url <span style="color: black " data-clipboard-target="source"><%= @webhook.request_url %></span>  
+      Webhook <span style="color: black " data-clipboard-target="source"><%= @webhook.request_url %></span>  
     
      <button class="btn btn-sm btn-success" data-action="clipboard#copy" data-clipboard-target="button">Copy</button>
       <%= link_to "Open", "#{@webhook.request_url}", class: 'btn btn-warning btn-sm', target: '_blank' %>
@@ -11,7 +11,8 @@
 
     <%= link_to "Reset", reset_webhook_path(@webhook.uuid), data: { 'turbo-method': :post }, class: 'btn btn-warning btn-sm' %>
 
-    <button type="button" class="btn btn-warning btn-sm" data-coreui-toggle="modal" data-coreui-target="#WebhookResponseSettingModal">返回内容设置</button>
+    <button type="button" class="btn btn-warning btn-sm" data-coreui-toggle="modal" data-coreui-target="#WebhookResponseSettingModal">Response Setting</button>
+    <button type="button" class="btn btn-warning btn-sm" data-coreui-toggle="modal" data-coreui-target="#WebhookEditModal">Setting</button>
 
     <%= link_to "custom action", webhook_custom_actions_path(@webhook.uuid), class: 'btn btn-warning btn-sm' %>   
   </div>

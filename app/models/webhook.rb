@@ -24,10 +24,13 @@ class Webhook < ApplicationRecord
 
   belongs_to :user, optional: true
 
+  validates :uuid, presence: true, uniqueness: true
+  validates :short, length: { minimum: 4, maximum: 50 }, uniqueness: true, allow_blank: true
+
   before_create :init_data
 
   def request_url
-    "#{ENV.fetch('WEBSITE_URL', nil)}/r/#{uuid}"
+    "#{ENV.fetch('WEBSITE_URL', nil)}/r/#{short || uuid}"
   end
 
   def self.ransackable_associations(_auth_object = nil)
