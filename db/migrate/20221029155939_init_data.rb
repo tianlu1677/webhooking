@@ -85,8 +85,7 @@ class InitData < ActiveRecord::Migration[6.1]
     t.string 'receive_email'
     t.datetime 'expired_at'
     t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
-    t.string 'webhook_token'
+    t.datetime 'updated_at', precision: 6, null: false    
     t.integer 'user_id'
     t.integer 'resp_code', default: 200
     t.string 'resp_body', default: ''

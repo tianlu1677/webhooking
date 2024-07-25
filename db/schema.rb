@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_25_101324) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_25_151213) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -66,15 +66,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_25_101324) do
     t.index ["webhook_id"], name: "index_custom_actions_on_webhook_id"
   end
 
-  create_table "operation_logs", force: :cascade do |t|
-    t.string "user_id"
-    t.string "params"
-    t.string "action"
-    t.string "controller"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "requests", force: :cascade do |t|
     t.string "uuid"
     t.string "url"
@@ -126,13 +117,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_25_101324) do
     t.datetime "expired_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "webhook_token"
     t.integer "user_id"
     t.integer "resp_code", default: 200
     t.string "resp_body", default: ""
     t.string "resp_content_type", default: "text/plain"
     t.boolean "cors_enabled", default: true
     t.text "script_content"
+    t.string "short"
+    t.index ["short"], name: "index_webhooks_on_short", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

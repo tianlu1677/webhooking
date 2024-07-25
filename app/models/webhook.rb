@@ -8,28 +8,23 @@
 #  uuid              :string
 #  receive_email     :string
 #  expired_at        :datetime
-#  user_id        :integer
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
-#  webhook_token     :string
 #  user_id           :integer
 #  resp_code         :integer          default(200)
 #  resp_body         :string           default("")
 #  resp_content_type :string           default("text/plain")
 #  cors_enabled      :boolean          default(TRUE)
 #  script_content    :text
+#  short             :string
 #
 class Webhook < ApplicationRecord
-  belongs_to :user, optional: true
-
   has_many :requests
   has_many :custom_actions, -> { order(position: :asc) }
 
-  before_create :set_init_data
+  belongs_to :user, optional: true
 
-  def set_init_data
-    self.uuid = SecureRandom.uuid.gsub('-', '')
-  end
+  before_create :init_data
 
   def request_url
     "#{ENV.fetch('WEBSITE_URL', nil)}/r/#{uuid}"
@@ -66,9 +61,15 @@ class Webhook < ApplicationRecord
     ]
   end
 
+  private
+
+  def init_data
+    self.uuid = SecureRandom.uuid.gsub('-', '')
+  end
+
   class << self
-    def find_by_id_or_uuid(id)
-      where('uuid = ? OR id = ?', id.to_s, id.to_i).first
+    def fetch(short_or_uuid)
+      where('uuid = ? OR short = ?', short_or_uuid, short_or_uuid).first
     end
   end
 end

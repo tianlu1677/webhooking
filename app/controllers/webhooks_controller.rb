@@ -7,7 +7,7 @@ class WebhooksController < ApplicationController
   def show
     return redirect_to not_found_webhooks_path if @webhook.nil?
 
-    @requests = @webhook.requests.order('id desc')
+    @requests = @webhook.requests.order('id desc').limit(100)
     @current_request = Request.find_by(uuid: params[:request_id]) || @requests.first
   end
 
@@ -23,7 +23,7 @@ class WebhooksController < ApplicationController
 
   def reset
     @webhook = BuildWebhookService.new(current_user, '').create!
-    setup_cookie_webhook_token(@webhook.webhook_token)
+    setup_cookie_webhook_token(@webhook)
     redirect_to "/webhooks/#{@webhook.uuid}"
   end
 
@@ -73,10 +73,10 @@ class WebhooksController < ApplicationController
 
   def set_webhook_by_params
     if current_user
-      @webhook = Webhook.where(user_id: current_user.id).find_by_id_or_uuid(params[:id])
-      setup_cookie_webhook_token(@webhook.webhook_token) if @webhook.present?
+      @webhook = Webhook.where(user_id: current_user.id).fetch(params[:id])
+      setup_cookie_webhook_token(@webhook) if @webhook.present?
     else
-      @webhook = Webhook.where(webhook_token: cookie_webhook_token).find_by_id_or_uuid(params[:id])
+      @webhook = Webhook.fetch(params[:id])
     end
   end
 end

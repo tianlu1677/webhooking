@@ -11,7 +11,7 @@
         table.table.table-bordered.table-striped.table-condensed
           thead
             tr
-              - attributes = %w[id user_id uuid webhook_token request_count created_at ]
+              - attributes = %w[id user_id uuid short request_count created_at ]
               - attributes.each do |attr|
                 th
                   = resource_class.human_attribute_name(attr)
@@ -23,7 +23,7 @@
                 td = webhook.id
                 td = webhook.user_id
                 td = webhook.uuid
-                td = webhook.webhook_token
+                td = webhook.short
                 td = link_to webhook.requests.count, admin_requests_path(q: {webhook_id_eq: webhook.id })
                 td = webhook.created_at.try(:strftime, '%Y-%m-%d %H:%M:%S').presence || "-"
                 td

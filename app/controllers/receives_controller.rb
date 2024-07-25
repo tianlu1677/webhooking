@@ -12,7 +12,7 @@ class ReceivesController < ApplicationController
   private
 
   def extrack_token
-    @token_uuid = params[:request_token]
-    @webhook = Webhook.find_by!(uuid: @token_uuid)
+    short_or_uuid = params[:request_token]
+    @webhook = Webhook.fetch(short_or_uuid)
   end
 end

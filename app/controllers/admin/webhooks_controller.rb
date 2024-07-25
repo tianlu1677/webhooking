@@ -6,7 +6,7 @@ module Admin
 
     def index
       @q = Webhook.all.ransack(params[:q])
-      @webhooks = @q.result.order('webhooks.id desc') # .page(params[:page] || 1).per(params[:per] || 10)
+      @webhooks = @q.result.order('webhooks.id desc')
       @pagy, @webhooks = pagy(@webhooks, items: params[:per_page] || 20, page: params[:page])
     end
 
@@ -22,7 +22,7 @@ module Admin
       @webhook = Webhook.new(webhooks_params)
 
       if @webhook.save
-        redirect_to(admin_webhooks_path, notice: '创建成功。')
+        redirect_to(admin_webhooks_path, notice: 'create success')
       else
         render :new
       end
@@ -31,7 +31,7 @@ module Admin
     def update
       if @webhook.update(webhook_params)
         respond_to do |format|
-          format.html { redirect_to(admin_webhooks_path, notice: '更新成功。') }
+          format.html { redirect_to(admin_webhooks_path, notice: 'Update success') }
           format.js
         end
       else
@@ -42,7 +42,7 @@ module Admin
     def destroy
       @webhook.destroy
       respond_to do |format|
-        format.html { redirect_to admin_webhooks_path, notice: '删除成功.' }
+        format.html { redirect_to admin_webhooks_path, notice: 'Delete success' }
         format.js
       end
     end

@@ -7,10 +7,10 @@ class ApplicationController < ActionController::Base
   after_action { pagy_headers_merge(@pagy) if @pagy }
 
   def cookie_webhook_token
-    cookies.encrypted['webhook_token'].presence
+    cookies.encrypted['webhook_uuid'].presence
   end
 
-  def setup_cookie_webhook_token(value)
-    cookies.encrypted['webhook_token'] = value
+  def setup_cookie_webhook_token(webhook)
+    cookies.encrypted['webhook_uuid'] = webhool.uuid
   end
 end

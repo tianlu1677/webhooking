@@ -6,7 +6,7 @@ module Admin
 
     def index
       @q = User.all.ransack(params[:q])
-      @users = @q.result.order('users.id desc') # .page(params[:page] || 1).per(params[:per] || 10)
+      @users = @q.result.order('users.id desc')
 
       @pagy, @users = pagy(@users, per_page: params[:per_page], page: params[:page])
     end
@@ -23,7 +23,7 @@ module Admin
       @user = User.new(user_params)
 
       if @user.save
-        redirect_to(admin_users_path, notice: '创建成功。')
+        redirect_to(admin_users_path, notice: 'Create success')
       else
         render :new
       end
@@ -32,7 +32,7 @@ module Admin
     def update
       if @user.update(user_params)
         respond_to do |format|
-          format.html { redirect_to(admin_users_path, notice: '更新成功。') }
+          format.html { redirect_to(admin_users_path, notice: 'Update success') }
           format.js
         end
       else
@@ -42,7 +42,7 @@ module Admin
 
     def destroy
       @user.destroy
-      redirect_to(admin_users_path, notice: '删除成功。')
+      redirect_to(admin_users_path, notice: 'Delete success')
     end
 
     private

@@ -1,25 +1,25 @@
 # frozen_string_literal: true
 
 class BuildWebhookService
-  attr_accessor :user, :webhook_token, :opts
+  attr_accessor :user, :short_or_uuid, :opts
 
-  def initialize(user = nil, webhook_token_or_uuid = nil)
+  def initialize(user = nil, short_or_uuid = nil)
     @user = user
-    @webhook_token = webhook_token_or_uuid
+    @short_or_uuid = short_or_uuid
   end
 
   def find_or_create!
-    if webhook_token.blank? || (webhook = find!).blank?
+    if short_or_uuid.blank? || (webhook = find!).blank?
       webhook = create!
     end
     webhook
   end
 
   def create!
-    Webhook.create(user_id: @user&.id, webhook_token: SecureRandom.hex)
+    Webhook.create(user_id: @user&.id)
   end
 
   def find!
-    Webhook.where(user_id: @user&.id).where('webhook_token = ? OR uuid = ?', webhook_token, webhook_token).first
+    Webhook.where(user_id: @user&.id).fetch(short_or_uuid).first
   end
 end
