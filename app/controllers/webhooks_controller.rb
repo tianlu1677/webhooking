@@ -2,7 +2,7 @@
 
 class WebhooksController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:left_list_item]
-  before_action :set_webhook_by_params, only: %i[show clear_requests left_list_item update run_script]
+  before_action :set_webhook, only: %i[show clear_requests left_list_item update run_script]
 
   def show
     return redirect_to not_found_webhooks_path if @webhook.nil?
@@ -12,7 +12,7 @@ class WebhooksController < ApplicationController
   end
 
   def update
-    @webhook.update(params.require(:webhook).permit(:resp_code, :resp_content_type, :resp_body, :cors_enabled, :script_content))
+    @webhook.update(webhook_params)
     redirect_to "/webhooks/#{@webhook.uuid}"
   end
 
@@ -32,32 +32,6 @@ class WebhooksController < ApplicationController
     @current_request
   end
 
-  # def exec_script
-  #   content = params[:content] || @webhook.script_content
-
-  #   Capybara.default_driver = :selenium_chrome_headless # :selenium_chrome and :selenium_chrome_headless
-  #   Capybara.visit('http://ohio.ce04.com')
-  #   page = Capybara.page
-
-  #   answer = page.evaluate_script(<<~JS)
-  #     (function () {
-  #       window.gooday = "hello";
-  #       window.headers = "yes";
-  #     })()
-  #   JS
-
-  #   answer = page.evaluate_script(<<~JS)
-  #     (function () {
-  #       #{content}
-  #     })()
-  #   JS
-  #   render json: { answer: answer}
-  # rescue Selenium::WebDriver::Error::WebDriverError => e
-  #   render json: { jserror: e}
-  # rescue => e
-  #   render json: { error: e }
-  # end
-
   def run_script
     content = params[:content] || @webhook.script_content
     context = MiniRacer::Context.new
@@ -71,12 +45,16 @@ class WebhooksController < ApplicationController
 
   private
 
-  def set_webhook_by_params
+  def set_webhook
     if current_user
       @webhook = Webhook.where(user_id: current_user.id).fetch(params[:id])
       setup_cookie_webhook_token(@webhook) if @webhook.present?
     else
       @webhook = Webhook.fetch(params[:id])
     end
+  end
+
+  def webhook_params
+    params.require(:webhook).permit(:short, :resp_code, :resp_content_type, :resp_body, :cors_enabled, :script_content)
   end
 end

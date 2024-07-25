@@ -46,7 +46,7 @@ class TrackService
     Rails.logger.info("req #{req_data}")
 
     request = webhook.requests.create!(req_data)
-    upload_file_params(file_params, request)    
+    upload_file_params(file_params, request)
     request
   end
 
@@ -83,53 +83,16 @@ class TrackService
   end
 
   def extract_http_req_headers(request_headers)
-    not_allowed = %[HTTP_COOKIE]
-    request_headers.select do |k, _v|
+    not_allowed = %(HTTP_COOKIE)
+    allow_headers = request_headers.select do |k, _v|
       (k =~ /^HTTP.+$/) && !not_allowed.include?(k)
-    end.map do |k, v|
-      [reconstruct_header_name(k), v]
-    end.each_with_object(Rack::Utils::HeaderHash.new) do |k_v, hash|
-      k, v = k_v
-      hash[k] = v
+    end
+    allow_headers.transform_keys do |k|
+      reconstruct_header_name(k)
     end
   end
 
   def reconstruct_header_name(name)
     name.sub(/^HTTP_/, '').gsub('_', '-').downcase
-  end
-
-  COOKIE_PARAM_PATTERN = %r{\A([^(),/<>@;:\\"\[\]?={}\s]+)(?:=([^;]*))?\Z}
-  COOKIE_SPLIT_PATTERN = /;\s*/
-
-  def parse_cookie(cookie_str)
-    params = cookie_str.split(COOKIE_SPLIT_PATTERN)
-    info = params.shift.match(COOKIE_PARAM_PATTERN)
-    return {} unless info
-
-    cookie = {
-      name: info[1],
-      value: CGI.unescape(info[2])
-    }
-
-    params.each do |param|
-      result = param.match(COOKIE_PARAM_PATTERN)
-      next unless result
-
-      key = result[1].downcase.to_sym
-      value = result[2]
-      case key
-      when :expires
-        begin
-          cookie[:expires] = Time.parse(value)
-        rescue ArgumentError
-        end
-      when :httponly, :secure
-        cookie[key] = true
-      else
-        cookie[key] = value
-      end
-    end
-
-    cookie
   end
 end

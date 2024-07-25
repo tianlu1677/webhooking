@@ -66,12 +66,12 @@ class Request < ApplicationRecord
     raw_content
   end
 
-  def self.ransackable_attributes(auth_object = nil)
-    ["content_length", "content_type", "created_at", "form_params", "headers", "hostname", "id", "ip", "media_type", "query_params", "raw_content", "referer", "req_method", "status_code", "token_uuid", "updated_at", "url", "user_agent", "user_id", "uuid", "webhook_id"]
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[content_length content_type created_at form_params headers hostname id ip media_type query_params raw_content referer req_method status_code token_uuid updated_at url user_agent user_id uuid webhook_id]
   end
 
-  def self.ransackable_associations(auth_object = nil)
-    ["custom_action_logs", "files_attachments", "files_blobs", "user", "webhook"]
+  def self.ransackable_associations(_auth_object = nil)
+    %w[custom_action_logs files_attachments files_blobs user webhook]
   end
 
   private

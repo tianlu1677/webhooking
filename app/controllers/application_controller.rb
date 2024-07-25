@@ -11,6 +11,6 @@ class ApplicationController < ActionController::Base
   end
 
   def setup_cookie_webhook_token(webhook)
-    cookies.encrypted['webhook_uuid'] = webhool.uuid
+    cookies.encrypted['webhook_uuid'] = webhook.uuid
   end
 end

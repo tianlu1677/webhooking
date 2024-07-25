@@ -20,6 +20,6 @@ class BuildWebhookService
   end
 
   def find!
-    Webhook.where(user_id: @user&.id).fetch(short_or_uuid).first
+    Webhook.where(user_id: @user&.id).fetch(short_or_uuid)
   end
 end

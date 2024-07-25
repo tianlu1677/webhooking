@@ -3,7 +3,7 @@
 module Admin
   class ApplicationController < ApplicationController
     layout 'admin'
-    include Admin::ResourceContent    
+    include Admin::ResourceContent
     include Pagy::Backend
     include ActionView::RecordIdentifier
 
