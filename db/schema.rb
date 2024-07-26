@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_25_160905) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_26_093029) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,6 +40,17 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_25_160905) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "agents", force: :cascade do |t|
+    t.string "type"
+    t.string "name"
+    t.integer "webhook_id"
+    t.text "option"
+    t.integer "position", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["webhook_id"], name: "index_agents_on_webhook_id"
   end
 
   create_table "custom_action_logs", force: :cascade do |t|
