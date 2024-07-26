@@ -21,7 +21,8 @@
 class Webhook < ApplicationRecord
   has_many :requests
   has_many :custom_actions, -> { order(position: :asc) }
-
+  has_many :agents
+  
   belongs_to :user, optional: true
 
   validates :uuid, presence: true, uniqueness: true

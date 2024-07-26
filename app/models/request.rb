@@ -25,6 +25,7 @@
 #  content_type   :string
 #  media_type     :string
 #  raw_content    :text
+#  path           :string
 #
 class Request < ApplicationRecord
   belongs_to :user, optional: true

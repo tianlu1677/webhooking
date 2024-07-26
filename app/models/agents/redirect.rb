@@ -11,12 +11,14 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-class Agent < ApplicationRecord
-  belongs_to :webhook
+module Agents
+  class Redirect < Agent
+    store_accessor :options, :redirect_url, prefix: 'opt'
 
-  acts_as_list scope: :webhook_id
+    validates :opt_redirect_url, presence: true
 
-  def execute
-    raise NotImplementedError, "Subclasses must implement the execute method"
+    def execute
+      
+    end
   end
 end

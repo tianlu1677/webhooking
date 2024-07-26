@@ -5,7 +5,7 @@ class ReceivesController < ApplicationController
   before_action :find_webhook
 
   def create
-    webhook_request = TrackService.new(@webhook, request).do!
+    webhook_request = TrackService.execute(@webhook, request)
     response_body = @webhook.build_response_body(webhook_request)
     if response_body.blank?
       render body: 'Successfully processed webhook request without a custom response body', status: 200

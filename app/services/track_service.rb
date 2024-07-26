@@ -3,6 +3,11 @@
 class TrackService
   attr_accessor :req, :webhook
 
+  class << self
+    def execute(webhook, req)
+      new.execute(webhook, req)
+    end
+  end
   def initialize(webhook, req)
     @webhook = webhook
     @req = req
