@@ -6,7 +6,7 @@ class TrackService
   class << self
     def execute(webhook, req)
       new(webhook, req).execute
-    end
+    end    
   end
 
   def initialize(webhook, req)
@@ -14,8 +14,7 @@ class TrackService
     @req = req
   end
 
-  def execute
-    # binding.pry
+  def request_info
     headers = extract_http_req_headers(req.headers.to_h)
     req_method = req.method
     ip = req.remote_ip
@@ -35,7 +34,7 @@ class TrackService
     raw_content = req.raw_post
     raw_content = '' if file_params.present?
     # 当有文件时，把文件都提取出来。
-    req_data = {
+    {
       path:,
       headers:,
       req_method:,
@@ -52,10 +51,14 @@ class TrackService
       media_type:,
       user_id: webhook.user_id
     }
+  end
+
+  def execute
+    req_data = request_info
     Rails.logger.info("req #{req_data}")
 
     request = webhook.requests.create!(req_data)
-    upload_file_params(file_params, request)
+    # upload_file_params(file_params, request)
     request
   end
 
