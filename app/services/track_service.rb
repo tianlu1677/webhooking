@@ -5,15 +5,16 @@ class TrackService
 
   class << self
     def execute(webhook, req)
-      new.execute(webhook, req)
+      new(webhook, req).execute
     end
   end
+
   def initialize(webhook, req)
     @webhook = webhook
     @req = req
   end
 
-  def do!
+  def execute
     # binding.pry
     headers = extract_http_req_headers(req.headers.to_h)
     req_method = req.method
