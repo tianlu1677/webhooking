@@ -4,7 +4,7 @@ class CreateAgents < ActiveRecord::Migration[7.1]
       t.string :type
       t.string :name
       t.integer :webhook_id
-      t.text :option
+      t.jsonb :options, default: {}
       t.integer :position, default: 0
 
       t.timestamps

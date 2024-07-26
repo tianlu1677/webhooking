@@ -46,7 +46,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_26_093029) do
     t.string "type"
     t.string "name"
     t.integer "webhook_id"
-    t.text "option"
+    t.jsonb "options", default: {}
     t.integer "position", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
