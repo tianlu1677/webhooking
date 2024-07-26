@@ -55,6 +55,6 @@ class WebhooksController < ApplicationController
   end
 
   def webhook_params
-    params.require(:webhook).permit(:short, :resp_code, :resp_content_type, :resp_body, :cors_enabled, :script_content)
+    params.require(:webhook).permit(:short, :redirect_url, :resp_code, :resp_content_type, :resp_body, :cors_enabled, :script_content)
   end
 end

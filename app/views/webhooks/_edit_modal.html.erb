@@ -10,7 +10,11 @@
           <div class='mb-12 row'>            
             <%= f.label :short %>
             <%= f.text_field :short, class: 'form-control'%>
-          </div>          
+          </div>
+          <div class='mb-12 row'>
+            <%= f.label :redirect_url %>
+            <%= f.text_field :redirect_url, class: 'form-control'%>
+          </div>
       </div>
       <div class="modal-footer">
         <%= f.submit "Save", class: 'btn btn-primary' %>

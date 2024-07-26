@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_26_093029) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_26_112043) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -136,6 +136,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_26_093029) do
     t.boolean "cors_enabled", default: true
     t.text "script_content"
     t.string "short"
+    t.string "redirect_url"
     t.index ["short"], name: "index_webhooks_on_short", unique: true
   end
 

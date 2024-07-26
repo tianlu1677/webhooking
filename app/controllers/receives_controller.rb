@@ -6,6 +6,10 @@ class ReceivesController < ApplicationController
 
   def create
     webhook_request = TrackService.execute(@webhook, request)
+    if @webhook.redirect_url.present?
+      return redirect_to @webhook.redirect_url, status: 302, allow_other_host: true
+    end
+
     response_body = @webhook.build_response_body(webhook_request)
     if response_body.blank?
       render body: 'Successfully processed webhook request without a custom response body', status: 200
