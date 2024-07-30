@@ -2,7 +2,9 @@
 
 class WebhooksController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:left_list_item]
-  before_action :set_webhook, only: %i[show clear_requests left_list_item update run_script]
+  before_action :set_webhook, except: [:reset]
+
+  before_action :authenticate
 
   def show
     return redirect_to not_found_webhooks_path if @webhook.nil?
@@ -43,7 +45,20 @@ class WebhooksController < ApplicationController
     render json: { error: e }
   end
 
+  def csv_export
+    Webhooks::CsvExport.new(@webhook).execute
+  end
+
   private
+
+  def authenticate
+    binding.pry
+    return if @webhook.password.blank?
+
+    authenticate_or_request_with_http_basic do |username, password|
+      username == 'admin' && password == @webhook.password
+    end
+  end
 
   def set_webhook
     if current_user

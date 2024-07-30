@@ -1,8 +1,11 @@
+# frozen_string_literal: true
+
 class IncomingsMailbox < ApplicationMailbox
   before_processing :ensure_user
 
   def process
     return if user.nil?
+
     mail_attachments
   end
 
@@ -17,7 +20,7 @@ class IncomingsMailbox < ApplicationMailbox
   end
 
   private
-  
+
   def user
     @user = User.find_by(email: mail.from)
   end

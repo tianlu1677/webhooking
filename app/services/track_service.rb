@@ -6,7 +6,7 @@ class TrackService
   class << self
     def execute(webhook, req)
       new(webhook, req).execute
-    end    
+    end
   end
 
   def initialize(webhook, req)
@@ -57,9 +57,8 @@ class TrackService
     req_data = request_info
     Rails.logger.info("req #{req_data}")
 
-    request = webhook.requests.create!(req_data)
+    webhook.requests.create!(req_data)
     # upload_file_params(file_params, request)
-    request
   end
 
   def extract_form_params(req)

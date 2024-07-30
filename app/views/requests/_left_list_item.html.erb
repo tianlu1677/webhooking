@@ -1,4 +1,4 @@
-<%= link_to "/webhooks/#{request.token_uuid}/#{request.uuid}" do %>
+<%= link_to "/webhooks/#{request.webhook_uuid}/#{request.uuid}" do %>
   <div class="list-group-item list-group-item-action flex-column align-items-start <%= current_request&.uuid == request.uuid  ? 'active' : '' %>">
       <div class="d-flex w-100 justify-content-between">
         <h6 class="mb-1 bg-green"><%= request.req_method %> #<%= request.uuid.to_s[0..4]  %></h6><small><%= request.created_at.strftime('%Y/%m/%d %H:%M:%S') %></small>

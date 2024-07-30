@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: agents
@@ -17,8 +19,6 @@ module Agents
 
     validates :opt_redirect_url, presence: true
 
-    def execute
-      
-    end
+    def execute; end
   end
 end

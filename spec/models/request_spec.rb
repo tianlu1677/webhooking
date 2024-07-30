@@ -6,16 +6,19 @@
 #
 #  id             :bigint           not null, primary key
 #  uuid           :string
+#  webhook_uuid   :string
 #  url            :string
 #  req_method     :string
+#  size           :integer
+#  time           :float
 #  ip             :string
+#  note           :string
 #  hostname       :string
 #  user_agent     :string
 #  referer        :string
 #  headers        :jsonb
 #  status_code    :integer
 #  user_id        :integer
-#  token_uuid     :string
 #  webhook_id     :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
