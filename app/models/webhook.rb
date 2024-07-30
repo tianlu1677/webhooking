@@ -17,18 +17,24 @@
 #  cors_enabled      :boolean          default(TRUE)
 #  script_content    :text
 #  short             :string
+#  redirect_url      :string
+#  username          :string
+#  password          :string
+#  timeout           :integer
+#  request_limit     :integer
+#  expiry            :integer
 #
 class Webhook < ApplicationRecord
   has_many :requests
   has_many :custom_actions, -> { order(position: :asc) }
   has_many :agents
-  
+
   belongs_to :user, optional: true
 
   validates :uuid, presence: true, uniqueness: true
   validates :short, length: { minimum: 4, maximum: 50 }, uniqueness: true, allow_blank: true
 
-before_validation :set_uuid
+  before_validation :set_uuid
 
   def request_url
     "#{ENV.fetch('WEBSITE_URL', nil)}/r/#{short || uuid}"
@@ -67,7 +73,7 @@ before_validation :set_uuid
 
   private
 
-def set_uuid
+  def set_uuid
     self.uuid = SecureRandom.uuid.gsub('-', '')
   end
 

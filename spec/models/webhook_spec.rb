@@ -17,6 +17,12 @@
 #  cors_enabled      :boolean          default(TRUE)
 #  script_content    :text
 #  short             :string
+#  redirect_url      :string
+#  username          :string
+#  password          :string
+#  timeout           :integer
+#  request_limit     :integer
+#  expiry            :integer
 #
 require 'rails_helper'
 

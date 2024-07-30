@@ -6,16 +6,19 @@
 #
 #  id             :bigint           not null, primary key
 #  uuid           :string
+#  webhook_uuid   :string
 #  url            :string
 #  req_method     :string
+#  size           :integer
+#  time           :float
 #  ip             :string
+#  note           :string
 #  hostname       :string
 #  user_agent     :string
 #  referer        :string
 #  headers        :jsonb
 #  status_code    :integer
 #  user_id        :integer
-#  token_uuid     :string
 #  webhook_id     :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
@@ -40,7 +43,7 @@ class Request < ApplicationRecord
 
   def set_init_data
     self.uuid = SecureRandom.uuid.gsub('-', '')
-    self.token_uuid = webhook.uuid
+    self.webhook_uuid = webhook.uuid
   end
 
   def send_websocket_notification
@@ -68,7 +71,7 @@ class Request < ApplicationRecord
   end
 
   def self.ransackable_attributes(_auth_object = nil)
-    %w[content_length content_type created_at form_params headers hostname id ip media_type query_params raw_content referer req_method status_code token_uuid updated_at url user_agent user_id uuid webhook_id]
+    %w[content_length content_type created_at form_params headers hostname id ip media_type query_params raw_content referer req_method status_code webhook_uuid updated_at url user_agent user_id uuid webhook_id]
   end
 
   def self.ransackable_associations(_auth_object = nil)
