@@ -52,7 +52,6 @@ class WebhooksController < ApplicationController
   private
 
   def authenticate
-    binding.pry
     return if @webhook.password.blank?
 
     authenticate_or_request_with_http_basic do |username, password|
