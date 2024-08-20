@@ -1,0 +1,11 @@
+.col-lg-12.search_form.mb-2
+  = search_form_for [:admin, @q], class: 'form-inline' do |f|
+    .input-group.mb-2.mr-sm-2
+      = f.label 'ID'
+      = f.search_field :id_eq, class: 'form-control'    
+    .input-group.mb-2.mr-sm-2
+      = f.label 'Create Time'
+      = f.search_field :created_at_gteq, placeholder: '开始时间', class: 'datepicker form-control'
+      = f.search_field :created_at_lteq, placeholder: '结束时间', class: 'datepicker form-control'
+    .input-group.mb-2.mr-sm-2
+      = f.submit 'Search', class: 'btn btn-sm btn-success'

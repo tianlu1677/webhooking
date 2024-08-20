@@ -6,7 +6,7 @@ SimpleForm.setup do |config|
   config.button_class = 'btn btn-default'
   config.boolean_label_class = true
 
-  config.wrappers :vertical_form, tag: 'div', class: 'form-group row', error_class: 'has-danger' do |b|
+  config.wrappers :vertical_form, tag: 'div', class: 'form-group  mt-1', error_class: 'has-danger' do |b|
     b.use :html5
     b.use :placeholder
     b.optional :maxlength
@@ -54,7 +54,7 @@ SimpleForm.setup do |config|
     b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
   end
 
-  config.wrappers :horizontal_form, tag: 'div', class: 'form-group row', error_class: 'has-danger' do |b|
+  config.wrappers :horizontal_form, tag: 'div', class: 'form-group row mt-2', error_class: 'has-danger' do |b|
     b.use :html5
     b.use :placeholder
     b.optional :maxlength

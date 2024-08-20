@@ -1,0 +1,65 @@
+.row
+  = render "search"
+  .col-lg-12
+    .card
+      .card-header
+        = '☰ '
+        = resource_class.model_name.human
+        / = new_link new_admin_schedule_path
+        / = page_entries_info @schedules
+      .card-block.card-body[style="overflow: scroll"]
+        table.table.table-bordered.table-striped.table-condensed
+          thead
+            tr
+              - attributes = %w[id name interval request_url request_setting cron time disable]
+              - attributes.each do |attr|
+                th
+                  = resource_class.human_attribute_name(attr)
+              th
+                = t('action_labels.action')
+          tbody
+            - @schedules.each do |schedule|
+              tr id="schedule_#{schedule.id}"
+                td = schedule.id
+                td = schedule.name
+                td = schedule.interval
+                td = schedule.request_url
+
+                td
+                  | method: 
+                  = schedule.request_method
+                  br
+                  | request_body
+                  = schedule.request_body
+                  br
+                  | request_headers
+                  = schedule.request_headers
+                  br
+                  | request_status_min
+                  = schedule.request_status_min
+                  br
+                  | request_status_max
+                  = schedule.request_status_max
+                  br
+                  | user_id
+                  = schedule.user_id
+                td = schedule.cron
+                td 
+                  | last_run_at
+                  = schedule.last_run_at
+                  br
+                  | last_run_status
+                  = schedule.last_run_status
+                  br
+                  | updated_at
+                  = schedule.updated_at
+                  br
+                  | create_at
+                  = schedule.created_at.try(:strftime, '%Y-%m-%d %H:%M:%S').presence || "-"
+                td= schedule.disable
+                td
+                  = edit_link edit_admin_schedule_path(schedule)
+                  = show_link admin_schedule_path(schedule)
+                  = destroy_link admin_schedule_path(schedule), remote: true
+
+        == pagy_nav @pagy

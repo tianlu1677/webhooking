@@ -47,7 +47,7 @@ class Request < ApplicationRecord
   end
 
   def send_websocket_notification
-    ActionCable.server.broadcast("webhook-notify-#{webhook.uuid}", { webhook_id: webhook.id, request_id: id })
+    ActionCable.server.broadcast("webhook-notify-#{webhook.uuid}", { webhook_id: webhook.uuid, request_id: id })
   end
 
   def default_template_param_keys

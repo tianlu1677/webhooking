@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: schedules
@@ -24,10 +26,18 @@ require 'web_request'
 class Schedule < ApplicationRecord
   has_many :schedule_logs, dependent: :destroy
 
-  after_save :schedule_job_update
+  after_save :schedule_job_update, if: -> { :interval_changed? || :cron_changed? }
 
   def job_name
     "schedule-#{id}"
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    ["schedule_logs"]
+  end
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[created_at cron disable id id_value interval last_run_at last_run_status name request_body request_headers request_method request_status_max request_status_min request_url updated_at user_id]
   end
 
   def run
