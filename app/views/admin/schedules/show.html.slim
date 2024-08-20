@@ -10,15 +10,13 @@
             th
               | Attributes
             th
-              | Values
+              | Value
         tbody
           - show_attributes.each do |attr|
             tr
               th
                 = resource_class.human_attribute_name(attr)
               th
-                = @user.send(attr)
-      = index_link admin_users_path
-      = edit_link edit_admin_user_path(@user)
-      
-    
+                = @schedule.send(attr)
+      = index_link admin_schedules_path
+

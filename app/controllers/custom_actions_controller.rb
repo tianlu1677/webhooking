@@ -101,9 +101,9 @@ class CustomActionsController < ApplicationController
 
   def set_webhook
     @webhook = if current_user
-                 Webhook.where(user_id: current_user.id).find_by_id_or_uuid(params[:webhook_id])
+                 Webhook.where(user_id: current_user.id).fetch(params[:webhook_id])
                else
-                 Webhook.where(webhook_token: cookie_webhook_token).find_by_id_or_uuid(params[:webhook_id])
+                 Webhook.fetch(params[:webhook_id])
                end
   end
 

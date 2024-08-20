@@ -17,10 +17,10 @@
                     <%= flash[:error]  %>
                   </div>
                 <% end %>
-                <%= form.input :email, label: "邮箱" %>
-                <%= form.input :password, label: "密码" %>
-                <%= form.input :remember_me, label: '记住我', as: :boolean %>
-                <%= form.submit '登陆', class: 'btn btn-primary form-control px-4 mb-0 mt-4' %>
+                <%= form.input :email, label: "Email" %>
+                <%= form.input :password, label: "Password" %>
+                <%= form.input :remember_me, label: 'Remember me', as: :boolean %>
+                <%= form.submit 'Sign In', class: 'btn btn-primary form-control px-4 mb-0 mt-4' %>
               <% end %>
               <div class="row">
               </div>
@@ -35,7 +35,7 @@
                   <% if devise_mapping.registerable? && controller_name != 'registrations' %>
                   <%= link_to new_registration_path(resource_name)  do%>
                     <button class="btn btn-lg btn-outline-light mt-3" type="button">
-                      注册
+                      Register
                     </button>
                     <% end %>
                   <% end %>

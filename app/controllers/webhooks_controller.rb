@@ -4,7 +4,7 @@ class WebhooksController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:left_list_item]
   before_action :set_webhook, except: [:reset]
 
-  before_action :authenticate
+  # before_action :authenticate
 
   def show
     return redirect_to not_found_webhooks_path if @webhook.nil?
@@ -15,7 +15,7 @@ class WebhooksController < ApplicationController
 
   def update
     @webhook.update(webhook_params)
-    redirect_to "/webhooks/#{@webhook.short || @webhook.uuid}"
+    redirect_to "/webhooks/#{@webhook.short.presence || @webhook.uuid}"
   end
 
   def clear_requests
@@ -52,8 +52,7 @@ class WebhooksController < ApplicationController
   private
 
   def authenticate
-    binding.pry
-    return if @webhook.password.blank?
+    return if @webhook && @webhook.password.blank?
 
     authenticate_or_request_with_http_basic do |username, password|
       username == 'admin' && password == @webhook.password
@@ -61,12 +60,12 @@ class WebhooksController < ApplicationController
   end
 
   def set_webhook
-    if current_user
-      @webhook = Webhook.where(user_id: current_user.id).fetch(params[:id])
-      setup_cookie_webhook_token(@webhook) if @webhook.present?
-    else
-      @webhook = Webhook.fetch(params[:id])
-    end
+    @webhook = if current_user
+                 Webhook.where(user_id: current_user.id).fetch(params[:id])
+               else
+                 Webhook.fetch(params[:id])
+               end
+    setup_cookie_webhook_token(@webhook) if @webhook.present?
   end
 
   def webhook_params

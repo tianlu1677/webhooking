@@ -61,5 +61,6 @@ Rails.application.routes.draw do
     resources :users
     resources :requests
     resources :webhooks
+    resources :schedules
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_30_104902) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_30_113633) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -112,6 +112,36 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_30_104902) do
     t.text "raw_content"
     t.string "path"
     t.index ["webhook_id"], name: "index_requests_on_webhook_id"
+  end
+
+  create_table "schedule_logs", force: :cascade do |t|
+    t.integer "response_status"
+    t.jsonb "response_headers", default: {}
+    t.text "response_body"
+    t.text "request"
+    t.text "error"
+    t.integer "schedule_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["schedule_id"], name: "index_schedule_logs_on_schedule_id"
+  end
+
+  create_table "schedules", force: :cascade do |t|
+    t.string "name"
+    t.string "interval"
+    t.string "request_url"
+    t.string "request_method"
+    t.text "request_body"
+    t.jsonb "request_headers"
+    t.string "request_status_min"
+    t.string "request_status_max"
+    t.integer "user_id"
+    t.string "cron"
+    t.datetime "last_run_at"
+    t.integer "last_run_status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "disable", default: false
   end
 
   create_table "users", force: :cascade do |t|
